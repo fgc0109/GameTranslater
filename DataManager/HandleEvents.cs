@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace ThisWarTranslater.DataManager
+
+namespace DataManager
 {
     /// <summary>
     /// 容纳数据库事件的附加信息
@@ -97,42 +97,53 @@ namespace ThisWarTranslater.DataManager
         }
     }
 
+   
     /// <summary>
     /// 回调函数
     /// </summary>
     internal class Callbacks
     {
-        //设定主界面回调函数
-        Action<string> m_changeInfo = Program.m_mainWindow.changeInfo;
-
-        internal void eventDatabase_Info(object sender, DatabaseEventArgs e)
+        internal void eventDatabase_Ready(object sender, DatabaseEventArgs e)
         {
-            m_changeInfo(e.Info);
+            string a = Properties.Resource.Database_Ready;
         }
-
-        internal void eventDatabase_Right(object sender, DatabaseEventArgs e)
-        {
-            m_changeInfo(e.Info);
-        }
-
         internal void eventDatabase_Error(object sender, DatabaseEventArgs e)
         {
-            m_changeInfo(e.Info);
+            string a = Properties.Resource.Database_Error;
         }
 
-        internal void eventExcel_Info(object sender, DatabaseEventArgs e)
+        internal void eventExcel_Ready(object sender, ExcelEventArgs e)
         {
-            m_changeInfo(e.Info);
+            string a = Properties.Resource.Database_Ready;
+        }
+        internal void eventExcel_Error(object sender, ExcelEventArgs e)
+        {
+            string a = Properties.Resource.Database_Error;
+        }
+    }
+
+    public class BasicInfo
+    {
+        private bool m_state = false;
+
+        public bool State
+        {
+            get { return m_state; }
+            set
+            {
+                m_state = value;
+            }
         }
 
-        internal void eventExcel_Right(object sender, DatabaseEventArgs e)
-        {
-            m_changeInfo(e.Info);
-        }
 
-        internal void eventExcel_Error(object sender, DatabaseEventArgs e)
+        private string name;
+        public string Name
         {
-            m_changeInfo(e.Info);
+            get { return name; }
+            set
+            {
+                name = value;
+            }
         }
     }
 }

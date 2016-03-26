@@ -4,7 +4,7 @@ using System.Collections;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 
-namespace ThisWarTranslater.DataManager
+namespace DataManager
 {
     public class Database
     {
@@ -24,7 +24,6 @@ namespace ThisWarTranslater.DataManager
                 host, port, database, user, pass);
 
             DatabaseEvents events = new DatabaseEvents();
-            events.EventCallback += new Callbacks().eventDatabase_Info;
 
             string message = "";
             bool state = true;
@@ -35,60 +34,31 @@ namespace ThisWarTranslater.DataManager
                 dbConnection.Open();
 
                 state = true;
-                message = Properties.Resources.Database_Right;
+                message = "";
+
+                events.EventCallback += new Callbacks().eventDatabase_Ready;
                 events.GetNewEvent(state, message);
             }
             catch (Exception er)
             {
                 state = false;
                 message = er.Message.ToString();
+
+                events.EventCallback += new Callbacks().eventDatabase_Error;
                 events.GetNewEvent(state, message);
             }
             finally
             {
-                events.EventCallback -= new Callbacks().eventDatabase_Info;
+                events.EventCallback -= new Callbacks().eventDatabase_Ready;
+                events.EventCallback -= new Callbacks().eventDatabase_Error;
             }
         }
 
         /// <summary>
-        /// 将内存数据保存至数据库
-        /// </summary>
-        /// <param name="update_string">数据库命令字符串</param>
-        static public void SaveDatabase(string update_string)
-        {
-            DatabaseEvents events = new DatabaseEvents();
-            events.EventCallback += new Callbacks().eventDatabase_Info;
-
-            string message = "";
-            bool state = true;
-
-            try
-            {
-                MySqlCommand command = dbConnection.CreateCommand();
-                command.CommandText = update_string;
-                command.ExecuteNonQuery();
-
-                state = true;
-                message = Properties.Resources.Database_Right;
-                events.GetNewEvent(state, message);
-            }
-            catch (Exception er)
-            {
-                state = false;
-                message = er.Message.ToString();
-                events.GetNewEvent(state, message);
-            }
-            finally
-            {
-                events.EventCallback -= new Callbacks().eventDatabase_Info;
-            }
-        }
-
-        /// <summary>
-        /// 加载数据库数据至内存
+        /// 加载DataSet
         /// </summary>
         /// <param name="select_string">数据选择字符串</param>
-        /// <returns>数据源缓存DataSet</returns>
+        /// <returns>DataSet</returns>
         static public DataSet LoadDatabase(string select_string)
         {
             string strSelect = select_string;
@@ -100,5 +70,42 @@ namespace ThisWarTranslater.DataManager
 
             return local_dataset;
         }
+
+
+
+        /// <summary>
+        /// 将内存数据保存至数据库
+        /// </summary>
+        /// <param name="update_string">数据库命令字符串</param>
+        static public void SaveDatabase(string update_string)
+        {
+            DatabaseEvents events = new DatabaseEvents();
+            //events.EventCallback += new Callbacks().eventDatabase_Info;
+
+            string message = "";
+            bool state = true;
+
+            try
+            {
+                MySqlCommand command = dbConnection.CreateCommand();
+                command.CommandText = update_string;
+                command.ExecuteNonQuery();
+
+                state = true;
+                message = Properties.Resource.Database_Ready;
+                events.GetNewEvent(state, message);
+            }
+            catch (Exception er)
+            {
+                state = false;
+                message = er.Message.ToString();
+                events.GetNewEvent(state, message);
+            }
+            finally
+            {
+                //events.EventCallback -= new Callbacks().eventDatabase_Info;
+            }
+        }
+
     }
 }
