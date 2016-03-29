@@ -18,6 +18,9 @@
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="156,126,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="187" Text="100000023" Background="White"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="156,199,0,0" VerticalAlignment="Top" Width="200"/>
+        <Grid HorizontalAlignment="Left" Height="100" Margin="419,1,-105,0" VerticalAlignment="Top" Width="100">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="34" Margin="10,14,0,0" VerticalAlignment="Top" Width="35" Source="Resources/state_error.png"/>
+        </Grid>
     </Grid>
 
 

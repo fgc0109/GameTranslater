@@ -121,29 +121,4 @@ namespace DataManager
             string a = Properties.Resource.Database_Error;
         }
     }
-
-    public class BasicInfo
-    {
-        private bool m_state = false;
-
-        public bool State
-        {
-            get { return m_state; }
-            set
-            {
-                m_state = value;
-            }
-        }
-
-
-        private string name;
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-            }
-        }
-    }
 }

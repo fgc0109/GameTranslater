@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 using DataManager;
 
 namespace GameTranslaterUI
@@ -23,14 +24,27 @@ namespace GameTranslaterUI
         public void BindingState()
         {
             BasicInfo aaa = new BasicInfo();
-             Binding bind = new Binding();
+            Binding bind = new Binding();
             bind.Source = aaa;
-            aaa.Name = textBox.Text;
+            //aaa.Name = textBox.Text;
+            aaa.State = false;
 
 
-            bind.Path = new PropertyPath("Name");
+            bind.Path = new PropertyPath("State");
             //textBox.SetBinding(TextBox.TextProperty, bind);
             textBox.SetBinding(TextBox.TextProperty, bind);
+
+
+            List<Binding> m_stateBinding = new List<Binding>();
+
+            //Bitmap bbb=new Bitmap()
+            InitializeComponent();
+            Uri imageURI = new Uri(@"pack://application:,,,/Resource/Image/20090102191236877.gif", UriKind.Absolute);
+            this.image.Source = new BitmapImage(imageURI);
+
+            m_stateBinding[0] = new Binding("Source");
+            m_stateBinding[0].Source = "Resources/state_readt.png";
+           
         }
     }
 }
