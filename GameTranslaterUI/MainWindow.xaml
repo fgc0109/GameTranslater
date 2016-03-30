@@ -6,7 +6,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GameTranslaterUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="880.983" BorderBrush="#FF7C7C7C">
     <Window.Background>
         <ImageBrush ImageSource="Resources/background.png" TileMode="Tile" Viewport="0,0,0.3,0.3"/>
     </Window.Background>
@@ -18,8 +18,17 @@
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="156,126,0,0" TextWrapping="Wrap"
                  VerticalAlignment="Top" Width="187" Text="100000023" Background="White"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="156,199,0,0" VerticalAlignment="Top" Width="200"/>
-        <Grid HorizontalAlignment="Left" Height="100" Margin="419,1,-105,0" VerticalAlignment="Top" Width="100">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="34" Margin="10,14,0,0" VerticalAlignment="Top" Width="35" Source="Resources/state_error.png"/>
+        <Grid HorizontalAlignment="Left" Height="247" Margin="419,1,-416,0" VerticalAlignment="Top" Width="411">
+            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Source="Resources/state_error.png"/>
+            <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="38,141,0,0" VerticalAlignment="Top" Width="150" Height="50" BorderBrush="#FF898989" Focusable="False">
+                <Button.Foreground>
+                    <ImageBrush ImageSource="Resources/state_inactiv.png"/>
+                </Button.Foreground>
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/state_inactiv.png"/>
+                </Button.Background>
+                
+            </Button>
         </Grid>
     </Grid>
 

@@ -111,6 +111,10 @@
     <Resource Include="Resources\state_error.png" />
     <Resource Include="Resources\state_ready.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\state_active.png" />
+    <Resource Include="Resources\state_inactiv.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
