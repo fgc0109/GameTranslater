@@ -23,22 +23,15 @@ namespace GameTranslaterUI
 
         public void BindingState()
         {
-            BasicInfo aaa = new BasicInfo();
-            Binding bind = new Binding();
-            bind.Source = aaa;
+            BasicInfo basic = new BasicInfo();
+            Binding bind = new Binding("State");
+            //bind.Path = new PropertyPath("State");
+            bind.Source = basic;
 
-            aaa.State = true;
-
-
-            bind.Path = new PropertyPath("State");
-          
-            textBox.SetBinding(TextBox.TextProperty, bind);
-
-
-          
+            basic.State = true;
+            textBox0.SetBinding(TextBox.TextProperty, bind);
 
             image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));
-
         }
     }
 }

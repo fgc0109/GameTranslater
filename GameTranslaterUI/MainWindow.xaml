@@ -5,32 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GameTranslaterUI"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="880.983" BorderBrush="#FF7C7C7C">
+        Title="MainWindow" Height="350" Width="1111.839" BorderBrush="#FF7C7C7C">
     <Window.Background>
         <ImageBrush ImageSource="Resources/background.png" TileMode="Tile" Viewport="0,0,0.3,0.3"/>
     </Window.Background>
 
-    <Grid HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="414">
-        <!--<TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="156,126,0,0" TextWrapping="Wrap" 
-                 Text="{Binding ElementName=slider, Path=Value, UpdateSourceTrigger=PropertyChanged}" 
-                 VerticalAlignment="Top" Width="187"/>-->
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="156,126,0,0" TextWrapping="Wrap"
-                 VerticalAlignment="Top" Width="187" Text="100000023" Background="White"/>
-        <Slider x:Name="slider" HorizontalAlignment="Left" Margin="156,199,0,0" VerticalAlignment="Top" Width="200"/>
-        <Grid HorizontalAlignment="Left" Height="247" Margin="419,1,-416,0" VerticalAlignment="Top" Width="411">
+    <!--WPF Button Style-->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Foreground"  Value="Blue"/>
+            <Setter Property="FontFamily" Value="CourierNew"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="1102">
+        <TextBox x:Name="textBox0" HorizontalAlignment="Left" Height="23" Margin="156,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Text="100000023" Background="White"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,10,10,0" VerticalAlignment="Top" Text="{Binding ElementName=slider1, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+        <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="156,199,0,0" VerticalAlignment="Top" Width="200"/>
+
+        <Grid HorizontalAlignment="Left" Height="319" Margin="419,0,0,0" VerticalAlignment="Top" Width="475">
             <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Source="Resources/state_error.png"/>
-            <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="38,141,0,0" VerticalAlignment="Top" Width="150" Height="50" BorderBrush="#FF898989" Focusable="False">
-                <Button.Foreground>
-                    <ImageBrush ImageSource="Resources/state_inactiv.png"/>
-                </Button.Foreground>
-                <Button.Background>
-                    <ImageBrush ImageSource="Resources/state_inactiv.png"/>
-                </Button.Background>
-                
+
+            <!--WPF TriState Image Button-->
+            <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="125,86,0,0" VerticalAlignment="Top" Width="150" Height="50" BorderBrush="#FF898989" Focusable="False">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Name="Normal" Source="Resources/state_inactiv.png"/>
+                            <Image Name="Pressed" Source="Resources/state_active.png" Visibility="Hidden"/>
+                            <Image Name="Disabled" Source="Resources/state_inactiv.png" Visibility="Hidden"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="Disabled" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
+
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="319" Margin="894,0,0,0" VerticalAlignment="Top" Width="208">
+
         </Grid>
     </Grid>
-
-
 </Window>
