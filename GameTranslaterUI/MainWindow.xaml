@@ -48,6 +48,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="53" Margin="142,221,0,0" VerticalAlignment="Top" Width="67" Source="Resources/state_ready.png"/>
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="319" Margin="894,0,0,0" VerticalAlignment="Top" Width="208">

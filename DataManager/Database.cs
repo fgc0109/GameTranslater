@@ -8,7 +8,8 @@ namespace DataManager
 {
     public class Database
     {
-        static MySqlConnection dbConnection;
+        static MySqlConnection m_dbConnection;
+        static MySqlDataAdapter m_dbDataAdapter;
 
         /// <summary>
         /// 打开数据库
@@ -30,8 +31,8 @@ namespace DataManager
 
             try
             {
-                dbConnection = new MySqlConnection(connectionString);
-                dbConnection.Open();
+                m_dbConnection = new MySqlConnection(connectionString);
+                m_dbConnection.Open();
 
                 state = true;
                 message = "";
@@ -64,7 +65,7 @@ namespace DataManager
             string strSelect = select_string;
 
             DataSet local_dataset = new DataSet();
-            MySqlDataAdapter local_adapter = new MySqlDataAdapter(strSelect, dbConnection);
+            MySqlDataAdapter local_adapter = new MySqlDataAdapter(strSelect, m_dbConnection);
 
             local_adapter.Fill(local_dataset);
 
@@ -87,7 +88,7 @@ namespace DataManager
 
             try
             {
-                MySqlCommand command = dbConnection.CreateCommand();
+                MySqlCommand command = m_dbConnection.CreateCommand();
                 command.CommandText = update_string;
                 command.ExecuteNonQuery();
 

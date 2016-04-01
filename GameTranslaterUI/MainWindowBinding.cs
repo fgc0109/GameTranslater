@@ -19,17 +19,22 @@ namespace GameTranslaterUI
 {
     public partial class MainWindow : Window
     {
-        Binding bind = new Binding();
-
         public void BindingState()
         {
-            BasicInfo basic = new BasicInfo();
-            Binding bind = new Binding("State");
-            //bind.Path = new PropertyPath("State");
-            bind.Source = basic;
+            BasicInfo.m_stateDatabase = true;
+            textBox0.SetBinding(TextBox.TextProperty, new Binding(".") { Source = BasicInfo.m_stateDatabase });
+            textBox1.SetBinding(TextBox.TextProperty, new Binding(".") { Source = BasicInfo.m_stateDataSets });
 
-            basic.State = true;
-            textBox0.SetBinding(TextBox.TextProperty, bind);
+            //button.SetBinding(Button.IsPressedProperty, new Binding(".") { Source = BasicInfo.m_stateDatabase });
+            image1.SetBinding(System.Windows.Controls.Image.VisibilityProperty, new Binding(".") { Source = BasicInfo.m_stateDatabase });
+
+            image1.SetBinding(System.Windows.Controls.Image.VisibilityProperty, new Binding(".")
+            {
+                Source = BasicInfo.m_stateDatabase ? BasicInfo.m_stateDatabase : BasicInfo.m_stateDatabase
+            });
+
+            BasicInfo.m_stateDatabase = false;
+            BasicInfo.m_stateDataSets = false;
 
             image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));
         }

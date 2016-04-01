@@ -12,8 +12,6 @@ namespace DataManager
     {
         static DataSet m_mainDataSet = null;
         static List<DataTable> m_mainDataTable = null;
-
-        static List<bool> m_mainState = null;
         
         public void DropDatas()
         {
@@ -34,28 +32,12 @@ namespace DataManager
             
         }
     }
-    public class BasicInfo
+    public static class BasicInfo
     {
-        private bool m_state = false;
-        private Bitmap m_icon = null;
+        public static bool m_stateDatabase = false;
+        public static bool m_stateDataSets = false;
+        public static string m_infoWindow = "";
+        public static Bitmap m_icon = null;
 
-
-        public bool State
-        {
-            get { return m_state; }
-            set
-            {
-                m_state = value;
-            }
-        }
-
-        public Bitmap Icon
-        {
-            get { return m_icon; }
-            set
-            {
-                m_icon = value;
-            }
-        }
     }
 }
