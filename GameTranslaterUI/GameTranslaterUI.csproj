@@ -112,13 +112,16 @@
     <Resource Include="Resources\state_ready.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\state_active.png" />
-    <Resource Include="Resources\state_inactiv.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\background_error.png" />
     <Resource Include="Resources\background_label.png" />
     <Resource Include="Resources\background_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_1_active.png" />
+    <Resource Include="Resources\button_1_hover.png" />
+    <Resource Include="Resources\button_1_inactiv.png" />
+    <Resource Include="Resources\switch_1_off.png" />
+    <Resource Include="Resources\switch_1_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

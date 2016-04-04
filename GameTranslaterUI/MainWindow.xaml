@@ -5,16 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GameTranslaterUI"
-        Title="MainWindow" Height="350" Width="1111.839" BorderBrush="#FF7C7C7C">
+        Title="MainWindow" Height="350" Width="1112" BorderBrush="#FF7C7C7C">
     <Window.Background>
         <ImageBrush ImageSource="Resources/background.png" TileMode="Tile" Viewport="0,0,0.3,0.3"/>
     </Window.Background>
 
-    <!--WPF Button Style-->
+    <!--WPF Style-->
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Foreground"  Value="Blue"/>
             <Setter Property="FontFamily" Value="CourierNew"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Name="Normal" Source="Resources/button_1_inactiv.png"/>
+                            <Image Name="Pressed" Source="Resources/button_1_active.png" Visibility="Hidden"/>
+                            <Image Name="Disabled" Source="Resources/button_1_inactiv.png" Visibility="Hidden"/>
+                            <Image Name="Hovered" Source="Resources/button_1_hover.png" Visibility="Hidden"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="Disabled" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsPressed" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="Hovered" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="Blue_TextBoxStyle">
+            <Style.Resources>
+                <ImageBrush x:Key="Blue_Brush" ImageSource="Resources/background_normal.png"/>
+            </Style.Resources>
+            <Setter Property="Width"  Value="96"/>
+            <Setter Property="Height"  Value="26"/>
+            <Setter Property="BorderThickness"  Value="0"/>
+            <Setter Property="TextAlignment"  Value="Center"/>
+            <Setter Property="HorizontalAlignment"  Value="Left"/>
+            <Setter Property="FontSize"  Value="14"/>
+            <Setter Property="FontFamily"  Value="Microsoft YaHei Light"/>
+            <Setter Property="Foreground"  Value="White"/>
+            <Setter Property="Background"  Value="{DynamicResource Blue_Brush}"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="Red_TextBoxStyle">
+            <Style.Resources>
+                <ImageBrush x:Key="Red_Brush" ImageSource="Resources/background_error.png"/>
+            </Style.Resources>
+            <Setter Property="Width"  Value="96"/>
+            <Setter Property="Height"  Value="26"/>
+            <Setter Property="BorderThickness"  Value="0"/>
+            <Setter Property="TextAlignment"  Value="Center"/>
+            <Setter Property="HorizontalAlignment"  Value="Left"/>
+            <Setter Property="FontSize"  Value="14"/>
+            <Setter Property="FontFamily"  Value="Microsoft YaHei Light"/>
+            <Setter Property="Foreground"  Value="White"/>
+            <Setter Property="Background"  Value="{DynamicResource Red_Brush}"/>
         </Style>
     </Window.Resources>
 
@@ -27,13 +86,14 @@
             <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Source="Resources/state_error.png"/>
 
             <!--WPF TriState Image Button-->
-            <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="125,86,0,0" VerticalAlignment="Top" Width="150" Height="50" BorderBrush="#FF898989" Focusable="False">
+            <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="125,86,0,0" VerticalAlignment="Top" Width="150" Height="50"  Focusable="False" Click="button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Image Name="Normal" Source="Resources/state_inactiv.png"/>
-                            <Image Name="Pressed" Source="Resources/state_active.png" Visibility="Hidden"/>
-                            <Image Name="Disabled" Source="Resources/state_inactiv.png" Visibility="Hidden"/>
+                            <Image Name="Normal" Source="Resources/button_1_inactiv.png"/>
+                            <Image Name="Pressed" Source="Resources/button_1_active.png" Visibility="Hidden"/>
+                            <Image Name="Disabled" Source="Resources/button_1_inactiv.png" Visibility="Hidden"/>
+                            <Image Name="Hovered" Source="Resources/button_1_hover.png" Visibility="Hidden"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsPressed" Value="True">
@@ -44,15 +104,26 @@
                                 <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
                                 <Setter TargetName="Disabled" Property="Visibility" Value="Visible"/>
                             </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="IsPressed" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="Hovered" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Image x:Name="image1" HorizontalAlignment="Left" Height="53" Margin="142,221,0,0" VerticalAlignment="Top" Width="67" Source="Resources/state_ready.png"/>
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="53" Margin="374,83,0,0" VerticalAlignment="Top" Width="67" Source="Resources/state_ready.png"/>
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="319" Margin="894,0,0,0" VerticalAlignment="Top" Width="208">
-
+            <TextBox x:Name="stateDatabase_TextBox" Margin="58,10,0,283" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <TextBox x:Name="stateDataSets_TextBox" Margin="58,68,0,225" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>

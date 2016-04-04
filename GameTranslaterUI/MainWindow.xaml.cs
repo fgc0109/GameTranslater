@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DataManager;
 
 namespace GameTranslaterUI
 {
@@ -26,6 +27,20 @@ namespace GameTranslaterUI
             BindingState();
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_globalBasicInfo.StateDB == false)
+            {
+                m_globalBasicInfo.StateDB = true;
+                m_globalBasicInfo.InfoDB = m_globalBasicInfo.InfoDB + "aaaa";
+            }
+            else
+            {
+                m_globalBasicInfo.StateDB = false;
+            }
 
+
+           // textBox0.Text = "111";
+        }
     }
 }
