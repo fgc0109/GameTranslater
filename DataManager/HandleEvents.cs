@@ -7,6 +7,13 @@ using System.Threading;
 
 namespace DataManager
 {
+    public interface SetGlobalData
+    {
+        void SetStateDB(bool state);
+        void SetStateDS(bool state);
+        void SetInfoDB(string info);
+        void SetInfoDS(string info);
+    }
     /// <summary>
     /// 容纳数据库事件的附加信息
     /// </summary>
@@ -96,8 +103,6 @@ namespace DataManager
             OnNewEvent(e);
         }
     }
-
-   
     /// <summary>
     /// 回调函数
     /// </summary>
@@ -124,4 +129,6 @@ namespace DataManager
             string a = Properties.Resource.Database_Error;
         }
     }
+
+
 }

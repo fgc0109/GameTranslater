@@ -62,6 +62,11 @@ namespace DataManager
         /// <returns>DataSet</returns>
         static public DataSet LoadDatabase(string select_string)
         {
+            if (m_dbConnection.State == ConnectionState.Open)
+            {
+
+            }
+
             string strSelect = select_string;
 
             DataSet local_dataset = new DataSet();
