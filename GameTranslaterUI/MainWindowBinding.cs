@@ -20,9 +20,11 @@ using DataManager;
 
 namespace GameTranslaterUI
 {
-    public partial class MainWindow : Window, SetGlobalData
+    public partial class MainWindow : Window
     {
-        internal BasicInfo m_globalBasicInfo = null;
+        private BasicInfo m_globalBasicInfo = null;
+        private DataSet m_mainDataSet = null;
+        private List<DataTable> m_mainDataTable = null;
 
         public void BindingState()
         {
@@ -37,24 +39,14 @@ namespace GameTranslaterUI
             //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));
         }
 
-        #region 全局数据接口
-        public void SetStateDB(bool state)
+        internal void GetDatas()
         {
-            m_globalBasicInfo.StateDB = state;
+            for (int i = 0; i < m_mainDataSet.Tables.Count; i++)
+            {
+                m_mainDataTable.Add(m_mainDataSet.Tables[i]);
+            }
+
         }
-        public void SetStateDS(bool state)
-        {
-            m_globalBasicInfo.StateDS = state;
-        }
-        public void SetInfoDB(string info)
-        {
-            m_globalBasicInfo.InfoDB = info;
-        }
-        public void SetInfoDS(string info)
-        {
-            m_globalBasicInfo.InfoDS = info;
-        }
-        #endregion
     }
 
     /// <summary>
@@ -67,6 +59,8 @@ namespace GameTranslaterUI
         private string m_infoDatabase = "m_infoDatabase";
         private string m_infoDataSets = "m_infoDataSets";
         private string m_infoWindow = "m_infoWindow";
+
+        private DataSet m_aa = new DataSet();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -129,31 +123,6 @@ namespace GameTranslaterUI
                     PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoWin"));
                 }
             }
-        }
-    }
-
-    class MainData
-    {
-        static DataSet m_mainDataSet = null;
-        static List<DataTable> m_mainDataTable = null;
-
-        public void DropDatas()
-        {
-
-        }
-
-        public void Initialize()
-        {
-
-        }
-
-        internal void GetDatas()
-        {
-            for (int i = 0; i < m_mainDataSet.Tables.Count; i++)
-            {
-                m_mainDataTable.Add(m_mainDataSet.Tables[i]);
-            }
-
         }
     }
 }
