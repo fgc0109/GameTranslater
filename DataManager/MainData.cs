@@ -108,4 +108,15 @@ namespace DataManager
             }
         }
     }
+
+    /// <summary>
+    /// 数据状态信息主接口
+    /// </summary>
+    public interface SetGlobalData
+    {
+        void SetStateDB(bool state);
+        void SetStateDS(bool state);
+        void SetInfoDB(string info);
+        void SetInfoDS(string info);
+    }
 }

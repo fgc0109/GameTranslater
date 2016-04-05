@@ -103,13 +103,16 @@ namespace DataManager
     /// </summary>
     internal class Callbacks
     {
+        SetGlobalData m_setGlobalData;
         internal void eventDatabase_Ready(object sender, DatabaseEventArgs e)
         {
             string a = Properties.Resource.Database_Ready;
+            m_setGlobalData.SetStateDB(true);
         }
         internal void eventDatabase_Error(object sender, DatabaseEventArgs e)
         {
             string a = Properties.Resource.Database_Error;
+            m_setGlobalData.SetStateDB(false);
         }
 
         internal void eventExcel_Ready(object sender, ExcelEventArgs e)

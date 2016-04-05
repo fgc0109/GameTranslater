@@ -18,9 +18,6 @@ using DataManager;
 
 namespace GameTranslaterUI
 {
-    
-
-
     public partial class MainWindow : Window
     {
         BasicInfo m_globalBasicInfo = null;
@@ -36,6 +33,26 @@ namespace GameTranslaterUI
             m_globalBasicInfo.InfoDS = "131313131";
 
             //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));
+        }
+    }
+
+    internal class SetGlobal:SetGlobalData
+    {
+        public void SetStateDB(bool state)
+        {
+
+        }
+        public void SetStateDS(bool state)
+        {
+
+        }
+        public void SetInfoDB(string info)
+        {
+
+        }
+        public void SetInfoDS(string info)
+        {
+
         }
     }
 }

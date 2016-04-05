@@ -12,9 +12,12 @@
 
     <!--WPF Style-->
     <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Foreground"  Value="Blue"/>
-            <Setter Property="FontFamily" Value="CourierNew"/>
+        <Style TargetType="Button" x:Key="TriState_ImageButtonStyle">
+            <Setter Property="Width"  Value="150"/>
+            <Setter Property="Height"  Value="50"/>
+            <Setter Property="HorizontalAlignment"  Value="Left"/>
+            <Setter Property="VerticalAlignment"  Value="Top"/>
+            <Setter Property="Focusable"  Value="False"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -56,6 +59,7 @@
             <Setter Property="BorderThickness"  Value="0"/>
             <Setter Property="TextAlignment"  Value="Center"/>
             <Setter Property="HorizontalAlignment"  Value="Left"/>
+            <Setter Property="VerticalAlignment"  Value="Top"/>
             <Setter Property="FontSize"  Value="14"/>
             <Setter Property="FontFamily"  Value="Microsoft YaHei Light"/>
             <Setter Property="Foreground"  Value="White"/>
@@ -70,6 +74,7 @@
             <Setter Property="BorderThickness"  Value="0"/>
             <Setter Property="TextAlignment"  Value="Center"/>
             <Setter Property="HorizontalAlignment"  Value="Left"/>
+            <Setter Property="VerticalAlignment"  Value="Top"/>
             <Setter Property="FontSize"  Value="14"/>
             <Setter Property="FontFamily"  Value="Microsoft YaHei Light"/>
             <Setter Property="Foreground"  Value="White"/>
@@ -78,46 +83,13 @@
     </Window.Resources>
 
     <Grid HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="1102">
-        <TextBox x:Name="textBox0" HorizontalAlignment="Left" Height="23" Margin="156,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" Text="100000023" Background="White"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="10,10,10,0" VerticalAlignment="Top" Text="{Binding ElementName=slider1, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox x:Name="textBox0"  Margin="156,126,0,0"  Style="{StaticResource Blue_TextBoxStyle}" Text="100000023" />
+        <TextBox x:Name="textBox1"  Margin="156,95,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding ElementName=slider1, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
         <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="156,199,0,0" VerticalAlignment="Top" Width="200"/>
 
         <Grid HorizontalAlignment="Left" Height="319" Margin="419,0,0,0" VerticalAlignment="Top" Width="475">
-            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Source="Resources/state_error.png"/>
-
-            <!--WPF TriState Image Button-->
-            <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="125,86,0,0" VerticalAlignment="Top" Width="150" Height="50"  Focusable="False" Click="button_Click">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
-                            <Image Name="Normal" Source="Resources/button_1_inactiv.png"/>
-                            <Image Name="Pressed" Source="Resources/button_1_active.png" Visibility="Hidden"/>
-                            <Image Name="Disabled" Source="Resources/button_1_inactiv.png" Visibility="Hidden"/>
-                            <Image Name="Hovered" Source="Resources/button_1_hover.png" Visibility="Hidden"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="Disabled" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsMouseOver" Value="True" />
-                                    <Condition Property="IsPressed" Value="False" />
-                                </MultiTrigger.Conditions>
-                                <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
-                                <Setter TargetName="Hovered" Property="Visibility" Value="Visible"/>
-                            </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Image x:Name="image1" HorizontalAlignment="Left" Height="53" Margin="374,83,0,0" VerticalAlignment="Top" Width="67" Source="Resources/state_ready.png"/>
-
+            <Button x:Name="button" Content="" Margin="125,86,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="-154,98,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="319" Margin="894,0,0,0" VerticalAlignment="Top" Width="208">
             <TextBox x:Name="stateDatabase_TextBox" Margin="58,10,0,283" Style="{StaticResource Blue_TextBoxStyle}"/>
@@ -125,5 +97,6 @@
             <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
         </Grid>
+        <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="319,98,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" RenderTransformOrigin="-9.38,0.2"/>
     </Grid>
 </Window>
