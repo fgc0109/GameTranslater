@@ -15,7 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Drawing;
-
 using DataManager;
 
 namespace GameTranslaterUI
@@ -28,6 +27,9 @@ namespace GameTranslaterUI
 
         public void BindingState()
         {
+            //添加数据库连接状态改变的事件
+            Database.m_dbConnection.StateChange += M_dbConnection_StateChange;
+
             m_globalBasicInfo = new BasicInfo();
 
             stateDatabase_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDB") { Source = m_globalBasicInfo });
@@ -45,7 +47,27 @@ namespace GameTranslaterUI
             {
                 m_mainDataTable.Add(m_mainDataSet.Tables[i]);
             }
+        }
 
+        private void M_dbConnection_StateChange(object sender, StateChangeEventArgs e)
+        {
+            if(Database.m_dbConnection.State==ConnectionState.Open)
+            {
+                m_globalBasicInfo.StateDB = true;
+            }
+            else if(Database.m_dbConnection.State==ConnectionState.Closed)
+            {
+                m_globalBasicInfo.StateDB = false;
+            }
+            else if(Database.m_dbConnection.State==ConnectionState.Connecting)
+            {      
+                m_globalBasicInfo.StateDB = false;
+            }
+            else
+            {
+                m_globalBasicInfo.StateDB = false;
+            }
+           // throw new NotImplementedException();
         }
     }
 
