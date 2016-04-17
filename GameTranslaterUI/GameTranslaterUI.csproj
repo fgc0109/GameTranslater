@@ -100,12 +100,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataManager\DataManager.csproj">
-      <Project>{1fd27886-9bc0-497a-bb03-c4f0418ff8cc}</Project>
-      <Name>DataManager</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\background.png" />
   </ItemGroup>
   <ItemGroup>
