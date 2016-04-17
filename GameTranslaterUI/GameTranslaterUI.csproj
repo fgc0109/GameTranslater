@@ -118,6 +118,12 @@
     <Resource Include="Resources\switch_1_off.png" />
     <Resource Include="Resources\switch_1_on.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataHelper\DataHelper.csproj">
+      <Project>{1f75dbbe-84a6-47de-8c15-88be126592e9}</Project>
+      <Name>DataHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
