@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTranslaterUI", "GameTra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHelper", "DataHelper\DataHelper.csproj", "{1F75DBBE-84A6-47DE-8C15-88BE126592E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager\DataManager.csproj", "{1FD27886-9BC0-497A-BB03-C4F0418FF8CC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{1F75DBBE-84A6-47DE-8C15-88BE126592E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F75DBBE-84A6-47DE-8C15-88BE126592E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F75DBBE-84A6-47DE-8C15-88BE126592E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FD27886-9BC0-497A-BB03-C4F0418FF8CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FD27886-9BC0-497A-BB03-C4F0418FF8CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FD27886-9BC0-497A-BB03-C4F0418FF8CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FD27886-9BC0-497A-BB03-C4F0418FF8CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
