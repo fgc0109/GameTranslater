@@ -50,6 +50,30 @@ namespace GameTranslaterUI
             }
         }
 
+        private DataTable GetDataTable()
+        {
+            DataTable data = new DataTable("MyDataTable");
+
+            DataColumn ID = new DataColumn("ID");//第一列
+            ID.DataType = System.Type.GetType("System.Int32");
+            //ID.AutoIncrement = true; //自动递增ID号 
+            data.Columns.Add(ID);
+
+            //设置主键
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = ID;
+            data.PrimaryKey = keys;
+
+            data.Columns.Add(new DataColumn("Name", typeof(string)));//第二列
+            data.Columns.Add(new DataColumn("Age", typeof(string)));//第三列
+
+            data.Rows.Add(1, "  XiaoM", "  20");
+            data.Rows.Add(2, "  XiaoF", "  122");
+            data.Rows.Add(3, "  XiaoA", "  29");
+            data.Rows.Add(4, "  XiaoB", "  102");
+            return data;
+        }
+
         private void M_dbConnection_StateChange(object sender, StateChangeEventArgs e)
         {
             if (MySqlHelper.Connection.State ==ConnectionState.Open)

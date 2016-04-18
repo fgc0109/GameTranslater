@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:GameTranslaterUI"
-        Title="MainWindow" Height="350" Width="1112" BorderBrush="#FF7C7C7C">
+        Title="MainWindow" Height="600" Width="1000" BorderBrush="#FF7C7C7C" HorizontalAlignment="Center" VerticalAlignment="Center">
     <Window.Background>
         <ImageBrush ImageSource="Resources/background.png" TileMode="Tile" Viewport="0,0,0.3,0.3"/>
     </Window.Background>
@@ -82,21 +82,55 @@
         </Style>
     </Window.Resources>
 
-    <Grid HorizontalAlignment="Left" Height="319" VerticalAlignment="Top" Width="1102">
-        <TextBox x:Name="textBox0"  Margin="156,126,0,0"  Style="{StaticResource Blue_TextBoxStyle}" Text="100000023" />
-        <TextBox x:Name="textBox1"  Margin="156,95,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding ElementName=slider1, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
-        <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="156,199,0,0" VerticalAlignment="Top" Width="200"/>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-4,0,-4,-3" Width="1000" Height="572">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <Grid HorizontalAlignment="Left" Height="319" Margin="419,0,0,0" VerticalAlignment="Top" Width="475">
-            <Button x:Name="button" Content="" Margin="125,86,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}"/>
-            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="-154,98,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png"/>
+        <Grid HorizontalAlignment="Left" Height="572" VerticalAlignment="Top" Width="295" Grid.Column="1">
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="234" Margin="10,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"  AcceptsReturn="True"  VerticalScrollBarVisibility="Visible"/>
+            <ListView Height="251" Margin="10,0,0,10" VerticalAlignment="Bottom" ItemsSource="{Binding}" Name="listView2" HorizontalAlignment="Left" Width="275">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="编号" DisplayMemberBinding="{Binding Path=ID}"  Width="100" />
+                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
+                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Path=Age}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBox x:Name="TextBox_Life" Margin="49,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
+            <Label x:Name="Label_Life" Content="生命" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack" Margin="189,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
+            <Label x:Name="Label_Attack" Content="攻击" Margin="150,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Defence" Margin="49,41,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
+            <Label x:Name="Label_Defence" Content="物防" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Magic" Margin="189,41,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
+            <Label x:Name="Label_Magic" Content="法防" Margin="150,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="319" Margin="894,0,0,0" VerticalAlignment="Top" Width="208">
-            <TextBox x:Name="stateDatabase_TextBox" Margin="58,10,0,283" Style="{StaticResource Blue_TextBoxStyle}"/>
-            <TextBox x:Name="stateDataSets_TextBox" Margin="58,68,0,225" Style="{StaticResource Blue_TextBoxStyle}"/>
-            <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+        <Grid HorizontalAlignment="Left" Height="572" Margin="300,0,0,0" VerticalAlignment="Top" Width="700" Grid.Column="1">
+            <TextBox x:Name="stateDatabase_TextBox" Margin="219,252,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <TextBox x:Name="stateDataSets_TextBox" Margin="219,284,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="187,253,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="187,284,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="button" Content="" Margin="10,137,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}"/>
+            <TextBox x:Name="textBox1"  Margin="33,296,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=slider1, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="textBox0"  Margin="33,340,0,0"  Style="{StaticResource Blue_TextBoxStyle}" Text="100000023" />
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="280,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" Visibility="Hidden"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="280,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png" Visibility="Hidden"/>
+            <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="43,424,0,0" VerticalAlignment="Top" Width="200" Height="18"/>
+            <TextBox x:Name="TextBox_Attack_Copy" Margin="49,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="Label_Attack_Copy" Content="用户" Margin="10,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack_Copy1" Margin="189,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="Label_Attack_Copy1" Content="密码" Margin="150,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack_Copy2" Margin="49,40,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="Label_Attack_Copy2" Content="地址" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack_Copy3" Margin="189,40,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="Label_Attack_Copy3" Content="端口" Margin="150,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack_Copy4" Margin="49,70,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="Label_Attack_Copy4" Content="库名" Margin="10,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack_Copy5" Margin="189,70,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="Label_Attack_Copy5" Content="表名" Margin="150,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
         </Grid>
-        <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="319,98,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" RenderTransformOrigin="-9.38,0.2"/>
     </Grid>
 </Window>
