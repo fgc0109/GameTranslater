@@ -6,161 +6,101 @@ using System.Threading.Tasks;
 
 namespace GameTranslaterUI
 {
-    public class RuneInfo
+    public class RuneCalculate
     {
         public double[] m_MHP = new double[10] { 1, 0, 0, 0, 0.5, 0, 0, 0.5, 0.5, 0 };
         public double[] m_ATT = new double[10] { 0, 1, 0, 0, 0.5, 0.5, 0, 0, 0, 0.5 };
         public double[] m_DEF = new double[10] { 0, 0, 1, 0, 0, 0.5, 0.5, 0.5, 0, 0 };
         public double[] m_RES = new double[10] { 0, 0, 0, 1, 0, 0, 0.5, 0, 0.5, 0.5 };
-    }
 
+        private double[] m_quality = new double[6] { 1, 1.5, 2.25, 3.25, 4.5, 6 };
 
-    public class PermutationAndCombination<T>
-    {
-        /// <summary>
-        /// 交换两个变量
-        /// </summary>
-        /// <param name="a">变量1</param>
-        /// <param name="b">变量2</param>
-        public static void Swap(ref T a, ref T b)
+        private double[,] m_LVL = new double[16, 6]
         {
-            T temp = a;
-            a = b;
-            b = temp;
-        }
+            {4, 1, 0, 0, 0, 0},
+            {0, 5, 0, 0, 0, 0},
+            {0, 4, 1, 0, 0, 0},
+            {0, 2, 3, 0, 0, 0},
+            {0, 0, 5, 0, 0, 0},
+            {0, 0, 4, 1, 0, 0},
+            {0, 0, 2, 3, 0, 0},
+            {0, 0, 1, 4, 0, 0},
+            {0, 0, 0, 5, 0, 0},
+            {0, 0, 0, 4, 1, 0},
+            {0, 0, 0, 3, 2, 0},
+            {0, 0, 0, 2, 3, 0},
+            {0, 0, 0, 1, 4, 0},
+            {0, 0, 0, 0, 5, 0},
+            {0, 0, 0, 0, 4, 1},
+            {0, 0, 0, 0, 0, 5},
+          };
 
-        /// <summary>
-        /// 递归算法求数组的组合(私有成员)
-        /// </summary>
-        /// <param name="list">返回的范型</param>
-        /// <param name="t">所求数组</param>
-        /// <param name="n">辅助变量</param>
-        /// <param name="m">辅助变量</param>
-        /// <param name="b">辅助数组</param>
-        /// <param name="M">辅助变量M</param>
-        private static void GetCombination(ref List<T[]> list, T[] t, int n, int m, int[] b, int M)
+        List<int[]> lst_Combination = null;
+        List<int[]> lst_Permutation = null;
+
+        public string Calculate(out bool state,int lv, string strMHP, string strATT, string strDEF, string strRES)
         {
-            for (int i = n; i >= m; i--)
+            double MHP, ATT, DEF, RES;
+
+            state = false;
+
+            string strRes = "";
+            RuneCalculate runeInfo = new RuneCalculate();
+
+            //取组合C10,5
+            int[] arrayCom = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            lst_Combination = PermutationAndCombination<int>.GetCombination(arrayCom, 5);
+
+            for (int i = 0; i < lst_Combination.Count; i++)
             {
-                b[m - 1] = i - 1;
-                if (m > 1)
+                MHP = ATT = DEF = RES = 0;
+
+                //取排列A5,X
+                int[] arrayPar = lst_Combination[i];
+                lst_Permutation = PermutationAndCombination<int>.GetPermutation(arrayPar, lv);
+
+                for (int j = 0;  j< lst_Combination.Count; j++)
                 {
-                    GetCombination(ref list, t, i - 1, m - 1, b, M);
+
+                }
+
+                double[] result = new double[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                foreach (int item in result)
+                    result[item] = 0.0;
+                foreach (var item in lst_Combination[i])
+                {
+                    MHP = MHP + runeInfo.m_MHP[item];
+                    ATT = ATT + runeInfo.m_ATT[item];
+                    DEF = DEF + runeInfo.m_DEF[item];
+                    RES = RES + runeInfo.m_RES[item];
+                }
+                if (double.Parse(strMHP) + double.Parse(strATT) + double.Parse(strDEF) + double.Parse(strRES) != 5)
+                {
+                    state = false;
                 }
                 else
                 {
-                    if (list == null)
-                    {
-                        list = new List<T[]>();
-                    }
-                    T[] temp = new T[M];
-                    for (int j = 0; j < b.Length; j++)
-                    {
-                        temp[j] = t[b[j]];
-                    }
-                    list.Add(temp);
+                    state = true;
                 }
-            }
-        }
-
-        /// <summary>
-        /// 递归算法求排列(私有成员)
-        /// </summary>
-        /// <param name="list">返回的列表</param>
-        /// <param name="t">所求数组</param>
-        /// <param name="startIndex">起始标号</param>
-        /// <param name="endIndex">结束标号</param>
-        private static void GetPermutation(ref List<T[]> list, T[] t, int startIndex, int endIndex)
-        {
-            if (startIndex == endIndex)
-            {
-                if (list == null)
+                if (MHP == double.Parse(strMHP) &&
+                    ATT == double.Parse(strATT) &&
+                    DEF == double.Parse(strDEF) &&
+                    RES == double.Parse(strRES))
                 {
-                    list = new List<T[]>();
-                }
-                T[] temp = new T[t.Length];
-                t.CopyTo(temp, 0);
-                list.Add(temp);
-            }
-            else
-            {
-                for (int i = startIndex; i <= endIndex; i++)
-                {
-                    Swap(ref t[startIndex], ref t[i]);
-                    GetPermutation(ref list, t, startIndex + 1, endIndex);
-                    Swap(ref t[startIndex], ref t[i]);
+                    foreach (var item in lst_Combination[i])
+                    {
+                        result[item] = 1;
+                    }
+                    foreach (int item in result)
+                    {
+                        strRes = strRes + item.ToString() + "\r\n";
+                    }
+                    strRes = strRes + "\r\n";
                 }
             }
-        }
 
-        /// <summary>
-        /// 求从起始标号到结束标号的排列，其余元素不变
-        /// </summary>
-        /// <param name="t">所求数组</param>
-        /// <param name="startIndex">起始标号</param>
-        /// <param name="endIndex">结束标号</param>
-        /// <returns>从起始标号到结束标号排列的范型</returns>
-        public static List<T[]> GetPermutation(T[] t, int startIndex, int endIndex)
-        {
-            if (startIndex < 0 || endIndex > t.Length - 1)
-            {
-                return null;
-            }
-            List<T[]> list = new List<T[]>();
-            GetPermutation(ref list, t, startIndex, endIndex);
-            return list;
-        }
-
-        /// <summary>
-        /// 返回数组所有元素的全排列
-        /// </summary>
-        /// <param name="t">所求数组</param>
-        /// <returns>全排列的范型</returns>
-        public static List<T[]> GetPermutation(T[] t)
-        {
-            return GetPermutation(t, 0, t.Length - 1);
-        }
-
-        /// <summary>
-        /// 求数组中n个元素的排列
-        /// </summary>
-        /// <param name="t">所求数组</param>
-        /// <param name="n">元素个数</param>
-        /// <returns>数组中n个元素的排列</returns>
-        public static List<T[]> GetPermutation(T[] t, int n)
-        {
-            if (n > t.Length)
-            {
-                return null;
-            }
-            List<T[]> list = new List<T[]>();
-            List<T[]> c = GetCombination(t, n);
-            for (int i = 0; i < c.Count; i++)
-            {
-                List<T[]> l = new List<T[]>();
-                GetPermutation(ref l, c[i], 0, n - 1);
-                list.AddRange(l);
-            }
-            return list;
-        }
-
-
-        /// <summary>
-        /// 求数组中n个元素的组合
-        /// </summary>
-        /// <param name="t">所求数组</param>
-        /// <param name="n">元素个数</param>
-        /// <returns>数组中n个元素的组合的范型</returns>
-        public static List<T[]> GetCombination(T[] t, int n)
-        {
-            if (t.Length < n)
-            {
-                return null;
-            }
-            int[] temp = new int[n];
-            List<T[]> list = new List<T[]>();
-            GetCombination(ref list, t, t.Length, n, temp, n);
-            return list;
+            return strRes;
         }
     }
+
 }

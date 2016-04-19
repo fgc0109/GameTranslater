@@ -40,58 +40,27 @@ namespace GameTranslaterUI
                 m_globalBasicInfo.StateDB = false;
             }
 
-            double MHP = 0;
-            double ATT = 0;
-            double DEF = 0;
-            double RES = 0;
-            RuneInfo runeInfo = new RuneInfo();
+
             textBox.Text = "";
+            bool state;
 
-            int[] array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            List<int[]> lst_Combination = PermutationAndCombination<int>.GetCombination(array, 5);
 
-            for (int i = 0; i < lst_Combination.Count; i++)
+            RuneCalculate basic = new RuneCalculate();
+            textBox.Text = basic.Calculate(out state,TextBox_Life.Text, TextBox_Attack.Text, TextBox_Defence.Text, TextBox_Magic.Text);
+
+            List<string[]> info = new List<string[]>();
+            string[] MHP = TextBox_Life.Text.Split('\t');
+            string[] ATT = TextBox_Attack.Text.Split('\t');
+
+            if (state==false)
             {
-                MHP = 0;
-                ATT = 0;
-                DEF = 0;
-                RES = 0;
-                double[] result = new double[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-                foreach (int item in result)
-                    result[item] = 0.0;
-                foreach (var item in lst_Combination[i])
-                {
-                    MHP = MHP + runeInfo.m_MHP[item];
-                    ATT = ATT + runeInfo.m_ATT[item];
-                    DEF = DEF + runeInfo.m_DEF[item];
-                    RES = RES + runeInfo.m_RES[item];
-                }
-                if (double.Parse(TextBox_Life.Text) + double.Parse(TextBox_Attack.Text) + double.Parse(TextBox_Defence.Text) + double.Parse(TextBox_Magic.Text) != 5)
-                {
-                    image.Visibility = Visibility.Visible;
-                    image1.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    image.Visibility = Visibility.Hidden;
-                    image1.Visibility = Visibility.Visible;
-
-                }
-                if (MHP == double.Parse(TextBox_Life.Text) &&
-                    ATT == double.Parse(TextBox_Attack.Text) &&
-                    DEF == double.Parse(TextBox_Defence.Text) &&
-                    RES == double.Parse(TextBox_Magic.Text))
-                {
-                    foreach (var item in lst_Combination[i])
-                    {
-                        result[item] = 1;
-                    }
-                    foreach (int item in result)
-                    {
-                        textBox.Text = textBox.Text + item.ToString() + "\r\n";
-                    }
-                    textBox.Text = textBox.Text + "\r\n";
-                }
+                image.Visibility = Visibility.Visible;
+                image1.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                image.Visibility = Visibility.Hidden;
+                image1.Visibility = Visibility.Visible;
             }
         }
     }
