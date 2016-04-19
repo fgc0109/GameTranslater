@@ -46,7 +46,7 @@ namespace GameTranslaterUI
 
 
             RuneCalculate basic = new RuneCalculate();
-            textBox.Text = basic.Calculate(out state,TextBox_Life.Text, TextBox_Attack.Text, TextBox_Defence.Text, TextBox_Magic.Text);
+            textBox.Text = basic.Calculate(out state, 2, TextBox_Life.Text, TextBox_Attack.Text, TextBox_Defence.Text, TextBox_Magic.Text);
 
             List<string[]> info = new List<string[]>();
             string[] MHP = TextBox_Life.Text.Split('\t');

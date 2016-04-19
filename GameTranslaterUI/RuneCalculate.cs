@@ -59,10 +59,27 @@ namespace GameTranslaterUI
                 //取排列A5,X
                 int[] arrayPar = new int[] { 0, 1, 2, 3, 4 };
 
+
+                int flag_quality_1 = 0;
+                int flag_quality_2 = 0;
+
                 for (int quality = 0; quality < 6; quality++)
                 {
-
-                    lst_Permutation = PermutationAndCombination<int>.GetPermutation(arrayPar, m_LVL[lv, quality]);
+                    if(m_LVL[lv, quality]!=0)
+                    {
+                        lst_Permutation = PermutationAndCombination<int>.GetPermutation(arrayPar, m_LVL[lv, quality]);
+                        flag_quality_1 = quality;
+                        if(m_LVL[lv, quality] != 5)
+                        {
+                            flag_quality_2 = quality + 1;
+                        }
+                        else
+                        {
+                            flag_quality_2 = 0;
+                        }
+                        quality = 6;
+                    }
+                    
                 }
 
 
