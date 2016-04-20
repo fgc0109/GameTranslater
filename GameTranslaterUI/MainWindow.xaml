@@ -88,37 +88,36 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid HorizontalAlignment="Left" Height="572" VerticalAlignment="Top" Width="295" Grid.Column="1">
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="234" Margin="10,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"  AcceptsReturn="True"  VerticalScrollBarVisibility="Visible"/>
-            <ListView Height="251" Margin="10,0,0,10" VerticalAlignment="Bottom" ItemsSource="{Binding}" Name="listView2" HorizontalAlignment="Left" Width="275">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="编号" DisplayMemberBinding="{Binding Path=ID}"  Width="100" />
-                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Path=Name}" Width="100"/>
-                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Path=Age}" Width="100"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <TextBox x:Name="TextBox_Life" Margin="49,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
-            <Label x:Name="Label_Life" Content="生命" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <TextBox x:Name="TextBox_Attack" Margin="189,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
-            <Label x:Name="Label_Attack" Content="攻击" Margin="150,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <TextBox x:Name="TextBox_Defence" Margin="49,41,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
-            <Label x:Name="Label_Defence" Content="物防" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <TextBox x:Name="TextBox_Magic" Margin="189,41,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
-            <Label x:Name="Label_Magic" Content="法防" Margin="150,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+        <Grid HorizontalAlignment="Left" Height="572" VerticalAlignment="Top" Width="702" Grid.Column="1">
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="234" Margin="10,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="682"  AcceptsReturn="True"  VerticalScrollBarVisibility="Visible"/>
+            <TextBox x:Name="TextBox_Life" Margin="52,261,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.969230769"/>
+            <Label x:Name="Label_Life" Content="生命" Margin="13,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Attack" Margin="192,261,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1.3"/>
+            <Label x:Name="Label_Attack" Content="攻击" Margin="153,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Defence" Margin="52,292,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.603076923"/>
+            <Label x:Name="Label_Defence" Content="物防" Margin="13,292,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="TextBox_Magic" Margin="192,292,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.295384615"/>
+            <Label x:Name="Label_Magic" Content="法防" Margin="153,291,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <Slider x:Name="Slider_LEF" HorizontalAlignment="Left" Margin="117,15,0,0" VerticalAlignment="Top" Width="200" Height="18" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05"/>
+            <Slider x:Name="Slider_ATT" HorizontalAlignment="Left" Margin="117,46,0,0" VerticalAlignment="Top" Width="200" Height="18" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05"/>
+            <Slider x:Name="Slider_DEF" HorizontalAlignment="Left" Margin="117,77,0,0" VerticalAlignment="Top" Width="200" Height="18" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05"/>
+            <TextBox x:Name="TextBox_ATT"  Margin="16,46,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_ATT, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="TextBox_DEF"  Margin="16,77,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_DEF, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="TextBox_LFE"  Margin="16,15,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_LEF, UpdateSourceTrigger=PropertyChanged}" />
+            <Button x:Name="button" Content="" Margin="433,285,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="127"/>
+            <TextBox x:Name="TextBox_Deviation"  Margin="332,260,0,0"  Style="{StaticResource Blue_TextBoxStyle}" Text="0" />
+            <Label x:Name="Label_Tittle" Content="基础权重" Margin="13,230,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="275" FontSize="13.333" FontWeight="Bold" Foreground="White"/>
+            <TextBox x:Name="TextBox_Level" Margin="332,291,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
+            <Label x:Name="Label_Level" Content="等级" Margin="293,292,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <Label x:Name="Label_Level_Copy" Content="偏差" Margin="293,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="572" Margin="300,0,0,0" VerticalAlignment="Top" Width="700" Grid.Column="1">
-            <TextBox x:Name="stateDatabase_TextBox" Margin="219,252,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-            <TextBox x:Name="stateDataSets_TextBox" Margin="219,284,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-            <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="187,253,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="187,284,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="button" Content="" Margin="10,137,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}"/>
-            <TextBox x:Name="textBox1"  Margin="33,296,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=slider1, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox x:Name="textBox0"  Margin="33,340,0,0"  Style="{StaticResource Blue_TextBoxStyle}" Text="100000023" />
+        <Grid HorizontalAlignment="Left" Height="572" Margin="702,0,0,0" VerticalAlignment="Top" Width="298" Grid.Column="1">
+            <TextBox x:Name="stateDatabase_TextBox" Margin="49,132,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <TextBox x:Name="stateDataSets_TextBox" Margin="49,163,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="17,132,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="18,163,0,0" VerticalAlignment="Top"/>
             <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="280,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" Visibility="Hidden"/>
             <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="280,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png" Visibility="Hidden"/>
-            <Slider x:Name="slider1" HorizontalAlignment="Left" Margin="43,424,0,0" VerticalAlignment="Top" Width="200" Height="18"/>
             <TextBox x:Name="TextBox_Attack_Copy" Margin="49,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
             <Label x:Name="Label_Attack_Copy" Content="用户" Margin="10,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
             <TextBox x:Name="TextBox_Attack_Copy1" Margin="189,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
@@ -131,6 +130,16 @@
             <Label x:Name="Label_Attack_Copy4" Content="库名" Margin="10,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
             <TextBox x:Name="TextBox_Attack_Copy5" Margin="189,70,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
             <Label x:Name="Label_Attack_Copy5" Content="表名" Margin="150,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <TextBox x:Name="stateDatabase_TextBox_Copy" Margin="49,101,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+            <ListView Height="235" Margin="10,0,0,10" VerticalAlignment="Bottom" ItemsSource="{Binding}" x:Name="listView2" HorizontalAlignment="Left" Width="278">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="编号" DisplayMemberBinding="{Binding ID}"  Width="100" />
+                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Name}" Width="100"/>
+                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Age}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Window>
