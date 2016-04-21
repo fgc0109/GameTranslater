@@ -13,11 +13,6 @@ namespace GameTranslaterUI
         public double[] m_DEF = new double[10] { 0, 0, 1, 0, 0, 0.5, 0.5, 0.5, 0, 0 };
         public double[] m_RES = new double[10] { 0, 0, 0, 1, 0, 0, 0.5, 0, 0.5, 0.5 };
 
-        //public double[] m_MHP = new double[10] { 1, 0, 0, 0, 0.5, 0, 0, 0.5, 0.5, -10 };
-        //public double[] m_ATT = new double[10] { 0, 1, 0, 0, 0.5, 0.5, 0, 0, 0, -10 };
-        //public double[] m_DEF = new double[10] { 0, 0, 1, 0, 0, 0.5, 0.5, 0.5, 0, -10 };
-        //public double[] m_RES = new double[10] { 0, 0, 0, 1, 0, 0, 0.5, 0, 0.5, -10 };
-
         private double[] m_qualityRunes = new double[6] { 1, 1.5, 2.25, 3.25, 4.5, 6 };
         private double[] m_qualityLevel = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -48,26 +43,20 @@ namespace GameTranslaterUI
         //符文结果{品质参数*10,生命,攻击,物防,法防}
         List<double[]> lst_Appropriate = null;
 
-        public double[] Calculate( bool[] state,out double min, int lv, string strMHP, string strATT, string strDEF, string strRES)
+        public double[] Calculate(bool[] state, out double min, int lv, string strMHP, string strATT, string strDEF, string strRES)
         {
             double MHP, ATT, DEF, RES;
 
-
             min = 10;
-            for(int i=0;i<16;i++)
+            for (int i = 0; i < 16; i++)
             {
-                for(int j=0;j<6;j++)
+                for (int j = 0; j < 6; j++)
                 {
                     m_qualityLevel[i] = m_qualityLevel[i] + m_LVL[i, j] * m_qualityRunes[j];
-                }    
+                }
             }
-            
 
-
-
-            string strRes = "";
             RuneCalculate runeInfo = new RuneCalculate();
-
 
             for (int i = 0; i < 10; i++)
             {
@@ -91,7 +80,7 @@ namespace GameTranslaterUI
                 MHP = ATT = DEF = RES = 0;
                 double[] result = new double[10] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-                //取排列A5,X
+                //取组合C5,X
                 //int[] arrayPar = new int[] { 0, 1, 2, 3, 4 };
                 int[] arrayPar = lst_Combination_A[i];
 
@@ -215,7 +204,7 @@ namespace GameTranslaterUI
                         double[] tempdata = new double[14];
                         for (int k = 0; k < 10; k++)
                         {
-                            
+
                             tempdata[k] = result[k];
                         }
                         tempdata[10] = MHP;
@@ -228,35 +217,30 @@ namespace GameTranslaterUI
                 }
             }
 
+            double dblMHP = double.Parse(strMHP);
+            double dblATT = double.Parse(strATT);
+            double dblDEF = double.Parse(strDEF);
+            double dblRES = double.Parse(strRES);
+
             //匹配合适的权重
             int flag = 0;
             double temp = 0;
 
-            double sum = double.Parse(strMHP) + double.Parse(strATT) + double.Parse(strDEF) + double.Parse(strRES);
+            double sum = dblMHP + dblATT + dblDEF + dblRES;
 
             for (int i = 0; i < lst_Appropriate.Count; i++)
             {
-
                 temp =
-                    Math.Abs(lst_Appropriate[i][10] - double.Parse(strMHP) * m_qualityLevel[lv] / sum) +
-                    Math.Abs(lst_Appropriate[i][11] - double.Parse(strATT) * m_qualityLevel[lv] / sum) +
-                    Math.Abs(lst_Appropriate[i][12] - double.Parse(strDEF) * m_qualityLevel[lv] / sum) +
-                    Math.Abs(lst_Appropriate[i][13] - double.Parse(strRES) * m_qualityLevel[lv] / sum);
+                    Math.Abs(lst_Appropriate[i][10] - dblMHP * m_qualityLevel[lv] / sum) +
+                    Math.Abs(lst_Appropriate[i][11] - dblATT * m_qualityLevel[lv] / sum) +
+                    Math.Abs(lst_Appropriate[i][12] - dblDEF * m_qualityLevel[lv] / sum) +
+                    Math.Abs(lst_Appropriate[i][13] - dblRES * m_qualityLevel[lv] / sum);
                 if (temp < min)
                 {
                     min = temp;
                     flag = i;
                 }
             }
-
-            //返回匹配的符文组
-            //foreach (var item in lst_Appropriate[flag])
-            //{
-            //    strRes = strRes + item.ToString() + "\r\n";
-            //}
-            //strRes = strRes + "\r\n";
-
-            //return strRes;
             return lst_Appropriate[flag];
         }
     }

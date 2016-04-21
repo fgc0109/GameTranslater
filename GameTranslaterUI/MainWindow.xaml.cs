@@ -73,72 +73,60 @@ namespace GameTranslaterUI
             min2 = min2 / 16;
 
             InfoRunes newlabel = new InfoRunes();
+            StringBuilder outputInfoBuilder = new StringBuilder(4096);
 
+            //以权重值方式导出
             if ((bool)radioButton_Copy0.IsChecked)
             {
-                //以权重值方式导出
-                string textValues = "";
                 for (int j = 0; j < 14; j++)
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        textValues = textValues + InfoReturn[i][j].ToString() + "\t";
+                        outputInfoBuilder.Append(InfoReturn[i][j]);
+                        outputInfoBuilder.Append("\t");
                     }
                     if (j == 9)
-                        textValues = textValues + newlabel.ReturnSeparator(145, '-');
-                    textValues = textValues + "\r\n";
+                        outputInfoBuilder.Append('-', 145);
+                    outputInfoBuilder.AppendLine();
                 }
+                outputInfoBuilder.Append('=', 85);
+                outputInfoBuilder.AppendLine();
 
-                textValues = textValues + newlabel.ReturnSeparator(85, '=');
-                textValues = textValues + "\r\n";
-
-                textBox.Text = textBox.Text + textValues;
+                textBox.Text = textBox.Text + outputInfoBuilder;
             }
 
+            //以品质名方式导出
             if ((bool)radioButton_Copy1.IsChecked)
             {
-                //以品质名方式导出
-                string textQuality = "";
                 for (int j = 0; j < 14; j++)
                 {
                     for (int i = 0; i < 16; i++)
                     {
-                        textQuality = textQuality + newlabel.ReturnLabel(InfoReturn[i][j]) + "\t";
+                        outputInfoBuilder.Append(newlabel.ReturnLabel(InfoReturn[i][j]));
+                        outputInfoBuilder.Append("\t");
                     }
                     if (j == 9)
-                        textQuality = textQuality + newlabel.ReturnSeparator(145, '-');
-                    textQuality = textQuality + "\r\n";
+                        outputInfoBuilder.Append('-', 145);
+                    outputInfoBuilder.AppendLine();
                 }
+                outputInfoBuilder.Append('=', 85);
+                outputInfoBuilder.AppendLine();
 
-                textQuality = textQuality + newlabel.ReturnSeparator(85, '=');
-                textQuality = textQuality + "\r\n";
-
-                textBox.Text = textBox.Text + textQuality;
+                textBox.Text = textBox.Text + outputInfoBuilder;
             }
 
+            //以符文组方式导出
             if ((bool)radioButton_Copy2.IsChecked)
             {
-                //以符文组方式导出
-                string textRuneList = "";
-                //for (int i = 0; i < 16; i++)
-                //{
-                //    for (int j = 0; j < 10; j++)
-                //    {
-                //        textRuneList = textRuneList + newlabel.ReturnID(InfoReturn[i][j], j, ",");
-                //    }
-                //    textRuneList = textRuneList + "\r\n";
-                //}
-                //textRuneList = textRuneList + newlabel.ReturnSeparator(85, '=');
-                //textRuneList = textRuneList + "\r\n";
                 for (int i = 0; i < 16; i++)
                 {
                     for (int j = 0; j < 10; j++)
                     {
-                        textRuneList = textRuneList + newlabel.ReturnID(InfoReturn[i][j], j, "\t");
+                        outputInfoBuilder.Append(newlabel.ReturnID(InfoReturn[i][j], j, "\t"));
                     }
-                    textRuneList = textRuneList + "\r\n";
+                    outputInfoBuilder.AppendLine();
                 }
-                textBox.Text = textBox.Text + textRuneList;
+                textBox.Text = textBox.Text + outputInfoBuilder;
             }
 
             //foreach (var item in basic.Calculate(out state, out min, int.Parse(TextBox_Level.Text) - 1, TextBox_MHP.Text, TextBox_ATT.Text, TextBox_DEF.Text, TextBox_RES.Text))

@@ -112,19 +112,5 @@ namespace GameTranslaterUI
             else
                 return "";
         }
-
-
-        public string ReturnSeparator(int length, char sp)
-        {
-            string temp = "";
-            temp = temp + "\r\n";
-            for (int i = 0; i < length; i++)
-            {
-                temp = temp + sp;
-            }
-            temp = temp + "\r\n";
-
-            return temp;
-        }
     }
 }
