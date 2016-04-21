@@ -65,6 +65,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InfoBasic.cs" />
+    <Compile Include="InfoRunes.cs" />
     <Compile Include="PermutationAndCombination.cs" />
     <Compile Include="RuneCalculate.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -125,9 +127,6 @@
       <Project>{1f75dbbe-84a6-47de-8c15-88be126592e9}</Project>
       <Name>DataHelper</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

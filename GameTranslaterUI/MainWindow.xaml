@@ -88,36 +88,61 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid HorizontalAlignment="Left" Height="572" VerticalAlignment="Top" Width="702" Grid.Column="1">
-            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="234" Margin="10,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="682"  AcceptsReturn="True"  VerticalScrollBarVisibility="Visible"/>
-            <TextBox x:Name="TextBox_Life" Margin="52,261,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.969230769"/>
+        <Grid HorizontalAlignment="Left" Height="572" VerticalAlignment="Top" Width="702" Grid.Column="1" Margin="-5,0,0,0">
+            <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="234" Margin="10,328,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="682"  AcceptsReturn="True"  VerticalScrollBarVisibility="Visible" FontSize="8"/>
+            <TextBox x:Name="TextBox_MHP" Margin="52,261,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.969230769"/>
             <Label x:Name="Label_Life" Content="生命" Margin="13,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <TextBox x:Name="TextBox_Attack" Margin="192,261,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1.3"/>
+            <TextBox x:Name="TextBox_ATT" Margin="192,261,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1.3"/>
             <Label x:Name="Label_Attack" Content="攻击" Margin="153,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <TextBox x:Name="TextBox_Defence" Margin="52,292,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.603076923"/>
+            <TextBox x:Name="TextBox_DEF" Margin="52,292,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.603076923"/>
             <Label x:Name="Label_Defence" Content="物防" Margin="13,292,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <TextBox x:Name="TextBox_Magic" Margin="192,292,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.295384615"/>
+            <TextBox x:Name="TextBox_RES" Margin="192,292,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="0.295384615"/>
             <Label x:Name="Label_Magic" Content="法防" Margin="153,291,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <Slider x:Name="Slider_LEF" HorizontalAlignment="Left" Margin="117,15,0,0" VerticalAlignment="Top" Width="200" Height="18" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05"/>
-            <Slider x:Name="Slider_ATT" HorizontalAlignment="Left" Margin="117,46,0,0" VerticalAlignment="Top" Width="200" Height="18" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05"/>
-            <Slider x:Name="Slider_DEF" HorizontalAlignment="Left" Margin="117,77,0,0" VerticalAlignment="Top" Width="200" Height="18" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05"/>
-            <TextBox x:Name="TextBox_ATT"  Margin="16,46,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_ATT, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox x:Name="TextBox_DEF"  Margin="16,77,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_DEF, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox x:Name="TextBox_LFE"  Margin="16,15,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_LEF, UpdateSourceTrigger=PropertyChanged}" />
-            <Button x:Name="button" Content="" Margin="433,285,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="127"/>
+
+            <Button x:Name="button" Content="" Margin="497,279,0,0" Click="button_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="127"/>
             <TextBox x:Name="TextBox_Deviation"  Margin="332,260,0,0"  Style="{StaticResource Blue_TextBoxStyle}" Text="0" />
             <Label x:Name="Label_Tittle" Content="基础权重" Margin="13,230,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="275" FontSize="13.333" FontWeight="Bold" Foreground="White"/>
             <TextBox x:Name="TextBox_Level" Margin="332,291,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="1"/>
             <Label x:Name="Label_Level" Content="等级" Margin="293,292,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-            <Label x:Name="Label_Level_Copy" Content="偏差" Margin="293,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <Label x:Name="Label_Deviation" Content="偏差" Margin="293,261,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+            <GroupBox x:Name="groupBox" Header="参数调整" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" Height="145" Width="400" FontWeight="Bold" FontSize="14" Foreground="White">
+                <WrapPanel Orientation="Horizontal">
+                    <Label x:Name="Label_MHP_Change" Content="生命" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" FontSize="12" HorizontalContentAlignment="Center"/>
+                    <Slider x:Name="Slider_LEF" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05" ValueChanged="Slider_LEF_ValueChanged"/>
+                    <TextBox x:Name="TextBox_MHP_Change"  Margin="10,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_LEF, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label x:Name="Label_ATT_Change" Content="攻击" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" FontSize="12" HorizontalContentAlignment="Center"/>
+                    <Slider x:Name="Slider_ATT" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05" ValueChanged="Slider_ATT_ValueChanged"/>
+                    <TextBox x:Name="TextBox_ATT_Change"  Margin="10,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_ATT, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label x:Name="Label_DEF_Change" Content="防御" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" FontSize="12" HorizontalContentAlignment="Center"/>
+                    <Slider x:Name="Slider_DEF" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.05" SmallChange="0.05" ValueChanged="Slider_DEF_ValueChanged"/>
+                    <TextBox x:Name="TextBox_DEF_Change"  Margin="10,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_DEF, UpdateSourceTrigger=PropertyChanged}" />
+                </WrapPanel>
+            </GroupBox>
+            <GroupBox x:Name="groupBox1" Header="符文偏好" HorizontalAlignment="Left" Margin="445,10,0,0" VerticalAlignment="Top" Height="145" Width="230" FontSize="14" Foreground="White">
+                <WrapPanel Orientation="Horizontal">
+                    <CheckBox x:Name="checkBox_Copy0" Content="符文01" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy1" Content="符文02" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy2" Content="符文03" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy3" Content="符文04" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy4" Content="符文05" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy5" Content="符文06" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy6" Content="符文07" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy7" Content="符文08" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy8" Content="符文09" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <CheckBox x:Name="checkBox_Copy9" Content="符文10" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                </WrapPanel>
+            </GroupBox>
+            <RadioButton x:Name="radioButton_Copy0" Content="权重" HorizontalAlignment="Left" Margin="515,193,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton_Copy1" Content="品质" HorizontalAlignment="Left" Margin="515,217,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButton_Copy2" Content="符文组" HorizontalAlignment="Left" Margin="515,242,0,0" VerticalAlignment="Top" IsChecked="True"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="572" Margin="702,0,0,0" VerticalAlignment="Top" Width="298" Grid.Column="1">
             <TextBox x:Name="stateDatabase_TextBox" Margin="49,132,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
             <TextBox x:Name="stateDataSets_TextBox" Margin="49,163,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
             <Label x:Name="StateDatabase" Content="DB" HorizontalAlignment="Left" Margin="17,132,0,0" VerticalAlignment="Top"/>
             <Label x:Name="StateDataSets" Content="DS" HorizontalAlignment="Left" Margin="18,163,0,0" VerticalAlignment="Top"/>
-            <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="280,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" Visibility="Hidden"/>
-            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="280,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png" Visibility="Hidden"/>
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="200,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" Visibility="Hidden"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="200,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png" Visibility="Hidden"/>
             <TextBox x:Name="TextBox_Attack_Copy" Margin="49,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
             <Label x:Name="Label_Attack_Copy" Content="用户" Margin="10,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
             <TextBox x:Name="TextBox_Attack_Copy1" Margin="189,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>

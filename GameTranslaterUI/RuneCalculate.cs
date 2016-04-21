@@ -13,6 +13,11 @@ namespace GameTranslaterUI
         public double[] m_DEF = new double[10] { 0, 0, 1, 0, 0, 0.5, 0.5, 0.5, 0, 0 };
         public double[] m_RES = new double[10] { 0, 0, 0, 1, 0, 0, 0.5, 0, 0.5, 0.5 };
 
+        //public double[] m_MHP = new double[10] { 1, 0, 0, 0, 0.5, 0, 0, 0.5, 0.5, -10 };
+        //public double[] m_ATT = new double[10] { 0, 1, 0, 0, 0.5, 0.5, 0, 0, 0, -10 };
+        //public double[] m_DEF = new double[10] { 0, 0, 1, 0, 0, 0.5, 0.5, 0.5, 0, -10 };
+        //public double[] m_RES = new double[10] { 0, 0, 0, 1, 0, 0, 0.5, 0, 0.5, -10 };
+
         private double[] m_qualityRunes = new double[6] { 1, 1.5, 2.25, 3.25, 4.5, 6 };
         private double[] m_qualityLevel = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -43,11 +48,11 @@ namespace GameTranslaterUI
         //符文结果{品质参数*10,生命,攻击,物防,法防}
         List<double[]> lst_Appropriate = null;
 
-        public string Calculate(out bool state,out double min, int lv, string strMHP, string strATT, string strDEF, string strRES)
+        public double[] Calculate( bool[] state,out double min, int lv, string strMHP, string strATT, string strDEF, string strRES)
         {
             double MHP, ATT, DEF, RES;
 
-            state = false;
+
             min = 10;
             for(int i=0;i<16;i++)
             {
@@ -58,8 +63,22 @@ namespace GameTranslaterUI
             }
             
 
+
+
             string strRes = "";
             RuneCalculate runeInfo = new RuneCalculate();
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (!state[i])
+                {
+                    runeInfo.m_MHP[i] = -1000;
+                    runeInfo.m_ATT[i] = -1000;
+                    runeInfo.m_DEF[i] = -1000;
+                    runeInfo.m_RES[i] = -1000;
+                }
+            }
 
             lst_Appropriate = new List<double[]>();
 
@@ -231,13 +250,14 @@ namespace GameTranslaterUI
             }
 
             //返回匹配的符文组
-            foreach (var item in lst_Appropriate[flag])
-            {
-                strRes = strRes + item.ToString() + "\r\n";
-            }
-            strRes = strRes + "\r\n";
+            //foreach (var item in lst_Appropriate[flag])
+            //{
+            //    strRes = strRes + item.ToString() + "\r\n";
+            //}
+            //strRes = strRes + "\r\n";
 
-            return strRes;
+            //return strRes;
+            return lst_Appropriate[flag];
         }
     }
 }
