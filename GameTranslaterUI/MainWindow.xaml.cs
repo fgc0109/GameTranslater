@@ -45,102 +45,54 @@ namespace GameTranslaterUI
             }
 
             textBox.Text = "";
-            bool[] state =new bool[10];
+
             double min;
-            double min2 = 0;
+            double deviation = 0;
 
+            //获取符文偏好设定
+            bool[] state = new bool[panel_Runes.Children.Count];
+            for (int i = 0; i < panel_Runes.Children.Count; i++)
+            {
+                if (panel_Runes.Children[i] is CheckBox)
+                {
+                    CheckBox checkbox = panel_Runes.Children[i] as CheckBox;
+                    state[i] = (bool)checkbox.IsChecked;
+                }
+            }
 
-
-            state[0] = (bool)checkBox_Copy0.IsChecked;
-            state[1] = (bool)checkBox_Copy1.IsChecked;
-            state[2] = (bool)checkBox_Copy2.IsChecked;
-            state[3] = (bool)checkBox_Copy3.IsChecked;
-            state[4] = (bool)checkBox_Copy4.IsChecked;
-            state[5] = (bool)checkBox_Copy5.IsChecked;
-            state[6] = (bool)checkBox_Copy6.IsChecked;
-            state[7] = (bool)checkBox_Copy7.IsChecked;
-            state[8] = (bool)checkBox_Copy8.IsChecked;
-            state[9] = (bool)checkBox_Copy9.IsChecked;
-
+            //获取最佳符文组合
             double[][] InfoReturn = new double[16][];
             for (int i = 0; i < 16; i++)
             {
                 RuneCalculate basic = new RuneCalculate();
                 InfoReturn[i] = basic.Calculate( state, out min, i, TextBox_MHP.Text, TextBox_ATT.Text, TextBox_DEF.Text, TextBox_RES.Text);
-                min2 = min2 + min;
+                deviation = deviation + min;
                 basic = null;
             }
-            min2 = min2 / 16;
+            deviation = deviation / 16;
 
-            InfoRunes newlabel = new InfoRunes();
+            InfoRunes infoRunesFormat = new InfoRunes();
             StringBuilder outputInfoBuilder = new StringBuilder(4096);
 
             //以权重值方式导出
-            if ((bool)radioButton_Copy0.IsChecked)
+            if ((bool)radioButton_Format_0.IsChecked)
             {
-                for (int j = 0; j < 14; j++)
-                {
-                    for (int i = 0; i < 16; i++)
-                    {
-                        outputInfoBuilder.Append(InfoReturn[i][j]);
-                        outputInfoBuilder.Append("\t");
-                    }
-                    if (j == 9)
-                        outputInfoBuilder.Append('-', 145);
-                    outputInfoBuilder.AppendLine();
-                }
-                outputInfoBuilder.Append('=', 85);
-                outputInfoBuilder.AppendLine();
-
-                textBox.Text = textBox.Text + outputInfoBuilder;
+                textBox.Text = textBox.Text + infoRunesFormat.ReturnWeights(InfoReturn);
             }
 
             //以品质名方式导出
-            if ((bool)radioButton_Copy1.IsChecked)
+            if ((bool)radioButton_Format_1.IsChecked)
             {
-                for (int j = 0; j < 14; j++)
-                {
-                    for (int i = 0; i < 16; i++)
-                    {
-                        outputInfoBuilder.Append(newlabel.ReturnLabel(InfoReturn[i][j]));
-                        outputInfoBuilder.Append("\t");
-                    }
-                    if (j == 9)
-                        outputInfoBuilder.Append('-', 145);
-                    outputInfoBuilder.AppendLine();
-                }
-                outputInfoBuilder.Append('=', 85);
-                outputInfoBuilder.AppendLine();
-
-                textBox.Text = textBox.Text + outputInfoBuilder;
+                textBox.Text = textBox.Text + infoRunesFormat.ReturnQuality(InfoReturn);
             }
 
             //以符文组方式导出
-            if ((bool)radioButton_Copy2.IsChecked)
+            if ((bool)radioButton_Format_2.IsChecked)
             {
-                for (int i = 0; i < 16; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        outputInfoBuilder.Append(newlabel.ReturnID(InfoReturn[i][j], j, "\t"));
-                    }
-                    outputInfoBuilder.AppendLine();
-                }
-                textBox.Text = textBox.Text + outputInfoBuilder;
+                textBox.Text = textBox.Text + infoRunesFormat.ReturnGroups(InfoReturn);
             }
 
-            //foreach (var item in basic.Calculate(out state, out min, int.Parse(TextBox_Level.Text) - 1, TextBox_MHP.Text, TextBox_ATT.Text, TextBox_DEF.Text, TextBox_RES.Text))
-            //{
-            //    textBox.Text = textBox.Text + item.ToString() + "\r\n";
-            //}
-            //textBox.Text = textBox.Text + "\r\n";
-
-
-            //textBox.Text = InfoReturn[0][0].ToString() + InfoReturn[1][0].ToString();
-
-            TextBox_Deviation.Text = min2.ToString();
-
-            //List<string[]> info = new List<string[]>();
+            TextBox_Deviation.Text = deviation.ToString();
 
             //if (state == false)
             //{

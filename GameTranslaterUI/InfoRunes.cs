@@ -68,7 +68,62 @@ namespace GameTranslaterUI
             }
         }
 
-        public string ReturnLabel(double quality)
+        public string  ReturnWeights(double[][] infoReturn)
+        {
+            StringBuilder outputInfoBuilder = new StringBuilder(4096);
+            for (int j = 0; j < 14; j++)
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    outputInfoBuilder.Append(infoReturn[i][j]);
+                    outputInfoBuilder.Append("\t");
+                }
+                if (j == 9)
+                    outputInfoBuilder.Append('-', 145);
+                outputInfoBuilder.AppendLine();
+            }
+            outputInfoBuilder.Append('=', 85);
+            outputInfoBuilder.AppendLine();
+
+            return outputInfoBuilder.ToString();
+        }
+
+        public string ReturnQuality(double[][] infoReturn)
+        {
+            StringBuilder outputInfoBuilder = new StringBuilder(4096);
+            for (int j = 0; j < 14; j++)
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    outputInfoBuilder.Append(QualityInfo(infoReturn[i][j]));
+                    outputInfoBuilder.Append("\t");
+                }
+                if (j == 9)
+                    outputInfoBuilder.Append('-', 145);
+                outputInfoBuilder.AppendLine();
+            }
+            outputInfoBuilder.Append('=', 85);
+            outputInfoBuilder.AppendLine();
+
+            return outputInfoBuilder.ToString();
+        }
+
+        public string ReturnGroups(double[][] infoReturn)
+        {
+            StringBuilder outputInfoBuilder = new StringBuilder(4096);
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    outputInfoBuilder.Append(GroupsInfo(infoReturn[i][j], j, "\t"));
+                }
+                outputInfoBuilder.AppendLine();
+            }
+
+            return outputInfoBuilder.ToString();
+        }
+
+        public string QualityInfo(double quality)
         {
             if (quality == 1)
                 return "白";
@@ -86,7 +141,7 @@ namespace GameTranslaterUI
                 return "";
         }
 
-        public string ReturnID(double quality, int type, string split)
+        public string GroupsInfo(double quality, int type, string split)
         {
             type = type + 1;
             string temp = "";

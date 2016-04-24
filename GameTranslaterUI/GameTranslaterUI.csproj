@@ -128,6 +128,27 @@
       <Name>DataHelper</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\checkbox_1_checked.png" />
+    <Resource Include="Resources\checkbox_1_nocheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\radio_1_checked.png" />
+    <Resource Include="Resources\radio_1_nocheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\slider_1_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\slider_1_thumb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\slider_1_thumb_off.png" />
+    <Resource Include="Resources\slider_1_thumb_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\slider_1_button.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
