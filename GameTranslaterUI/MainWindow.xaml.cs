@@ -89,7 +89,13 @@ namespace GameTranslaterUI
             //以符文组方式导出
             if ((bool)radioButton_Format_2.IsChecked)
             {
-                textBox.Text = textBox.Text + infoRunesFormat.ReturnGroups(InfoReturn);
+                textBox.Text = textBox.Text + infoRunesFormat.ReturnGroups_Type1(InfoReturn);
+            }
+
+            //以品质名符文组方式导出
+            if ((bool)radioButton_Format_3.IsChecked)
+            {
+                textBox.Text = textBox.Text + infoRunesFormat.ReturnGroups_Type2(InfoReturn);
             }
 
             TextBox_Deviation.Text = deviation.ToString();

@@ -13,7 +13,7 @@ namespace GameTranslaterUI
         public double[] m_DEF = new double[10] { 0, 0, 1, 0, 0, 0.5, 0.5, 0.5, 0, 0 };
         public double[] m_RES = new double[10] { 0, 0, 0, 1, 0, 0, 0.5, 0, 0.5, 0.5 };
 
-        private double[] m_qualityRunes = new double[6] { 1, 1.5, 2.25, 3.25, 4.5, 6 };
+        public static double[] m_qualityRunes = new double[6] { 1, 1.4, 2.25, 3.9, 6.75, 8.1 };
         private double[] m_qualityLevel = new double[16] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         private int[,] m_LVL = new int[16, 6]

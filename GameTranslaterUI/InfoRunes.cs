@@ -95,7 +95,7 @@ namespace GameTranslaterUI
             {
                 for (int i = 0; i < 16; i++)
                 {
-                    outputInfoBuilder.Append(QualityInfo(infoReturn[i][j]));
+                    outputInfoBuilder.Append(QualityInfo(infoReturn[i][j], string.Empty));
                     outputInfoBuilder.Append("\t");
                 }
                 if (j == 9)
@@ -108,7 +108,7 @@ namespace GameTranslaterUI
             return outputInfoBuilder.ToString();
         }
 
-        public string ReturnGroups(double[][] infoReturn)
+        public string ReturnGroups_Type1(double[][] infoReturn)
         {
             StringBuilder outputInfoBuilder = new StringBuilder(4096);
             for (int i = 0; i < 16; i++)
@@ -123,22 +123,37 @@ namespace GameTranslaterUI
             return outputInfoBuilder.ToString();
         }
 
-        public string QualityInfo(double quality)
+        public string ReturnGroups_Type2(double[][] infoReturn)
         {
-            if (quality == 1)
-                return "白";
-            else if (quality == 1.5)
-                return "绿";
-            else if (quality == 2.25)
-                return "蓝";
-            else if (quality == 3.25)
-                return "紫";
-            else if (quality == 4.5)
-                return "橙";
-            else if (quality == 6)
-                return "红";
+            StringBuilder outputInfoBuilder = new StringBuilder(4096);
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    outputInfoBuilder.Append(QualityInfo(infoReturn[i][j],"\t"));
+                }
+                outputInfoBuilder.AppendLine();
+            }
+
+            return outputInfoBuilder.ToString();
+        }
+
+        public string QualityInfo(double quality, string split)
+        {
+            if (quality == RuneCalculate.m_qualityRunes[0])
+                return "白" + split;
+            else if (quality == RuneCalculate.m_qualityRunes[1])
+                return "绿" + split;
+            else if (quality == RuneCalculate.m_qualityRunes[2])
+                return "蓝" + split;
+            else if (quality == RuneCalculate.m_qualityRunes[3])
+                return "紫" + split;
+            else if (quality == RuneCalculate.m_qualityRunes[4])
+                return "橙" + split;
+            else if (quality == RuneCalculate.m_qualityRunes[5])
+                return "红" + split;
             else
-                return "";
+                return "" + split;
         }
 
         public string GroupsInfo(double quality, int type, string split)
@@ -152,17 +167,17 @@ namespace GameTranslaterUI
             else
                 temp = "0" + type.ToString() + split;
 
-            if (quality == 1)
+            if (quality == RuneCalculate.m_qualityRunes[0])
                 return "10" + temp;
-            else if (quality == 1.5)
+            else if (quality == RuneCalculate.m_qualityRunes[1])
                 return "20" + temp;
-            else if (quality == 2.25)
+            else if (quality == RuneCalculate.m_qualityRunes[2])
                 return "30" + temp;
-            else if (quality == 3.25)
+            else if (quality == RuneCalculate.m_qualityRunes[3])
                 return "40" + temp;
-            else if (quality == 4.5)
+            else if (quality == RuneCalculate.m_qualityRunes[4])
                 return "50" + temp;
-            else if (quality == 6)
+            else if (quality == RuneCalculate.m_qualityRunes[5])
                 return "60" + temp;
             else
                 return "";

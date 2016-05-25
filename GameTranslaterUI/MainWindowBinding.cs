@@ -48,9 +48,9 @@ namespace GameTranslaterUI
             TextBox_DEF.SetBinding(TextBox.TextProperty, new Binding("DEF") { Source = m_globalRunesInfo });
             TextBox_RES.SetBinding(TextBox.TextProperty, new Binding("RES") { Source = m_globalRunesInfo });
 
-            Slider_LEF.Value = 0.2;
-            Slider_ATT.Value = 0.3;
-            Slider_DEF.Value = 0.2;
+            Slider_LEF.Value = 0;
+            Slider_ATT.Value = 0;
+            Slider_DEF.Value = 0;
         }
 
         internal void GetDatas()
