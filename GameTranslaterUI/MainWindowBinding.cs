@@ -26,7 +26,7 @@ namespace GameTranslaterUI
         private DataSet m_mainDataSet = null;
         private List<DataTable> m_mainDataTable = null;
 
-        public void BindingState()
+        public void bindingState()
         {
             //添加数据库连接状态改变的事件
             MySqlHelper.OpenMySql("localhost", "3306", "root", "123456", "par_db_new");
@@ -44,17 +44,10 @@ namespace GameTranslaterUI
             //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));
 
 
-            TextBox_MHP.SetBinding(TextBox.TextProperty, new Binding("MHP") { Source = m_globalRunesInfo });
-            TextBox_ATT.SetBinding(TextBox.TextProperty, new Binding("ATT") { Source = m_globalRunesInfo });
-            TextBox_DEF.SetBinding(TextBox.TextProperty, new Binding("DEF") { Source = m_globalRunesInfo });
-            TextBox_RES.SetBinding(TextBox.TextProperty, new Binding("RES") { Source = m_globalRunesInfo });
-
-            Slider_LEF.Value = 0;
-            Slider_ATT.Value = 0;
-            Slider_DEF.Value = 0;
+            
         }
 
-        internal void GetDatas()
+        internal void getDatas()
         {
             for (int i = 0; i < m_mainDataSet.Tables.Count; i++)
             {
@@ -62,7 +55,7 @@ namespace GameTranslaterUI
             }
         }
 
-        private DataTable GetDataTable()
+        private DataTable getDataTable()
         {
             DataTable data = new DataTable("MyDataTable");
 
