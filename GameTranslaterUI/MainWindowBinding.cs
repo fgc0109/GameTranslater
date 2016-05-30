@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using System.Drawing;
 using DataHelper;
+using RuneDesign;
 
 namespace GameTranslaterUI
 {

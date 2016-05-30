@@ -66,9 +66,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="InfoBasic.cs" />
-    <Compile Include="InfoRunes.cs" />
-    <Compile Include="PermutationAndCombination.cs" />
-    <Compile Include="RuneCalculate.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -146,6 +143,10 @@
     <ProjectReference Include="..\DataHelper\DataHelper.csproj">
       <Project>{1f75dbbe-84a6-47de-8c15-88be126592e9}</Project>
       <Name>DataHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RuneDesign\RuneDesign.csproj">
+      <Project>{5d9513fd-d9f7-4ca5-98c9-4474fa148c50}</Project>
+      <Name>RuneDesign</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
