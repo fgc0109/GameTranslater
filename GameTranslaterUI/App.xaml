@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:GameTranslaterUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StyleDictionary_Button.xaml" />
+                <ResourceDictionary Source="StyleDictionary_CheckBox.xaml" />
+                <ResourceDictionary Source="StyleDictionary_Radio.xaml" />
+                <ResourceDictionary Source="StyleDictionary_Slider.xaml" />
+                <ResourceDictionary Source="StyleDictionary_TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
