@@ -13,10 +13,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image Name="Normal" Source="Resources/button_1_inactiv.png"/>
-                        <Image Name="Pressed" Source="Resources/button_1_active.png" Visibility="Hidden"/>
-                        <Image Name="Disabled" Source="Resources/button_1_inactiv.png" Visibility="Hidden"/>
-                        <Image Name="Hovered" Source="Resources/button_1_hover.png" Visibility="Hidden"/>
+                        <Image x:Name="Normal" Source="Resources/button_1_inactiv.png"/>
+                        <Image x:Name="Pressed" Source="Resources/button_1_active.png" Visibility="Hidden"/>
+                        <Image x:Name="Disabled" Source="Resources/button_1_inactiv.png" Visibility="Hidden"/>
+                        <Image x:Name="Hovered" Source="Resources/button_1_hover.png" Visibility="Hidden"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">

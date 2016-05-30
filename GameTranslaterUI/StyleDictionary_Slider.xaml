@@ -5,8 +5,8 @@
     <!--WPF 蓝色边框文本框-->
     <ControlTemplate x:Key="ImageThumbTemplate" TargetType="{x:Type Thumb}">
         <Grid>
-            <Image Name="Normal" Source="Resources/slider_1_thumb.png"/>
-            <Image Name="Hovered" Source="Resources/slider_1_thumb_on.png" Visibility="Hidden"/>
+            <Image x:Name="Normal" Source="Resources/slider_1_thumb.png"/>
+            <Image x:Name="Hovered" Source="Resources/slider_1_thumb_on.png" Visibility="Hidden"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
