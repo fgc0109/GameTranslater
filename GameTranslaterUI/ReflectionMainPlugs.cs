@@ -11,7 +11,7 @@ namespace GameTranslaterUI
 {
     static class ReflectionMainPlugs
     {
-        static Assembly m_plugAssembly = null;
+        public static Assembly m_plugAssembly = null;
 
         static public bool LoadAssembly(string path,string name)
         {
@@ -26,6 +26,11 @@ namespace GameTranslaterUI
             //type = m_plugAssembly.GetType();
 
             Type[] ts = m_plugAssembly.GetTypes();
+
+            MethodInfo method = ts[0].GetMethod("add");
+
+            int count = (int)method.Invoke(null, null);
+
             return true;
         }
     }

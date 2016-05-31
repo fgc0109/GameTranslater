@@ -72,7 +72,11 @@ namespace GameTranslaterUI
         {
             ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\",comboBox_Plugs.SelectedItem as string);
 
-            //textBox.Text=
+            textBox.Text = ReflectionMainPlugs.m_plugAssembly.GetTypes().Length.ToString() + "\r\n";
+            foreach (var item in ReflectionMainPlugs.m_plugAssembly.GetTypes())
+            {
+                textBox.Text += item.FullName + "\r\n";
+            }
         }
     }
 }
