@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
 
 namespace GameTranslaterUI
 {
@@ -22,6 +25,8 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +37,15 @@ namespace GameTranslaterUI
             bindingRunes();
 
             listView2.DataContext = getDataTable();
+        }
+
+        private void button_LoadAssembly_Click(object sender, RoutedEventArgs e)
+        {
+            string path = m_appStartupPath + @"\Plugs\";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            ReflectionMainPlugs.LoadAssembly(path);
         }
     }
 }

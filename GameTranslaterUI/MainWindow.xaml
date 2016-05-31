@@ -12,7 +12,7 @@
 
     <!--WPF Style-->
     <Window.Resources>
-        
+
     </Window.Resources>
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,1,4,-2" Width="1200" Height="570">
@@ -110,6 +110,7 @@
                     <Grid Background="#FFE5E5E5"/>
                 </TabItem>
             </TabControl>
+            <Button x:Name="button_LoadAssembly" Content="" Margin="178,192,0,0" Click="button_LoadAssembly_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
         </Grid>
     </Grid>
 </Window>

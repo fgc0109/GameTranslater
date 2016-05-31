@@ -35,8 +35,6 @@ namespace GameTranslaterUI
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            textBox.Text = "";
-
             double min;
             double deviation = 0;
 
