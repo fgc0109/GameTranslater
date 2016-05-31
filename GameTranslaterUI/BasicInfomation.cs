@@ -10,7 +10,7 @@ namespace GameTranslaterUI
     /// <summary>
     /// 提供全局基础信息和事件
     /// </summary>
-    public class InfoBasic : INotifyPropertyChanged
+    public class BasicInfomation : INotifyPropertyChanged
     {
         private bool m_stateDatabase = false;
         private bool m_stateDataSets = false;

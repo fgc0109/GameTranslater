@@ -22,7 +22,7 @@ namespace GameTranslaterUI
 {
     public partial class MainWindow : Window
     {
-        private InfoBasic m_globalBasicInfo = null;
+        private BasicInfomation m_globalBasicInfo = null;
         private DataSet m_mainDataSet = null;
         private List<DataTable> m_mainDataTable = null;
 
@@ -32,7 +32,7 @@ namespace GameTranslaterUI
             MySqlHelper.OpenMySql("localhost", "3306", "root", "123456", "par_db_new");
             MySqlHelper.Connection.StateChange += M_dbConnection_StateChange;
 
-            m_globalBasicInfo = new InfoBasic();
+            m_globalBasicInfo = new BasicInfomation();
             m_globalRunesInfo = new InfoRunes();
 
             stateDatabase_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDB") { Source = m_globalBasicInfo });

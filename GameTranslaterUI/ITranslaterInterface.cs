@@ -10,7 +10,7 @@ namespace GameTranslaterUI
     /// <summary>
     /// 主接口
     /// </summary>
-    interface TranslaterInterface
+    interface ITranslaterInterface
     {
         /// <summary>
         /// 读取数据集合

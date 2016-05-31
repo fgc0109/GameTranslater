@@ -63,7 +63,6 @@ namespace GameTranslaterUI
             deviation = deviation / 16;
 
             InfoRunes infoRunesFormat = new InfoRunes();
-            StringBuilder outputInfoBuilder = new StringBuilder(4096);
 
             //以权重值方式导出
             if ((bool)radioButton_Format_0.IsChecked)
