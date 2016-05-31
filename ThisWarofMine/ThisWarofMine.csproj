@@ -7,8 +7,8 @@
     <ProjectGuid>{1C0E712E-C372-42DF-9ADF-AF4B1281410A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ThisWarofMine</RootNamespace>
-    <AssemblyName>ThisWarofMine</AssemblyName>
+    <RootNamespace>ThisWarOfMine</RootNamespace>
+    <AssemblyName>ThisWarOfMine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

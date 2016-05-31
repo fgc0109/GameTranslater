@@ -11,17 +11,21 @@ namespace GameTranslaterUI
 {
     static class ReflectionMainPlugs
     {
-        static public bool LoadAssembly(string path)
+        static Assembly m_plugAssembly = null;
+
+        static public bool LoadAssembly(string path,string name)
         {
-            Assembly ass;
+           
             Type type;
             Object obj;
 
-            string[] file = Directory.GetFiles(path);
+ 
 
             Object any = new Object();
-            ass = Assembly.LoadFile(file[0]);
-            type = ass.GetType("ReflectionTest.WriteTest");
+            m_plugAssembly = Assembly.LoadFile(path+name);
+            //type = m_plugAssembly.GetType();
+
+            Type[] ts = m_plugAssembly.GetTypes();
             return true;
         }
     }

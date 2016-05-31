@@ -26,6 +26,7 @@ namespace GameTranslaterUI
     public partial class MainWindow : Window
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+        List<string> m_plugList = new List<string>();
 
         public MainWindow()
         {
@@ -37,15 +38,41 @@ namespace GameTranslaterUI
             bindingRunes();
 
             listView2.DataContext = getDataTable();
+            checkPlugFiles();
+
+            FileSystemWatcher plugChangeWatcher = new FileSystemWatcher();
+            plugChangeWatcher.Path = m_appStartupPath + @"\Plugs\";
+            plugChangeWatcher.Filter = "*.dll";
+            plugChangeWatcher.EnableRaisingEvents = true;
         }
 
-        private void button_LoadAssembly_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 检测并读取插件名
+        /// </summary>
+        private void checkPlugFiles()
         {
             string path = m_appStartupPath + @"\Plugs\";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            ReflectionMainPlugs.LoadAssembly(path);
+            foreach (var item in Directory.GetFiles(path))
+            {
+                if (item.EndsWith(".dll"))
+                {
+                    string temp = item.Replace(path, "");
+                    m_plugList.Add(temp);
+                }
+                   
+            }
+            comboBox_Plugs.ItemsSource = m_plugList;
+            comboBox_Plugs.SelectedIndex = 0;
+        }
+
+        private void button_LoadAssembly_Click(object sender, RoutedEventArgs e)
+        {
+            ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\",comboBox_Plugs.SelectedItem as string);
+
+            //textBox.Text=
         }
     }
 }
