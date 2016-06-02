@@ -39,6 +39,7 @@ namespace GameTranslaterUI
 
             listView2.DataContext = getDataTable();
 
+            ReflectionMainPlugs.InterfaceName = "ITranslaterInterface";
             comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
             comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
 

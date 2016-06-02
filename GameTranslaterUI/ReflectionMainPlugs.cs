@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
+using IMainPlug;
 
 namespace GameTranslaterUI
 {
@@ -14,22 +15,36 @@ namespace GameTranslaterUI
         public static Assembly m_plugAssembly = null;
         public static List<string> m_plugList = new List<string>();
 
+        private static string m_interfaceName = String.Empty;
+
+        public static string InterfaceName
+        {
+            get { return m_interfaceName; }
+            set { m_interfaceName = value; }
+        }
+
         /// <summary>
         /// 检测并读取插件名
         /// </summary>
         static public List<string> checkPlugFiles(string path)
         {
             path = path + @"\Plugs\";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
             m_plugList.Clear();
+            m_plugAssembly = null;
 
             foreach (var item in Directory.GetFiles(path))
             {
                 if (item.EndsWith(".dll"))
                 {
                     string temp = item.Replace(path, "");
-                    m_plugList.Add(temp);
+
+                    m_plugAssembly = Assembly.LoadFile(path + temp);
+                    Type[] types = m_plugAssembly.GetTypes();
+
+                    foreach (var items in types)
+                        if (items.GetInterface(m_interfaceName) != null) m_plugList.Add(temp);
                 }
             }
             return m_plugList;
@@ -38,28 +53,37 @@ namespace GameTranslaterUI
 
         static public string LoadAssembly(string path, string name)
         {
-            //
+
             Type type = null;
             Type[] types = null;
+            m_plugAssembly = null;
 
             //类型的完全限定名
-            string fullName = name.Replace(".dll", ".") + "Class1";
+            string fullName = "";
 
             //使用绝对路径读取程序集文件
-            try
-            {
-                m_plugAssembly = Assembly.LoadFile(path + name);
-            }
-            catch (Exception)
-            {
-                return "";
-            }
+            m_plugAssembly = Assembly.LoadFile(path + name);
 
             //获取程序集中的类
-            type = m_plugAssembly.GetType(fullName, true);
+           
             types = m_plugAssembly.GetTypes();
 
+            //使用接口获取合适的程序集
+            ITranslaterInterface loadedPlug = null;
+            foreach (var item in types)
+            {
+                if (item.GetInterface("ITranslaterInterface") != null)
+                {
+                    loadedPlug = (ITranslaterInterface)Activator.CreateInstance(item);
+                    fullName = item.FullName.ToString();
+                }
+            }
+            if (loadedPlug != null)
+            {
+                return loadedPlug.plugInfomation();
+            }
 
+            type = m_plugAssembly.GetType(fullName, true);
 
             //获取方法
             MethodInfo method = type.GetMethod("returnstring");

@@ -57,7 +57,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ITranslaterInterface.cs" />
     <Compile Include="ReflectionMainPlugs.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +145,10 @@
     <ProjectReference Include="..\DataHelper\DataHelper.csproj">
       <Project>{1f75dbbe-84a6-47de-8c15-88be126592e9}</Project>
       <Name>DataHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IMainPlug\IMainPlug.csproj">
+      <Project>{89174eea-fd9a-44e4-b39f-7ad261017d78}</Project>
+      <Name>IMainPlug</Name>
     </ProjectReference>
     <ProjectReference Include="..\RuneDesign\RuneDesign.csproj">
       <Project>{5d9513fd-d9f7-4ca5-98c9-4474fa148c50}</Project>

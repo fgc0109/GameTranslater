@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace GameTranslaterUI
+namespace IMainPlug
 {
     /// <summary>
     /// 主接口
     /// </summary>
-    interface ITranslaterInterface
+    public interface ITranslaterInterface
     {
         /// <summary>
         /// 读取数据集合
