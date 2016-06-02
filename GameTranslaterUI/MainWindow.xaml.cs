@@ -60,7 +60,7 @@ namespace GameTranslaterUI
 
         private void button_LoadAssembly_Click(object sender, RoutedEventArgs e)
         {
-            ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\",comboBox_Plugs.SelectedItem as string);
+            string temp=            ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\",comboBox_Plugs.SelectedItem as string);
 
             if (ReflectionMainPlugs.m_plugAssembly!=null)
             {
@@ -69,6 +69,8 @@ namespace GameTranslaterUI
                 {
                     textBox.Text += item.FullName + "\r\n";
                 }
+
+                textBox.Text += temp;
             }
             else
             {

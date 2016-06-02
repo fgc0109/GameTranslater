@@ -36,34 +36,58 @@ namespace GameTranslaterUI
         }
 
 
-        static public bool LoadAssembly(string path,string name)
+        static public string LoadAssembly(string path, string name)
         {
-           
-            Type type;
-            Object obj;
+            //
+            Type type = null;
+            Type[] types = null;
 
- 
+            //类型的完全限定名
+            string fullName = name.Replace(".dll", ".") + "Class1";
 
-            Object any = new Object();
-
+            //使用绝对路径读取程序集文件
             try
             {
                 m_plugAssembly = Assembly.LoadFile(path + name);
             }
             catch (Exception)
             {
-                return false;
+                return "";
             }
-            
-            //type = m_plugAssembly.GetType();
 
-            Type[] ts = m_plugAssembly.GetTypes();
+            //获取程序集中的类
+            type = m_plugAssembly.GetType(fullName, true);
+            types = m_plugAssembly.GetTypes();
 
-            MethodInfo method = ts[0].GetMethod("add");
 
-            //int count = (int)method.Invoke(null, null);
 
-            return true;
+            //获取方法
+            MethodInfo method = type.GetMethod("returnstring");
+
+            //对于实例方法需要创建对象实例
+            if (method != null)
+            {
+                Object obj = m_plugAssembly.CreateInstance(fullName, true);
+                Object[] parametors = new Object[] { };
+                string count = (string)method.Invoke(obj, parametors);
+
+                return count;
+            }
+
+            else
+            {
+                string count = "没有找到方法";
+                return count;
+            }
+
+            //对于静态方法
+            //if (method != null)
+            //{
+            //    Object[] parametors = new Object[] { };
+            //    string count = (string)method.Invoke(null, parametors);
+
+            //    return count;
+            //}
         }
     }
 }
