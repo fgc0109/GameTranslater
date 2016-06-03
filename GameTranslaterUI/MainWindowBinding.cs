@@ -37,14 +37,12 @@ namespace GameTranslaterUI
 
             stateDatabase_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDB") { Source = m_globalBasicInfo });
             stateDataSets_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDS") { Source = m_globalBasicInfo });
+            comboBox_Plugs.SetBinding(ComboBox.ItemsSourceProperty,new Binding("plugListInfo") { Source = m_globalBasicInfo });
 
             m_globalBasicInfo.InfoDB = "12121212";
-            m_globalBasicInfo.InfoDS = "131313131";
+            m_globalBasicInfo.InfoDS = "13131313";
 
-            //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));
-
-
-            
+            //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));            
         }
 
         internal void getDatas()

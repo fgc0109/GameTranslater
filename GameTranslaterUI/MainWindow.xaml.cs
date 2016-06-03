@@ -26,7 +26,6 @@ namespace GameTranslaterUI
     public partial class MainWindow : Window
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-        public List<string> temp = null;
 
         public MainWindow()
         {
@@ -40,9 +39,9 @@ namespace GameTranslaterUI
             listView2.DataContext = getDataTable();
 
             ReflectionMainPlugs.InterfaceName = "ITranslaterInterface";
-            temp= ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
-            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = temp; }));
-            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
+            m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
+            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = m_globalBasicInfo.plugListInfo; }));
+            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
 
 
             FileSystemWatcher plugChangeWatcher = new FileSystemWatcher();
@@ -55,8 +54,9 @@ namespace GameTranslaterUI
 
         private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            temp= ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
-            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = temp; }));
+            m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
+            //comboBox_Plugs
+            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = m_globalBasicInfo.plugListInfo; }));
             //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
             //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
             //throw new NotImplementedException();

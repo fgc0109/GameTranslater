@@ -12,13 +12,13 @@ namespace GameTranslaterUI
     /// </summary>
     public class BasicInfomation : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private bool m_stateDatabase = false;
         private bool m_stateDataSets = false;
         private string m_infoDatabase = "m_infoDatabase";
         private string m_infoDataSets = "m_infoDataSets";
-        private string m_infoWindow = "m_infoWindow";
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private List<string> m_plugList = new List<string>();
 
         public bool StateDB
         {
@@ -26,10 +26,7 @@ namespace GameTranslaterUI
             set
             {
                 m_stateDatabase = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDB"));
-                }
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDB"));
             }
         }
         public bool StateDS
@@ -38,10 +35,7 @@ namespace GameTranslaterUI
             set
             {
                 m_stateDataSets = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDS"));
-                }
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDS"));
             }
         }
         public string InfoDB
@@ -50,10 +44,8 @@ namespace GameTranslaterUI
             set
             {
                 m_infoDatabase = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoDB"));
-                }
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoDB"));
+
             }
         }
         public string InfoDS
@@ -62,22 +54,17 @@ namespace GameTranslaterUI
             set
             {
                 m_infoDataSets = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoDS"));
-                }
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoDS"));
             }
         }
-        public string InfoWin
+
+        public List<string> plugListInfo
         {
-            get { return m_infoWindow; }
+            get { return m_plugList; }
             set
             {
-                m_infoWindow = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoWin"));
-                }
+                m_plugList = value;
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("plugListInfo"));
             }
         }
     }
