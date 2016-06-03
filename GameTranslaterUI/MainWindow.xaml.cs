@@ -35,30 +35,22 @@ namespace GameTranslaterUI
             bindingState();
             //符文绑定
             bindingRunes();
+            //打开文件监视器
+            settingPlugsWatcher();
 
             listView2.DataContext = getDataTable();
 
             ReflectionMainPlugs.InterfaceName = "ITranslaterInterface";
-            m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
-            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = m_globalBasicInfo.plugListInfo; }));
-            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
 
-
-            FileSystemWatcher plugChangeWatcher = new FileSystemWatcher();
-            plugChangeWatcher.Path = m_appStartupPath + @"\Plugs\";
-            plugChangeWatcher.Filter = "*.dll";
-            plugChangeWatcher.EnableRaisingEvents = true;
-
-            plugChangeWatcher.Changed += PlugChangeWatcher_Changed;
+            //线程调度器委托获取可用组件列表
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
+            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
         }
 
         private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
-            //comboBox_Plugs
-            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = m_globalBasicInfo.plugListInfo; }));
-            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
-            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
+            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
             //throw new NotImplementedException();
         }
 
@@ -73,7 +65,6 @@ namespace GameTranslaterUI
                 {
                     textBox.Text += item.FullName + "\r\n";
                 }
-
                 textBox.Text += temp;
             }
             else

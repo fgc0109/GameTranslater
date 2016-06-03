@@ -7,13 +7,15 @@ using System.IO;
 using System.IO.Compression;
 using System.Reflection;
 using IMainPlug;
+using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace GameTranslaterUI
 {
     static class ReflectionMainPlugs
     {
         public static Assembly m_plugAssembly = null;
-        public static List<string> m_plugList = new List<string>();
+        public static ObservableCollection<string> m_plugList = new ObservableCollection<string>();
 
         private static string m_interfaceName = String.Empty;
 
@@ -26,14 +28,14 @@ namespace GameTranslaterUI
         /// <summary>
         /// 检测并读取插件名
         /// </summary>
-        static public List<string> checkPlugFiles(string path)
+        static public ObservableCollection<string> checkPlugFiles(string path)
         {
             path = path + @"\Plugs\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
             m_plugList.Clear();
             m_plugAssembly = null;
-
+            
             foreach (var item in Directory.GetFiles(path))
             {
                 if (item.EndsWith(".dll"))
@@ -50,7 +52,12 @@ namespace GameTranslaterUI
             return m_plugList;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         static public string LoadAssembly(string path, string name)
         {
 

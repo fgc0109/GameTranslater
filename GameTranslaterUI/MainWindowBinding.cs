@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using System.Drawing;
 using DataHelper;
 using RuneDesign;
 
@@ -37,7 +25,7 @@ namespace GameTranslaterUI
 
             stateDatabase_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDB") { Source = m_globalBasicInfo });
             stateDataSets_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDS") { Source = m_globalBasicInfo });
-            comboBox_Plugs.SetBinding(ComboBox.ItemsSourceProperty,new Binding("plugListInfo") { Source = m_globalBasicInfo });
+            comboBox_Plugs.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("plugListInfo") { Source = m_globalBasicInfo });
 
             m_globalBasicInfo.InfoDB = "12121212";
             m_globalBasicInfo.InfoDS = "13131313";

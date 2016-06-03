@@ -110,8 +110,8 @@
                     <Grid Background="#FFE5E5E5"/>
                 </TabItem>
             </TabControl>
-            <Button x:Name="button_LoadAssembly" Content="" Margin="178,192,0,0" Click="button_LoadAssembly_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
-            <ComboBox x:Name="comboBox_Plugs" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="button_LoadAssembly" Content="" Margin="277,267,0,0" Click="button_LoadAssembly_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
+            <ComboBox x:Name="comboBox_Plugs" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" Width="353"/>
         </Grid>
     </Grid>
 </Window>

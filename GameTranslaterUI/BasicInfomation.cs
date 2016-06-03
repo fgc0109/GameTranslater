@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace GameTranslaterUI
 {
@@ -18,7 +19,7 @@ namespace GameTranslaterUI
         private bool m_stateDataSets = false;
         private string m_infoDatabase = "m_infoDatabase";
         private string m_infoDataSets = "m_infoDataSets";
-        private List<string> m_plugList = new List<string>();
+        private ObservableCollection<string> m_plugList = new ObservableCollection<string>();
 
         public bool StateDB
         {
@@ -58,7 +59,7 @@ namespace GameTranslaterUI
             }
         }
 
-        public List<string> plugListInfo
+        public ObservableCollection<string> plugListInfo
         {
             get { return m_plugList; }
             set
