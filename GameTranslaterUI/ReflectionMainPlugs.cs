@@ -65,7 +65,6 @@ namespace GameTranslaterUI
             m_plugAssembly = Assembly.LoadFile(path + name);
 
             //获取程序集中的类
-           
             types = m_plugAssembly.GetTypes();
 
             //使用接口获取合适的程序集
@@ -85,23 +84,24 @@ namespace GameTranslaterUI
 
             type = m_plugAssembly.GetType(fullName, true);
 
+            //对于不继承接口的反射,在运行时进行各种条件判断
+
             //获取方法
-            MethodInfo method = type.GetMethod("returnstring");
+            MethodInfo method = type.GetMethod("testReflection");
 
             //对于实例方法需要创建对象实例
             if (method != null)
             {
                 Object obj = m_plugAssembly.CreateInstance(fullName, true);
                 Object[] parametors = new Object[] { };
-                string count = (string)method.Invoke(obj, parametors);
+                string str = (string)method.Invoke(obj, parametors);
 
-                return count;
+                return str;
             }
 
             else
             {
-                string count = "没有找到方法";
-                return count;
+                return "没有找到方法";
             }
 
             //对于静态方法

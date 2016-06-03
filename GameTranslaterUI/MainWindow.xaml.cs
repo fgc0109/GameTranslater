@@ -26,7 +26,7 @@ namespace GameTranslaterUI
     public partial class MainWindow : Window
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-        
+        public List<string> temp = null;
 
         public MainWindow()
         {
@@ -40,7 +40,8 @@ namespace GameTranslaterUI
             listView2.DataContext = getDataTable();
 
             ReflectionMainPlugs.InterfaceName = "ITranslaterInterface";
-            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
+            temp= ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
+            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = temp; }));
             comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
 
 
@@ -54,16 +55,18 @@ namespace GameTranslaterUI
 
         private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
+            temp= ReflectionMainPlugs.checkPlugFiles(m_appStartupPath);
+            comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = temp; }));
+            //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.ItemsSource = ReflectionMainPlugs.checkPlugFiles(m_appStartupPath); }));
             //comboBox_Plugs.Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
             //throw new NotImplementedException();
         }
 
         private void button_LoadAssembly_Click(object sender, RoutedEventArgs e)
         {
-            string temp=            ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\",comboBox_Plugs.SelectedItem as string);
+            string temp = ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", comboBox_Plugs.SelectedItem as string);
 
-            if (ReflectionMainPlugs.m_plugAssembly!=null)
+            if (ReflectionMainPlugs.m_plugAssembly != null)
             {
                 textBox.Text = ReflectionMainPlugs.m_plugAssembly.GetTypes().Length.ToString() + "\r\n";
                 foreach (var item in ReflectionMainPlugs.m_plugAssembly.GetTypes())
@@ -77,8 +80,6 @@ namespace GameTranslaterUI
             {
                 textBox.Text = "未发现可用程序集\r\n";
             }
-
-            
         }
     }
 }

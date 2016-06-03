@@ -8,20 +8,25 @@ using IMainPlug;
 
 namespace ThisWarOfMine
 {
-    public class Class1:ITranslaterInterface
+    public class MainInfomation:ITranslaterInterface
     {
         public string teststring = "test 测试反射用数据";
-        public string returnstring()
+        public string testReflection()
         {
             return "测试反射用方法\r\n 切记要重新生成插件";
+        }
+
+        //以下为接口方法实现
+
+        public bool mainStartPoint(string path, string name)
+        {
+            return true;
         }
 
         public DataSet languageDataSet()
         {
             return new DataSet();
         }
-
-
 
         public string plugInfomation()
         {

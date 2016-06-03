@@ -13,6 +13,12 @@ namespace IMainPlug
     public interface ITranslaterInterface
     {
         /// <summary>
+        /// 程序主入口点,在主程序中首先调用
+        /// </summary>
+        /// <returns></returns>
+        bool mainStartPoint(string path,string name);
+
+        /// <summary>
         /// 读取数据集合
         /// </summary>
         /// <returns>已经读取的数据集</returns>
