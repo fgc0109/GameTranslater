@@ -8,7 +8,7 @@ using System.Data;
 namespace IMainPlug
 {
     /// <summary>
-    /// 主接口
+    /// 插件主接口
     /// </summary>
     public interface ITranslaterInterface
     {

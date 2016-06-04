@@ -14,65 +14,45 @@ namespace GameTranslaterUI
 {
     static class ReflectionMainPlugs
     {
-        public static Assembly m_plugAssembly = null;
         public static ObservableCollection<string> m_plugList = new ObservableCollection<string>();
 
-        private static string m_interfaceName = String.Empty;
-
-        public static string InterfaceName
-        {
-            get { return m_interfaceName; }
-            set { m_interfaceName = value; }
-        }
-
         /// <summary>
-        /// 检测并读取插件名
+        /// 检测插件并读取实现特定接口的插件名
         /// </summary>
-        static public ObservableCollection<string> checkPlugFiles(string path)
+        /// <param name="path">程序集绝对路径</param>
+        /// <param name="interfaceName">接口名</param>
+        /// <returns>可用插件列表</returns>
+        static public ObservableCollection<string> CheckPlugFiles(string path,string interfaceName)
         {
+            ObservableCollection<string> plugNamerList = new ObservableCollection<string>();
+
             path = path + @"\Plugs\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-            m_plugList.Clear();
-            m_plugAssembly = null;
-            
-            foreach (var item in Directory.GetFiles(path))
+            foreach (var item in Directory.GetFiles(path, "*.dll"))
             {
-                if (item.EndsWith(".dll"))
-                {
-                    string temp = item.Replace(path, "");
+                string temp = item.Replace(path, "");
 
-                    m_plugAssembly = Assembly.LoadFile(path + temp);
-                    Type[] types = m_plugAssembly.GetTypes();
+                Assembly plugAssembly = Assembly.LoadFile(path + temp);
+                Type[] types = plugAssembly.GetTypes();
 
-                    foreach (var items in types)
-                        if (items.GetInterface(m_interfaceName) != null) m_plugList.Add(temp);
-                }
+                foreach (var items in types)
+                    if (items.GetInterface(interfaceName) != null) plugNamerList.Add(temp);
             }
-            return m_plugList;
+            return plugNamerList;
         }
 
         /// <summary>
-        /// 
+        /// 加载实现ITranslaterInterface接口的程序集并创建对应实例
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        static public string LoadAssembly(string path, string name)
+        /// <param name="path">程序集绝对路径</param>
+        /// <param name="plugname">程序集名称</param>
+        /// <returns>实现ITranslaterInterface接口的程序集实例装箱</returns>
+        static public object LoadAssembly(string path, string plugname)
         {
-
-            Type type = null;
-            Type[] types = null;
-            m_plugAssembly = null;
-
-            //类型的完全限定名
-            string fullName = "";
-
             //使用绝对路径读取程序集文件
-            m_plugAssembly = Assembly.LoadFile(path + name);
-
-            //获取程序集中的类
-            types = m_plugAssembly.GetTypes();
+            Assembly plugAssembly = Assembly.LoadFile(path + plugname);
+            Type[] types = plugAssembly.GetTypes();
 
             //使用接口获取合适的程序集
             ITranslaterInterface loadedPlug = null;
@@ -81,44 +61,38 @@ namespace GameTranslaterUI
                 if (item.GetInterface("ITranslaterInterface") != null)
                 {
                     loadedPlug = (ITranslaterInterface)Activator.CreateInstance(item);
-                    fullName = item.FullName.ToString();
                 }
             }
-            if (loadedPlug != null)
-            {
-                return loadedPlug.plugInfomation();
-            }
+            return loadedPlug;
+        }
 
-            type = m_plugAssembly.GetType(fullName, true);
+        /// <summary>
+        /// 加载程序集并调用程序集方法
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="assembly"></param>
+        /// <param name="classname"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        static public object LoadAssembly(string path, string assembly, string classname, string method, object[] parametors)
+        {
+            List<string> classList = new List<string>();
 
-            //对于不继承接口的反射,在运行时进行各种条件判断
+            //类型的完全限定名
+            string fullName = assembly + "." + classname;
 
-            //获取方法
-            MethodInfo method = type.GetMethod("testReflection");
+            //使用绝对路径读取程序集文件
+            Assembly plugAssembly = Assembly.LoadFile(path + assembly);
+            Type type = plugAssembly.GetType(fullName, true);
+            MethodInfo methodinfo = type.GetMethod(method);
 
-            //对于实例方法需要创建对象实例
-            if (method != null)
-            {
-                Object obj = m_plugAssembly.CreateInstance(fullName, true);
-                Object[] parametors = new Object[] { };
-                string str = (string)method.Invoke(obj, parametors);
+            object obj = plugAssembly.CreateInstance(fullName, true);
+            object result = null;
 
-                return str;
-            }
+            if (methodinfo != null)
+                result = methodinfo.Invoke(methodinfo.IsStatic ? null : obj, parametors);
 
-            else
-            {
-                return "没有找到方法";
-            }
-
-            //对于静态方法
-            //if (method != null)
-            //{
-            //    Object[] parametors = new Object[] { };
-            //    string count = (string)method.Invoke(null, parametors);
-
-            //    return count;
-            //}
+            return result;
         }
     }
 }
