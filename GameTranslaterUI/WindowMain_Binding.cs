@@ -8,7 +8,7 @@ using RuneDesign;
 
 namespace GameTranslaterUI
 {
-    public partial class MainWindow : Window
+    public partial class WindowMain : Window
     {
         private BasicInfomation m_globalBasicInfo = null;
         private DataSet m_mainDataSet = null;

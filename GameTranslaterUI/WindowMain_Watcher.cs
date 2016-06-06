@@ -9,7 +9,7 @@ using System.IO;
 
 namespace GameTranslaterUI
 {
-    public partial class MainWindow : Window
+    public partial class WindowMain : Window
     {
         /// <summary>
         /// 设置文件监视器

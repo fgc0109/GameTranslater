@@ -30,7 +30,9 @@ namespace ThisWarOfMine
 
         public string plugInfomation()
         {
-            return "使用接口方法";
+            string temp = "使用实例接口方法调用插件成功\r\n";
+            temp += "接口名:ITranslaterInterface";
+            return temp;
         }
     }
 }

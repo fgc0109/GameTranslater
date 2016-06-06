@@ -17,7 +17,7 @@ using RuneDesign;
 
 namespace GameTranslaterUI
 {
-    public partial class MainWindow : Window
+    public partial class WindowMain : Window
     {
         private InfoRunes m_globalRunesInfo = null;
 
@@ -61,6 +61,8 @@ namespace GameTranslaterUI
             deviation = deviation / 16;
 
             InfoRunes infoRunesFormat = new InfoRunes();
+
+            textBox.Text = "";
 
             //以权重值方式导出
             if ((bool)radioButton_Format_0.IsChecked)

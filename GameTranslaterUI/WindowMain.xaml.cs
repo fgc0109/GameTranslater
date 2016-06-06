@@ -24,11 +24,11 @@ namespace GameTranslaterUI
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WindowMain : Window
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-        public MainWindow()
+        public WindowMain()
         {
             InitializeComponent();
 
