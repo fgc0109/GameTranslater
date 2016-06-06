@@ -62,6 +62,10 @@
     </Compile>
     <Compile Include="WindowMain_Watcher.cs" />
     <Compile Include="ReflectionMainPlugs.cs" />
+    <Page Include="StyleDictionary_Tab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="WindowLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,7 +188,10 @@
   <ItemGroup>
     <Resource Include="Resources\slider_1_button.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\tab_1_checked.png" />
+    <Resource Include="Resources\tab_1_uncheck.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
