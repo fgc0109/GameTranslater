@@ -13,7 +13,18 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
                         <Image x:Name="Normal" Source="Resources/tab_1_uncheck.png"/>
-                        <Image x:Name="Pressed" Source="Resources/tab_1_checked.png" Visibility="Hidden"/>
+                        <Image x:Name="Pressed" Visibility="Hidden">
+                            <Image.Source>
+                                <DrawingImage >
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_checked.png"/>
+                                            <ImageDrawing Rect="38,0,20,20" ImageSource="{Binding Image}"/>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
                         <Image x:Name="Disabled" Source="Resources/tab_1_uncheck.png" Visibility="Hidden"/>
                         <Image x:Name="Hovered" Source="Resources/tab_1_uncheck.png" Visibility="Hidden"/>
                     </Grid>
