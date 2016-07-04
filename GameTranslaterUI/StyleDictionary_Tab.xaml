@@ -3,23 +3,22 @@
                     xmlns:local="clr-namespace:GameTranslaterUI">
 
     <!--WPF 三态图片按钮-->
-    <Style TargetType="TabItem" x:Key="TriState_ImageButtonStyle">
-        <Setter Property="Width"  Value="150"/>
-        <Setter Property="Height"  Value="50"/>
+    <Style TargetType="TabItem" x:Key="TriState_TabItemStyle">
+        <Setter Property="Width"  Value="87"/>
+        <Setter Property="Height"  Value="40"/>
         <Setter Property="HorizontalAlignment"  Value="Left"/>
         <Setter Property="VerticalAlignment"  Value="Top"/>
-        <Setter Property="Focusable"  Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
-                        <Image x:Name="Normal" Source="Resources/button_1_inactiv.png"/>
-                        <Image x:Name="Pressed" Source="Resources/button_1_active.png" Visibility="Hidden"/>
-                        <Image x:Name="Disabled" Source="Resources/button_1_inactiv.png" Visibility="Hidden"/>
-                        <Image x:Name="Hovered" Source="Resources/button_1_hover.png" Visibility="Hidden"/>
+                        <Image x:Name="Normal" Source="Resources/tab_1_uncheck.png"/>
+                        <Image x:Name="Pressed" Source="Resources/tab_1_checked.png" Visibility="Hidden"/>
+                        <Image x:Name="Disabled" Source="Resources/tab_1_uncheck.png" Visibility="Hidden"/>
+                        <Image x:Name="Hovered" Source="Resources/tab_1_uncheck.png" Visibility="Hidden"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
+                        <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
                             <Setter TargetName="Pressed" Property="Visibility" Value="Visible"/>
                         </Trigger>
@@ -30,7 +29,7 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
-                                <Condition Property="IsPressed" Value="False" />
+                                <Condition Property="IsSelected" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Normal" Property="Visibility" Value="Hidden"/>
                             <Setter TargetName="Hovered" Property="Visibility" Value="Visible"/>

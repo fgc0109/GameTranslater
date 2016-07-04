@@ -12,7 +12,7 @@
     
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="158" Margin="26,38,0,0" VerticalAlignment="Top" Width="405">
-            <TabItem Header="MySQL">
+            <TabItem Header="MySQL" Style="{StaticResource TriState_TabItemStyle}" VerticalAlignment="Stretch" Height="Auto">
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="TextBox_Attack_Copy" Margin="26,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" RenderTransformOrigin="0.875,1.115"/>
                     <Label x:Name="Label_Attack_Copy" Content="用户" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
@@ -28,7 +28,7 @@
                     <Label x:Name="Label_Attack_Copy5" Content="表名" Margin="127,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="SQLite">
+            <TabItem Header="SQLite" Style="{StaticResource TriState_TabItemStyle}">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>

@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="StyleDictionary_Radio.xaml" />
                 <ResourceDictionary Source="StyleDictionary_Slider.xaml" />
                 <ResourceDictionary Source="StyleDictionary_TextBox.xaml" />
+                <ResourceDictionary Source="StyleDictionary_Tab.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
