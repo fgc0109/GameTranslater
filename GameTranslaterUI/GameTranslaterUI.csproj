@@ -198,6 +198,13 @@
     <Resource Include="Resources\Img_84.png" />
     <Resource Include="Resources\Img_85.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\button_2_active.png" />
+    <Resource Include="Resources\button_2_hover.png" />
+    <Resource Include="Resources\button_2_inactiv.png" />
+    <Resource Include="Resources\database_mysql.png" />
+    <Resource Include="Resources\database_sqlite.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
