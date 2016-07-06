@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:GameTranslaterUI">
 
     <!--WPF 三态图片按钮-->
-    <Style TargetType="TabItem" x:Key="TriState_TabItemStyle">
+    <Style TargetType="TabItem" x:Key="TriState_TabItemStyle_1">
         <Setter Property="Width"  Value="87"/>
         <Setter Property="Height"  Value="40"/>
         <Setter Property="HorizontalAlignment"  Value="Left"/>
@@ -12,21 +12,54 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
-                        <Image x:Name="Normal" Source="Resources/tab_1_uncheck.png"/>
-                        <Image x:Name="Pressed" Visibility="Hidden">
+                        <Image x:Name="Normal">
                             <Image.Source>
-                                <DrawingImage >
+                                <DrawingImage>
                                     <DrawingImage.Drawing>
                                         <DrawingGroup>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_checked.png"/>
-                                            <ImageDrawing Rect="38,0,20,20" ImageSource="{Binding Image}"/>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_uncheck.png"/>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
                                         </DrawingGroup>
                                     </DrawingImage.Drawing>
                                 </DrawingImage>
                             </Image.Source>
                         </Image>
-                        <Image x:Name="Disabled" Source="Resources/tab_1_uncheck.png" Visibility="Hidden"/>
-                        <Image x:Name="Hovered" Source="Resources/tab_1_uncheck.png" Visibility="Hidden"/>
+                        <Image x:Name="Pressed" Visibility="Hidden">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_checked.png"/>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <Image x:Name="Disabled" Visibility="Hidden">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_uncheck.png"/>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <Image x:Name="Hovered" Visibility="Hidden">
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_uncheck.png"/>
+                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
