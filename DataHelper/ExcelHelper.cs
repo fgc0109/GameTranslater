@@ -8,7 +8,7 @@ using System.Data.OleDb;
 
 namespace DataHelper
 {
-    public class ExcelHelper
+    static public class ExcelHelper
     {
         static private OleDbConnection m_dbConnection = null;
         static private OleDbDataAdapter m_dbDataAdapter = null;

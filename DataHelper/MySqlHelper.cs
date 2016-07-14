@@ -43,7 +43,7 @@ namespace DataHelper
             DataSet local_dataset = new DataSet();
             try
             {
-                m_dbDataAdapter = new MySqlDataAdapter(strCommand, m_dbConnection);
+                m_dbDataAdapter = new MySqlDataAdapter(string.Format(strCommand, paraValues), m_dbConnection);
                 m_dbDataAdapter.Fill(local_dataset);
 
                 return local_dataset;

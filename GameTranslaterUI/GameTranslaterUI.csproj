@@ -64,6 +64,9 @@
     </Compile>
     <Compile Include="WindowMain_Watcher.cs" />
     <Compile Include="ReflectionMainPlugs.cs" />
+    <Compile Include="WindowTrans.xaml.cs">
+      <DependentUpon>WindowTrans.xaml</DependentUpon>
+    </Compile>
     <Page Include="StyleDictionary_Tab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +105,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="StyleDictionary_TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowTrans.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

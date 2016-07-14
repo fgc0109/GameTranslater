@@ -11,31 +11,36 @@
     </Window.Background>
 
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="158" Margin="26,38,0,0" VerticalAlignment="Top" Width="405">
-            <TabItem Header="MySQL" Style="{StaticResource TriState_TabItemStyle_1}">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="158" Margin="26,38,0,0" VerticalAlignment="Top" Width="405" SelectionChanged="tabControl_SelectionChanged">
+            <TabItem x:Name="Tab_MySQL" Header="MySQL" Style="{StaticResource TriState_TabItemStyle_1}">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="TextBox_Attack_Copy" Margin="26,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" RenderTransformOrigin="0.875,1.115"/>
-                    <Label x:Name="Label_Attack_Copy" Content="用户" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-                    <TextBox x:Name="TextBox_Attack_Copy1" Margin="166,10,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-                    <Label x:Name="Label_Attack_Copy1" Content="密码" Margin="127,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-                    <TextBox x:Name="TextBox_Attack_Copy2" Margin="26,41,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-                    <Label x:Name="Label_Attack_Copy2" Content="地址" Margin="0,31,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-                    <TextBox x:Name="TextBox_Attack_Copy3" Margin="166,41,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-                    <Label x:Name="Label_Attack_Copy3" Content="端口" Margin="127,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-                    <TextBox x:Name="TextBox_Attack_Copy4" Margin="26,72,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-                    <Label x:Name="Label_Attack_Copy4" Content="库名" Margin="0,61,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
-                    <TextBox x:Name="TextBox_Attack_Copy5" Margin="166,72,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-                    <Label x:Name="Label_Attack_Copy5" Content="表名" Margin="127,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="23*"/>
+                        <ColumnDefinition Width="110*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="TextBox_User" Margin="26,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" RenderTransformOrigin="0.875,1.115" Grid.ColumnSpan="2"/>
+                    <Label x:Name="Label_User" Content="用户" Margin="0,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+                    <TextBox x:Name="TextBox_Pass" Margin="97,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Grid.Column="1"/>
+                    <Label x:Name="Label_Pass" Content="密码" Margin="58,11,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34" Grid.Column="1"/>
+                    <TextBox x:Name="TextBox_Addr" Margin="26,41,0,0" Style="{StaticResource Blue_TextBoxStyle}" Grid.ColumnSpan="2"/>
+                    <Label x:Name="Label_Addr" Content="地址" Margin="0,31,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+                    <TextBox x:Name="TextBox_Port" Margin="97,41,0,0" Style="{StaticResource Blue_TextBoxStyle}" Grid.Column="1"/>
+                    <Label x:Name="Label_Port" Content="端口" Margin="58,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34" Grid.Column="1"/>
+                    <TextBox x:Name="TextBox_Base" Margin="26,72,0,0" Style="{StaticResource Blue_TextBoxStyle}" Grid.ColumnSpan="2"/>
+                    <Label x:Name="Label_Base" Content="库名" Margin="0,61,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34"/>
+                    <TextBox x:Name="TextBox_Table" Margin="97,72,0,0" Style="{StaticResource Blue_TextBoxStyle}" Grid.Column="1"/>
+                    <Label x:Name="Label_Table" Content="表名" Margin="58,72,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="34" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="SQLite" Style="{StaticResource TriState_TabItemStyle_1}">
                 <Grid Background="#FFE5E5E5">
-                   
+
                 </Grid>
             </TabItem>
         </TabControl>
 
 
         <Button x:Name="button_LoginIn" Content="" Margin="162,213,0,0" Click="button_LoginIn_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
+        <TextBox x:Name="TextBox_DebugInfo" Margin="45,213,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
     </Grid>
 </Window>
