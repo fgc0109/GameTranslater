@@ -195,17 +195,17 @@
     <Resource Include="Resources\tab_1_uncheck.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Img_25.png" />
-    <Resource Include="Resources\Img_26.png" />
-    <Resource Include="Resources\Img_84.png" />
-    <Resource Include="Resources\Img_85.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\button_2_active.png" />
     <Resource Include="Resources\button_2_hover.png" />
     <Resource Include="Resources\button_2_inactiv.png" />
     <Resource Include="Resources\database_mysql.png" />
     <Resource Include="Resources\database_sqlite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pilotlamp_1_hold.png" />
+    <Resource Include="Resources\pilotlamp_1_off.png" />
+    <Resource Include="Resources\pilotlamp_1_on.png" />
+    <Resource Include="Resources\pilotlamp_1_other.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

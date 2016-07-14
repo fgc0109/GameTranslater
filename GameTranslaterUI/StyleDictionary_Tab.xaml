@@ -4,7 +4,7 @@
 
     <!--WPF 三态图片按钮-->
     <Style TargetType="TabItem" x:Key="TriState_TabItemStyle_1">
-        <Setter Property="Width"  Value="87"/>
+        <Setter Property="Width"  Value="120"/>
         <Setter Property="Height"  Value="40"/>
         <Setter Property="HorizontalAlignment"  Value="Left"/>
         <Setter Property="VerticalAlignment"  Value="Top"/>
@@ -17,8 +17,15 @@
                                 <DrawingImage>
                                     <DrawingImage.Drawing>
                                         <DrawingGroup>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_uncheck.png"/>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="10,35,100,5"/>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="#000000ff"/>
+                                                </GeometryDrawing.Brush>
+                                            </GeometryDrawing>
+                                            <ImageDrawing Rect="10,0,100,40" ImageSource="Resources/database_mysql.png"/>
                                         </DrawingGroup>
                                     </DrawingImage.Drawing>
                                 </DrawingImage>
@@ -29,8 +36,15 @@
                                 <DrawingImage>
                                     <DrawingImage.Drawing>
                                         <DrawingGroup>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_checked.png"/>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="10,35,100,5"/>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="#CCCCFF"/>
+                                                </GeometryDrawing.Brush>
+                                            </GeometryDrawing>
+                                            <ImageDrawing Rect="10,0,100,40" ImageSource="Resources/database_mysql.png"/>
                                         </DrawingGroup>
                                     </DrawingImage.Drawing>
                                 </DrawingImage>
@@ -41,8 +55,15 @@
                                 <DrawingImage>
                                     <DrawingImage.Drawing>
                                         <DrawingGroup>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_uncheck.png"/>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="10,35,100,5"/>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="#CCCCFF"/>
+                                                </GeometryDrawing.Brush>
+                                            </GeometryDrawing>
+                                            <ImageDrawing Rect="10,0,100,40" ImageSource="Resources/database_mysql.png"/>
                                         </DrawingGroup>
                                     </DrawingImage.Drawing>
                                 </DrawingImage>
@@ -53,8 +74,15 @@
                                 <DrawingImage>
                                     <DrawingImage.Drawing>
                                         <DrawingGroup>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/tab_1_uncheck.png"/>
-                                            <ImageDrawing Rect="0,0,87,40" ImageSource="Resources/database_mysql.png"/>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="10,35,100,5"/>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Brush>
+                                                    <SolidColorBrush Color="#CCCCFF"/>
+                                                </GeometryDrawing.Brush>
+                                            </GeometryDrawing>
+                                            <ImageDrawing Rect="10,0,100,40" ImageSource="Resources/database_mysql.png"/>
                                         </DrawingGroup>
                                     </DrawingImage.Drawing>
                                 </DrawingImage>
