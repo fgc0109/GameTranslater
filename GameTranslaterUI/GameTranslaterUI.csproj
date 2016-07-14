@@ -191,10 +191,6 @@
     <Resource Include="Resources\slider_1_button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\tab_1_checked.png" />
-    <Resource Include="Resources\tab_1_uncheck.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\button_2_active.png" />
     <Resource Include="Resources\button_2_hover.png" />
     <Resource Include="Resources\button_2_inactiv.png" />
