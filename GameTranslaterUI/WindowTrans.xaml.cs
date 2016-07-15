@@ -20,9 +20,16 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowTrans : Window
     {
-        public WindowTrans(DataSet basicData)
+        public WindowTrans(params object[] paraValues)
         {
             InitializeComponent();
+
+            textBox.Text = "";
+            foreach (var item in paraValues)
+            {
+                textBox.Text = textBox.Text + item.ToString() + "\n\r";
+            }
+            
         }
     }
 }

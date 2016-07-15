@@ -8,6 +8,12 @@ using MySql.Data.MySqlClient;
 
 namespace DataHelper
 {
+    public enum DataType
+    {
+        dataSet,
+        dataTable
+    }
+
     static public class MySqlHelper
     {
         static private MySqlConnection m_dbConnection = null;
@@ -19,67 +25,67 @@ namespace DataHelper
             get { return m_dbConnection; }
         }
 
-        static public void OpenMySql(string host, string port, string user, string pass, string database)
+        /// <summary>
+        /// 连接MySQL数据库
+        /// </summary>
+        /// <param name="host">IP地址</param>
+        /// <param name="port">端口号</param>
+        /// <param name="name">数据库名</param>
+        /// <param name="user">数据库用户名</param>
+        /// <param name="pass">数据库密码</param>
+        /// <returns>返回连接标识,连接状态枚举,错误信息</returns>
+        static public object[] OpenMySql(string host, string port, string name, string user, string pass)
         {
             string connectionString = string.Format("Server = {0};port={1};Database = {2}; User ID = {3}; Password = {4};",
-                host, port, database, user, pass);
+                host, port, name, user, pass);
             m_dbConnection = new MySqlConnection(connectionString);
-
-            if (m_dbConnection.State != ConnectionState.Open)
+            try
             {
-                try
-                {
-                    m_dbConnection.Open();
-                }
-                catch
-                {
+                m_dbConnection.Open();
 
-                }
+                if (m_dbConnection.State == ConnectionState.Open)
+                    return new object[3] { true, m_dbConnection.State, string.Empty };
+                else
+                    return new object[3] { false, m_dbConnection.State, string.Empty };
+            }
+            catch (Exception ex)
+            {
+                return new object[3] { false, m_dbConnection.State, ex };
             }
         }
 
-        static public DataSet ExecuteDataSet(string strCommand, params object[] paraValues)
+        /// <summary>
+        /// 返回对应名称的数据集或数据表
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="paraValues"></param>
+        /// <returns>返回数据状态标识,数据集或数据表,错误信息</returns>
+        static public object[] ExecuteData(DataType type, params object[] paraValues)
         {
-            DataSet local_dataset = new DataSet();
+            DataSet local_data = new DataSet();
+            string strCommand = "select * from {0};";
             try
             {
                 m_dbDataAdapter = new MySqlDataAdapter(string.Format(strCommand, paraValues), m_dbConnection);
-                m_dbDataAdapter.Fill(local_dataset);
+                m_dbDataAdapter.Fill(local_data);
 
-                return local_dataset;
+                return new object[3] { true, local_data, string.Empty };
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
-            }
-        }
-
-        static public DataTable ExecuteDataTable(string strCommand, params object[] paraValues)
-        {
-            DataTable local_datatable = new DataTable();
-            try
-            {
-                m_dbDataAdapter = new MySqlDataAdapter(strCommand, m_dbConnection);
-                m_dbDataAdapter.Fill(local_datatable);
-
-                return local_datatable;
-            }
-            catch
-            {
-                return null;
+                return new object[3] { false, null, ex };
             }
         }
 
         static public int ExecuteNonQuery(string strCommand, params object[] paraValues)
         {
             m_dbCommand.Connection = m_dbConnection;
-            m_dbCommand.CommandText = strCommand;
+            m_dbCommand.CommandText = string.Format(strCommand, paraValues);
             if (paraValues != null)
             {
                 foreach (MySqlParameter parm in paraValues)
                     m_dbCommand.Parameters.Add(parm);
             }
-
             return m_dbCommand.ExecuteNonQuery();
         }
     }
