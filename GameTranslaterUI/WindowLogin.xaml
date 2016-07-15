@@ -4,14 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameTranslaterUI"
-        mc:Ignorable="d" Height="300" Width="460.623" Title="登录">
+        mc:Ignorable="d" Height="343" Width="634.623" Title="登录">
 
     <Window.Background>
         <ImageBrush ImageSource="Resources/background.png" TileMode="Tile" Viewport="0,0,0.3,0.3"/>
     </Window.Background>
 
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="158" Margin="26,38,0,0" VerticalAlignment="Top" Width="405" SelectionChanged="tabControl_SelectionChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="158" Margin="212,31,0,0" VerticalAlignment="Top" Width="405" SelectionChanged="tabControl_SelectionChanged">
             <TabItem x:Name="Tab_MySQL" Header="MySQL" Style="{StaticResource TriState_TabItemStyle_1}">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -40,7 +44,8 @@
         </TabControl>
 
 
-        <Button x:Name="button_LoginIn" Content="" Margin="162,213,0,0" Click="button_LoginIn_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
-        <TextBox x:Name="TextBox_DebugInfo" Margin="45,213,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
+        <Button x:Name="button_LoginIn" Content="" Margin="348,213,0,0" Click="button_LoginIn_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
+        <TextBox x:Name="TextBox_DebugInfo" Margin="10,268,0,0" Style="{StaticResource Blue_TextBoxStyle}" Width="607" Height="37" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox_Plugs" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" Width="257"/>
     </Grid>
 </Window>

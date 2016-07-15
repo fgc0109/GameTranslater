@@ -12,7 +12,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.IO;
 using DataHelper;
+using IMainPlug;
 
 namespace GameTranslaterUI
 {
@@ -21,6 +24,9 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowLogin : Window
     {
+        public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+
+
         WindowMain basicWindow = null;
         WindowTrans transWindow = null;
 
@@ -29,6 +35,17 @@ namespace GameTranslaterUI
         {
             InitializeComponent();
             InitializingDefult();
+
+
+            //状态绑定
+            bindingState();
+            //打开文件监视器
+            settingPlugsWatcher();
+
+
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
+            //throw new NotImplementedException();
         }
 
         private void InitializingDefult()
@@ -39,6 +56,13 @@ namespace GameTranslaterUI
             TextBox_Pass.Text = "123456";
             TextBox_Base.Text = "refdata";
             TextBox_Table.Text = "border";
+        }
+
+        private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
+            //throw new NotImplementedException();
         }
 
         private void button_LoginIn_Click(object sender, RoutedEventArgs e)
@@ -71,6 +95,9 @@ namespace GameTranslaterUI
                 default:
                     transWindow = new WindowTrans(dataObject);
                     transWindow.Show();
+
+                    basicWindow = new WindowMain();
+                    basicWindow.Show();
                     break;
             }
             Close();

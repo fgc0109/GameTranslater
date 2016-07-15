@@ -62,6 +62,8 @@
     <Compile Include="WindowLogin.xaml.cs">
       <DependentUpon>WindowLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowLogin_Watcher.cs" />
+    <Compile Include="WindowLogin_Binding.cs" />
     <Compile Include="WindowMain_Watcher.cs" />
     <Compile Include="ReflectionMainPlugs.cs" />
     <Compile Include="WindowTrans.xaml.cs">
