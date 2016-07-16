@@ -8,7 +8,7 @@ using RuneDesign;
 
 namespace GameTranslaterUI
 {
-    public partial class WindowMain : Window
+    public partial class WindowRunes : Window
     {
         private BasicInfomation m_globalBasicInfo = null;
         private DataSet m_mainDataSet = null;
@@ -27,8 +27,6 @@ namespace GameTranslaterUI
             stateDataSets_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDS") { Source = m_globalBasicInfo });
             comboBox_Plugs.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("plugListInfo") { Source = m_globalBasicInfo });
 
-            m_globalBasicInfo.InfoDB = "12121212";
-            m_globalBasicInfo.InfoDS = "13131313";
 
             //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));            
         }
@@ -69,19 +67,19 @@ namespace GameTranslaterUI
         {
             if (MySqlHelper.Connection.State ==ConnectionState.Open)
             {
-                m_globalBasicInfo.StateDB = true;
+                m_globalBasicInfo.StateDataBase = true;
             }
             else if (MySqlHelper.Connection.State ==ConnectionState.Closed)
             {
-                m_globalBasicInfo.StateDB = false;
+                m_globalBasicInfo.StateDataBase = false;
             }
             else if (MySqlHelper.Connection.State ==ConnectionState.Connecting)
             {      
-                m_globalBasicInfo.StateDB = false;
+                m_globalBasicInfo.StateDataBase = false;
             }
             else
             {
-                m_globalBasicInfo.StateDB = false;
+                m_globalBasicInfo.StateDataBase = false;
             }
            // throw new NotImplementedException();
         }

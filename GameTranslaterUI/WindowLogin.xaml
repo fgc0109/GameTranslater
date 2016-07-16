@@ -46,6 +46,6 @@
 
         <Button x:Name="button_LoginIn" Content="" Margin="348,213,0,0" Click="button_LoginIn_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
         <TextBox x:Name="TextBox_DebugInfo" Margin="10,268,0,0" Style="{StaticResource Blue_TextBoxStyle}" Width="607" Height="37" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox_Plugs" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" Width="257"/>
+        <ComboBox x:Name="comboBox_Plugs" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" Width="257" SelectionChanged="comboBox_Plugs_SelectionChanged"/>
     </Grid>
 </Window>

@@ -64,7 +64,6 @@
     </Compile>
     <Compile Include="WindowLogin_Watcher.cs" />
     <Compile Include="WindowLogin_Binding.cs" />
-    <Compile Include="WindowMain_Watcher.cs" />
     <Compile Include="ReflectionMainPlugs.cs" />
     <Compile Include="WindowTrans.xaml.cs">
       <DependentUpon>WindowTrans.xaml</DependentUpon>
@@ -77,7 +76,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowMain.xaml">
+    <Page Include="WindowRunes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -86,8 +85,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BasicInfomation.cs" />
-    <Compile Include="WindowMain.xaml.cs">
-      <DependentUpon>WindowMain.xaml</DependentUpon>
+    <Compile Include="WindowRunes.xaml.cs">
+      <DependentUpon>WindowRunes.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="StyleDictionary_Radio.xaml">
@@ -116,8 +115,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WindowMain_Binding.cs" />
-    <Compile Include="WindowMain_Runes.cs" />
+    <Compile Include="WindowRunes_Binding.cs" />
+    <Compile Include="WindowRunes_Runes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -24,11 +24,11 @@ namespace GameTranslaterUI
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class WindowMain : Window
+    public partial class WindowRunes : Window
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-        public WindowMain()
+        public WindowRunes()
         {
             InitializeComponent();
 
@@ -42,13 +42,13 @@ namespace GameTranslaterUI
             listView2.DataContext = getDataTable();
 
             //线程调度器获取可用组件列表
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
         }
 
         private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
             //throw new NotImplementedException();
         }

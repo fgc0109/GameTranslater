@@ -17,7 +17,7 @@ using RuneDesign;
 
 namespace GameTranslaterUI
 {
-    public partial class WindowMain : Window
+    public partial class WindowRunes : Window
     {
         private InfoRunes m_globalRunesInfo = null;
 

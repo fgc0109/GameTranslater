@@ -17,55 +17,45 @@ namespace GameTranslaterUI
 
         private bool m_stateDatabase = false;
         private bool m_stateDataSets = false;
-        private string m_infoDatabase = "m_infoDatabase";
-        private string m_infoDataSets = "m_infoDataSets";
+
         private ObservableCollection<string> m_plugList = new ObservableCollection<string>();
 
-        public bool StateDB
+        /// <summary>
+        /// 提供程序数据表加载状态信息
+        /// </summary>
+        public bool StateDataBase
         {
             get { return m_stateDatabase; }
             set
             {
                 m_stateDatabase = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDB"));
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDataBase"));
             }
         }
-        public bool StateDS
+
+        /// <summary>
+        /// 提供程序数据集加载状态信息
+        /// </summary>
+        public bool StateDataSets
         {
             get { return m_stateDataSets; }
             set
             {
                 m_stateDataSets = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDS"));
-            }
-        }
-        public string InfoDB
-        {
-            get { return m_infoDatabase; }
-            set
-            {
-                m_infoDatabase = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoDB"));
-
-            }
-        }
-        public string InfoDS
-        {
-            get { return m_infoDataSets; }
-            set
-            {
-                m_infoDataSets = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoDS"));
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDataSets"));
             }
         }
 
-        public ObservableCollection<string> plugListInfo
+        /// <summary>
+        /// 提供插件列表信息
+        /// </summary>
+        public ObservableCollection<string> InfoPlugList
         {
             get { return m_plugList; }
             set
             {
                 m_plugList = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("plugListInfo"));
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("InfoPlugList"));
             }
         }
     }

@@ -26,10 +26,8 @@ namespace GameTranslaterUI
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-
-        WindowMain basicWindow = null;
+        WindowRunes basicWindow = null;
         WindowTrans transWindow = null;
-
 
         public WindowLogin()
         {
@@ -43,7 +41,7 @@ namespace GameTranslaterUI
             settingPlugsWatcher();
 
 
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
             //throw new NotImplementedException();
         }
@@ -60,9 +58,8 @@ namespace GameTranslaterUI
 
         private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.plugListInfo = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
-            //throw new NotImplementedException();
         }
 
         private void button_LoginIn_Click(object sender, RoutedEventArgs e)
@@ -89,14 +86,14 @@ namespace GameTranslaterUI
             switch (tabControl.SelectedIndex)
             {
                 case 99:
-                    basicWindow = new WindowMain();
+                    basicWindow = new WindowRunes();
                     basicWindow.Show();
                     break;
                 default:
                     transWindow = new WindowTrans(dataObject);
                     transWindow.Show();
 
-                    basicWindow = new WindowMain();
+                    basicWindow = new WindowRunes();
                     basicWindow.Show();
                     break;
             }
@@ -106,6 +103,12 @@ namespace GameTranslaterUI
         private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TextBox_DebugInfo.Text = tabControl.SelectedIndex.ToString();
+        }
+
+        private void comboBox_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", comboBox_Plugs.SelectedItem as string);
+            TextBox_DebugInfo.Text = temp.plugInfomation();
         }
     }
 }
