@@ -34,16 +34,16 @@ namespace GameTranslaterUI
             InitializeComponent();
             InitializingDefult();
 
-
             //状态绑定
             bindingState();
             //打开文件监视器
             settingPlugsWatcher();
 
-
             Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
             //throw new NotImplementedException();
+
+            listView_Plugs.DataContext = getDataTable();
         }
 
         private void InitializingDefult()
@@ -108,6 +108,12 @@ namespace GameTranslaterUI
         private void comboBox_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", comboBox_Plugs.SelectedItem as string);
+            TextBox_DebugInfo.Text = temp.plugInfomation();
+        }
+
+        private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", listView_Plugs.Items[listView_Plugs.SelectedIndex] as string);
             TextBox_DebugInfo.Text = temp.plugInfomation();
         }
     }

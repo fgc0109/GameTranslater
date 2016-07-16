@@ -38,7 +38,7 @@ namespace RuneDesign
 
         List<int[]> lst_Combination_A = null;
         List<int[]> lst_Combination_B = null;
-        List<int[]> lst_Permutation = null;
+        //List<int[]> lst_Permutation = null;
 
         //符文结果{品质参数*10,生命,攻击,物防,法防}
         List<double[]> lst_Appropriate = null;

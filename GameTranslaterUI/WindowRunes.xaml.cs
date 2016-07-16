@@ -26,8 +26,6 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowRunes : Window
     {
-        public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
-
         public WindowRunes()
         {
             InitializeComponent();
@@ -36,27 +34,6 @@ namespace GameTranslaterUI
             bindingState();
             //符文绑定
             bindingRunes();
-            //打开文件监视器
-            settingPlugsWatcher();
-
-            listView2.DataContext = getDataTable();
-
-            //线程调度器获取可用组件列表
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
-            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
-        }
-
-        private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
-        {
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
-            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
-            //throw new NotImplementedException();
-        }
-
-        private void button_LoadAssembly_Click(object sender, RoutedEventArgs e)
-        {
-            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", comboBox_Plugs.SelectedItem as string);
-            textBox.Text = temp.plugInfomation();
         }
     }
 }

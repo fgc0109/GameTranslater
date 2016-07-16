@@ -80,19 +80,7 @@
             <Image x:Name="image1" HorizontalAlignment="Left" Height="50" Margin="200,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_ready.png" Visibility="Hidden"/>
             <Image x:Name="image" HorizontalAlignment="Left" Height="50" Margin="200,137,0,0" VerticalAlignment="Top" Width="50" Source="Resources/state_error.png" Visibility="Hidden"/>
             <TextBox x:Name="stateDatabase_TextBox_Copy" Margin="10,296,0,0" Style="{StaticResource Blue_TextBoxStyle}"/>
-            <ListView Height="235" Margin="10,0,0,10" VerticalAlignment="Bottom" ItemsSource="{Binding}" x:Name="listView2" HorizontalAlignment="Left" Width="405">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="编号" DisplayMemberBinding="{Binding ID}"  Width="100" />
-                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Name}" Width="100"/>
-                        <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Age}" Width="100"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-           
-            <Button x:Name="button_LoadAssembly" Content="" Margin="277,267,0,0" Click="button_LoadAssembly_Click" Style="{StaticResource TriState_ImageButtonStyle}" Height="38" Width="126"/>
-            <ComboBox x:Name="comboBox_Plugs" HorizontalAlignment="Left" Margin="30,208,0,0" VerticalAlignment="Top" Width="257"/>
-            
+
         </Grid>
     </Grid>
 </Window>
