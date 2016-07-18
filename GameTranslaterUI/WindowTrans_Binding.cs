@@ -12,15 +12,9 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowTrans : Window
     {
-        private BasicInfomation m_globalBasicInfo = null;
-
-        /// <summary>
-        /// 绑定全局状态数据
-        /// </summary>
         public void BindingState()
         {
-            m_globalBasicInfo = new BasicInfomation();
-            dataGrid.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("MainDataTable") { Source = m_globalBasicInfo });           
-        }   
+            dataGrid.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("MainDataTable") { Source = m_globalBasicInfo });
+        }
     }
 }

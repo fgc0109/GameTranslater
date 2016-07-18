@@ -26,32 +26,19 @@ namespace GameTranslaterUI
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-        WindowTrans transWindow = null;
+        private BasicInfomation m_globalBasicInfo = null;
+        private WindowTrans transWindow = null;
 
         public WindowLogin()
         {
             InitializeComponent();
-            InitializingDefult();
-
-            //状态绑定
+            m_globalBasicInfo = new BasicInfomation();
+            
             BindingState();
-            //打开文件监视器
+            InitializeDefult();
             SettingPlugsWatcher();
 
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
-            Dispatcher.Invoke(new Action(() => { listView_Plugs.SelectedIndex = 0; }));
-
             listView_Plugs.DataContext = GetDataTable();
-        }
-
-        private void InitializingDefult()
-        {
-            TextBox_Addr.Text = "localhost";
-            TextBox_Port.Text = "3306 ";
-            TextBox_User.Text = "root";
-            TextBox_Pass.Text = "123456";
-            TextBox_Base.Text = "refdata";
-            TextBox_Table.Text = "border";
         }
 
         private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
@@ -79,6 +66,7 @@ namespace GameTranslaterUI
                     break;
             }
 
+            MySqlHelper.Connection.StateChange += connectionState_Change;
             //根据插件选择加载的窗口
             switch (tabControl.SelectedIndex)
             {

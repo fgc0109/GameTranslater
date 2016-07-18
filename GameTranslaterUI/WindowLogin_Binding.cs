@@ -12,23 +12,20 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowLogin : Window
     {
-        private BasicInfomation m_globalBasicInfo = null;
-
-        /// <summary>
-        /// 绑定全局状态数据
-        /// </summary>
         public void BindingState()
         {
-            //添加数据库连接状态改变的事件
-            MySqlHelper.OpenMySql("localhost", "3306", "root", "123456", "par_db_new");
-            MySqlHelper.Connection.StateChange += connectionState_Change;
-
-            m_globalBasicInfo = new BasicInfomation();
-
             //stateDataBase_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDB") { Source = m_globalBasicInfo });
-            //stateDataSets_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDS") { Source = m_globalBasicInfo });
-            //comboBox_Plugs.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("InfoPlugList") { Source = m_globalBasicInfo });
-            //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));            
+            //stateDataSets_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDS") { Source = m_globalBasicInfo });    
+        }
+
+        private void InitializeDefult()
+        {
+            TextBox_Addr.Text = "localhost";
+            TextBox_Port.Text = "3306 ";
+            TextBox_User.Text = "root";
+            TextBox_Pass.Text = "123456";
+            TextBox_Base.Text = "refdata";
+            TextBox_Table.Text = "border";
         }
 
         private DataTable GetDataTable()

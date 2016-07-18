@@ -20,17 +20,21 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowTrans : Window
     {
+        private BasicInfomation m_globalBasicInfo = null;
+
         public WindowTrans(params object[] paraValues)
         {
             InitializeComponent();
+            m_globalBasicInfo = new BasicInfomation();
 
             BindingState();
 
-            textBox.Text = "";
-            foreach (var item in paraValues)
-            {
-                textBox.Text = textBox.Text + item.ToString() + "\n\r";
-            }
+            m_globalBasicInfo.MainDataTable = paraValues[1] as DataTable;
+        }
+
+        private void button_Export_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

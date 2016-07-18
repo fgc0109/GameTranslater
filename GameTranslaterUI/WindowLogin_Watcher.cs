@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using DataHelper;
 using System.IO;
+using System;
 
 namespace GameTranslaterUI
 {
@@ -21,6 +22,9 @@ namespace GameTranslaterUI
             plugChangeWatcher.EnableRaisingEvents = true;
 
             plugChangeWatcher.Changed += plugChangeWatcher_Changed;
+
+            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { listView_Plugs.SelectedIndex = 0; }));
         }
     }
 }
