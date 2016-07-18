@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameTranslaterUI"
         mc:Ignorable="d"
-        Title="WindowTrans" Height="300" Width="300">
+        Title="WindowTrans" Height="346.661" Width="565.154">
     <Grid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="140" Margin="78,61,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="171*"/>
+            <RowDefinition Height="172*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="textBox" Margin="10,0,432,10" TextWrapping="Wrap" Text="TextBox" Height="220" VerticalAlignment="Bottom" Grid.RowSpan="2"/>
+        <DataGrid x:Name="dataGrid" Margin="0,10,10,10" Grid.RowSpan="2" HorizontalAlignment="Right" Width="417"/>
 
     </Grid>
 </Window>

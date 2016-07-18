@@ -26,7 +26,7 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowRunes : Window
     {
-        public WindowRunes()
+        public WindowRunes(params object[] paraValues)
         {
             InitializeComponent();
 

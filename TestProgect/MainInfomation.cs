@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using IMainPlug;
 
-namespace ThisWarOfMine
+namespace TestProgect
 {
     public class MainInfomation:ITranslaterInterface
     {
@@ -16,6 +16,7 @@ namespace ThisWarOfMine
             get { return mainData; }
             set { mainData = value; }
         }
+
 
         public string teststring = "测试反射数据";
         public string testReflection()
@@ -27,6 +28,7 @@ namespace ThisWarOfMine
 
         public bool mainStartPoint(string path, string name)
         {
+
             return true;
         }
 
@@ -37,7 +39,7 @@ namespace ThisWarOfMine
 
         public string plugInfomation()
         {
-            string temp = "调用插件成功\r\n";
+            string temp = string.Format("调用{0}插件成功\r\n", ToString());
             temp += "接口名:ITranslaterInterface";
             return temp;
         }

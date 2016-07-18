@@ -86,14 +86,14 @@ namespace GameTranslaterUI
             switch (tabControl.SelectedIndex)
             {
                 case 99:
-                    basicWindow = new WindowRunes();
+                    basicWindow = new WindowRunes(dataObject);
                     basicWindow.Show();
                     break;
                 default:
                     transWindow = new WindowTrans(dataObject);
                     transWindow.Show();
 
-                    basicWindow = new WindowRunes();
+                    basicWindow = new WindowRunes(dataObject);
                     basicWindow.Show();
                     break;
             }
@@ -113,7 +113,8 @@ namespace GameTranslaterUI
 
         private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", listView_Plugs.Items[listView_Plugs.SelectedIndex] as string);
+            DataRowView row = listView_Plugs.SelectedItem as DataRowView;
+            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", row.Row[1] as string);
             TextBox_DebugInfo.Text = temp.plugInfomation();
         }
     }

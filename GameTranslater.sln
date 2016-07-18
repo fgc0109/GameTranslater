@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMainPlug", "IMainPlug\IMai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThisWarOfMine", "ThisWarOfMine\ThisWarOfMine.csproj", "{1C0E712E-C372-42DF-9ADF-AF4B1281410A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProgect", "TestProgect\TestProgect.csproj", "{63AB8A36-FA99-4CB5-A28E-716913CDD304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1C0E712E-C372-42DF-9ADF-AF4B1281410A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C0E712E-C372-42DF-9ADF-AF4B1281410A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C0E712E-C372-42DF-9ADF-AF4B1281410A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AB8A36-FA99-4CB5-A28E-716913CDD304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AB8A36-FA99-4CB5-A28E-716913CDD304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AB8A36-FA99-4CB5-A28E-716913CDD304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AB8A36-FA99-4CB5-A28E-716913CDD304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
