@@ -26,7 +26,6 @@ namespace GameTranslaterUI
     {
         public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-        WindowRunes basicWindow = null;
         WindowTrans transWindow = null;
 
         public WindowLogin()
@@ -86,8 +85,8 @@ namespace GameTranslaterUI
             switch (tabControl.SelectedIndex)
             {
                 case 99:
-                    basicWindow = new WindowRunes(dataObject);
-                    basicWindow.Show();
+                    //basicWindow = new WindowRunes(dataObject);
+                    //basicWindow.Show();
                     break;
                 default:
                     transWindow = new WindowTrans(dataObject);
@@ -108,14 +107,14 @@ namespace GameTranslaterUI
         private void comboBox_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", comboBox_Plugs.SelectedItem as string);
-            TextBox_DebugInfo.Text = temp.plugInfomation();
+            TextBox_DebugInfo.Text = temp.PlugInfo();
         }
 
         private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataRowView row = listView_Plugs.SelectedItem as DataRowView;
             ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", row.Row[1] as string);
-            TextBox_DebugInfo.Text = temp.plugInfomation();
+            TextBox_DebugInfo.Text = temp.PlugInfo();
         }
     }
 }

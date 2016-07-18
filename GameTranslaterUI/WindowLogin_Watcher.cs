@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using DataHelper;
-using RuneDesign;
 using System.IO;
 
 namespace GameTranslaterUI

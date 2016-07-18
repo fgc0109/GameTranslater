@@ -26,18 +26,22 @@ namespace TestProgect
 
         //以下为接口方法实现
 
-        public bool mainStartPoint(string path, string name)
+        public bool StartPoint(string path, string name)
         {
-
             return true;
         }
 
-        public DataSet languageDataSet()
+        public bool DataNeeded()
+        {
+            return true;
+        }
+
+        public DataSet GetDataSet()
         {
             return mainData;
         }
 
-        public string plugInfomation()
+        public string PlugInfo()
         {
             string temp = string.Format("调用{0}插件成功\r\n", ToString());
             temp += "接口名:ITranslaterInterface";

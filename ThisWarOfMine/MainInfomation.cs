@@ -25,17 +25,22 @@ namespace ThisWarOfMine
 
         //以下为接口方法实现
 
-        public bool mainStartPoint(string path, string name)
+        public bool StartPoint(string path, string name)
         {
             return true;
         }
 
-        public DataSet languageDataSet()
+        public bool DataNeeded()
+        {
+            return true;
+        }
+
+        public DataSet GetDataSet()
         {
             return mainData;
         }
 
-        public string plugInfomation()
+        public string PlugInfo()
         {
             string temp = "调用插件成功\r\n";
             temp += "接口名:ITranslaterInterface";

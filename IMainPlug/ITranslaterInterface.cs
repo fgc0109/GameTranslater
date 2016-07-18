@@ -16,18 +16,24 @@ namespace IMainPlug
         /// 程序主入口点,在主程序中首先调用
         /// </summary>
         /// <returns></returns>
-        bool mainStartPoint(string path,string name);
+        bool StartPoint(string path,string name);
+
+        /// <summary>
+        /// 界面的打开是否需要强制加载数据
+        /// </summary>
+        /// <returns></returns>
+        bool DataNeeded();
 
         /// <summary>
         /// 读取数据集合
         /// </summary>
         /// <returns>已经读取的数据集</returns>
-        DataSet languageDataSet();
+        DataSet GetDataSet();
 
         /// <summary>
         /// 获取插件基本信息
         /// </summary>
         /// <returns>信息字符串</returns>
-        string plugInfomation();
+        string PlugInfo();
     }
 }

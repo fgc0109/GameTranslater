@@ -76,19 +76,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WindowRunes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BasicInfomation.cs" />
-    <Compile Include="WindowRunes.xaml.cs">
-      <DependentUpon>WindowRunes.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="StyleDictionary_Radio.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,7 +107,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WindowRunes_Runes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -170,10 +161,6 @@
     <ProjectReference Include="..\IMainPlug\IMainPlug.csproj">
       <Project>{89174eea-fd9a-44e4-b39f-7ad261017d78}</Project>
       <Name>IMainPlug</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RuneDesign\RuneDesign.csproj">
-      <Project>{5d9513fd-d9f7-4ca5-98c9-4474fa148c50}</Project>
-      <Name>RuneDesign</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
