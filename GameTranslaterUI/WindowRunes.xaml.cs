@@ -30,10 +30,36 @@ namespace GameTranslaterUI
         {
             InitializeComponent();
 
-            //状态绑定
-            bindingState();
-            //符文绑定
-            bindingRunes();
+            BindingRunes();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            SettingRunesData();
+        }
+
+        private void slider_LEF_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            m_globalRunesInfo.MHP = (1 / (1 + slider_ATT.Value) + slider_LEF.Value);
+            m_globalRunesInfo.ATT = (1 + slider_ATT.Value);
+            m_globalRunesInfo.DEF = ((1 / (1 + slider_ATT.Value)) * (1 + slider_DEF.Value) - (slider_LEF.Value * 1.6));
+            m_globalRunesInfo.RES = ((1 / (1 + slider_ATT.Value)) * (1 - slider_DEF.Value) - (slider_LEF.Value * 1.6));
+        }
+
+        private void slider_ATT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            m_globalRunesInfo.MHP = (1 / (1 + slider_ATT.Value) + slider_LEF.Value);
+            m_globalRunesInfo.ATT = (1 + slider_ATT.Value);
+            m_globalRunesInfo.DEF = ((1 / (1 + slider_ATT.Value)) * (1 + slider_DEF.Value) - (slider_LEF.Value * 1.6));
+            m_globalRunesInfo.RES = ((1 / (1 + slider_ATT.Value)) * (1 - slider_DEF.Value) - (slider_LEF.Value * 1.6));
+        }
+
+        private void slider_DEF_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            m_globalRunesInfo.MHP = (1 / (1 + slider_ATT.Value) + slider_LEF.Value);
+            m_globalRunesInfo.ATT = (1 + slider_ATT.Value);
+            m_globalRunesInfo.DEF = ((1 / (1 + slider_ATT.Value)) * (1 + slider_DEF.Value) - (slider_LEF.Value * 1.6));
+            m_globalRunesInfo.RES = ((1 / (1 + slider_ATT.Value)) * (1 - slider_DEF.Value) - (slider_LEF.Value * 1.6));
         }
     }
 }

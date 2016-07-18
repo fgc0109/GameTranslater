@@ -56,7 +56,7 @@ namespace GameTranslaterUI
             TextBox_Table.Text = "border";
         }
 
-        private void PlugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
+        private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
@@ -71,7 +71,7 @@ namespace GameTranslaterUI
             {
                 case 0:
                     MySqlHelper.OpenMySql(TextBox_Addr.Text, TextBox_Port.Text, TextBox_Base.Text, TextBox_User.Text, TextBox_Pass.Text);
-                    dataObject = MySqlHelper.ExecuteData(DataType.dataSet, TextBox_Table.Text);
+                    dataObject = MySqlHelper.ExecuteData(DataType.dataTable, TextBox_Table.Text);
                     break;
                 case 1:
                     MySqlHelper.OpenMySql(TextBox_Addr.Text, TextBox_Port.Text, TextBox_Base.Text, TextBox_User.Text, TextBox_Pass.Text);
@@ -93,8 +93,8 @@ namespace GameTranslaterUI
                     transWindow = new WindowTrans(dataObject);
                     transWindow.Show();
 
-                    basicWindow = new WindowRunes(dataObject);
-                    basicWindow.Show();
+                    //basicWindow = new WindowRunes(dataObject);
+                    //basicWindow.Show();
                     break;
             }
             Close();

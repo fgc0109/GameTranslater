@@ -21,7 +21,7 @@ namespace GameTranslaterUI
             plugChangeWatcher.Filter = "*.dll";
             plugChangeWatcher.EnableRaisingEvents = true;
 
-            plugChangeWatcher.Changed += PlugChangeWatcher_Changed;
+            plugChangeWatcher.Changed += plugChangeWatcher_Changed;
         }
     }
 }

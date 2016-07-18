@@ -29,7 +29,14 @@ namespace GameTranslaterUI
             {
                 textBox.Text = textBox.Text + item.ToString() + "\n\r";
             }
-            
+
+            //dataGrid.SetBinding(ItemsControl.ItemsSourceProperty, new Binding() { });
+            DataTable temp = paraValues[1] as DataTable;
+            if (temp != null)
+            {
+                dataGrid.ItemsSource = temp.AsDataView();
+            }
+
         }
     }
 }

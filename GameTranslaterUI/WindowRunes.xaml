@@ -28,13 +28,13 @@
             <GroupBox x:Name="groupBox" Header="参数调整" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="145" Width="400" FontWeight="Bold" FontSize="14" Foreground="White">
                 <WrapPanel Orientation="Horizontal">
                     <Label x:Name="Label_MHP_Change" Content="生命" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" FontSize="12" HorizontalContentAlignment="Center"/>
-                    <Slider x:Name="Slider_LEF" Style="{StaticResource ImageSliderStyle}" Margin="10,10,0,0" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.01" SmallChange="0.01" ValueChanged="Slider_LEF_ValueChanged"/>
+                    <Slider x:Name="slider_LEF" Style="{StaticResource ImageSliderStyle}" Margin="10,10,0,0" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.01" SmallChange="0.01" ValueChanged="slider_LEF_ValueChanged"/>
                     <TextBox x:Name="TextBox_MHP_Change"  Margin="10,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_LEF, UpdateSourceTrigger=PropertyChanged}" />
                     <Label x:Name="Label_ATT_Change" Content="攻击" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" FontSize="12" HorizontalContentAlignment="Center"/>
-                    <Slider x:Name="Slider_ATT" Style="{StaticResource ImageSliderStyle}" Margin="10,10,0,0" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.01" SmallChange="0.01" ValueChanged="Slider_ATT_ValueChanged"/>
+                    <Slider x:Name="slider_ATT" Style="{StaticResource ImageSliderStyle}" Margin="10,10,0,0" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.01" SmallChange="0.01" ValueChanged="slider_ATT_ValueChanged"/>
                     <TextBox x:Name="TextBox_ATT_Change"  Margin="10,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_ATT, UpdateSourceTrigger=PropertyChanged}" />
                     <Label x:Name="Label_DEF_Change" Content="防御" Margin="0,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" FontSize="12" HorizontalContentAlignment="Center"/>
-                    <Slider x:Name="Slider_DEF" Style="{StaticResource ImageSliderStyle}" Margin="10,10,0,0" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.01" SmallChange="0.01" ValueChanged="Slider_DEF_ValueChanged"/>
+                    <Slider x:Name="slider_DEF" Style="{StaticResource ImageSliderStyle}" Margin="10,10,0,0" Width="200" Height="26" Maximum="1" Minimum="-1" LargeChange="0.01" SmallChange="0.01" ValueChanged="slider_DEF_ValueChanged"/>
                     <TextBox x:Name="TextBox_DEF_Change"  Margin="10,10,0,0" Style="{StaticResource Blue_TextBoxStyle}" Text="{Binding Value, ElementName=Slider_DEF, UpdateSourceTrigger=PropertyChanged}" />
                 </WrapPanel>
             </GroupBox>

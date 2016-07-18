@@ -62,7 +62,7 @@ namespace DataHelper
         /// <returns>返回数据状态标识,数据集或数据表,错误信息</returns>
         static public object[] ExecuteData(DataType type, params object[] paraValues)
         {
-            DataSet local_data = new DataSet();
+            DataTable local_data = new DataTable();
             string strCommand = "select * from {0};";
             try
             {

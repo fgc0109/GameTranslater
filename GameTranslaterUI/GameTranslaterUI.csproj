@@ -115,7 +115,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WindowRunes_Binding.cs" />
     <Compile Include="WindowRunes_Runes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

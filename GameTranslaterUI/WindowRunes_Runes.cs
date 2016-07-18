@@ -21,19 +21,19 @@ namespace GameTranslaterUI
     {
         private InfoRunes m_globalRunesInfo = null;
 
-        public void bindingRunes()
+        public void BindingRunes()
         {
             TextBox_MHP.SetBinding(TextBox.TextProperty, new Binding("MHP") { Source = m_globalRunesInfo });
             TextBox_ATT.SetBinding(TextBox.TextProperty, new Binding("ATT") { Source = m_globalRunesInfo });
             TextBox_DEF.SetBinding(TextBox.TextProperty, new Binding("DEF") { Source = m_globalRunesInfo });
             TextBox_RES.SetBinding(TextBox.TextProperty, new Binding("RES") { Source = m_globalRunesInfo });
 
-            Slider_LEF.Value = 0;
-            Slider_ATT.Value = 0;
-            Slider_DEF.Value = 0;
+            slider_LEF.Value = 0;
+            slider_ATT.Value = 0;
+            slider_DEF.Value = 0;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void SettingRunesData()
         {
             double min;
             double deviation = 0;
@@ -91,28 +91,6 @@ namespace GameTranslaterUI
             TextBox_Deviation.Text = deviation.ToString();
         }
 
-        private void Slider_LEF_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            m_globalRunesInfo.MHP = (1 / (1 + Slider_ATT.Value) + Slider_LEF.Value);
-            m_globalRunesInfo.ATT = (1 + Slider_ATT.Value);
-            m_globalRunesInfo.DEF = ((1 / (1 + Slider_ATT.Value)) * (1 + Slider_DEF.Value) - (Slider_LEF.Value * 1.6));
-            m_globalRunesInfo.RES = ((1 / (1 + Slider_ATT.Value)) * (1 - Slider_DEF.Value) - (Slider_LEF.Value * 1.6));
-        }
-
-        private void Slider_ATT_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            m_globalRunesInfo.MHP = (1 / (1 + Slider_ATT.Value) + Slider_LEF.Value);
-            m_globalRunesInfo.ATT = (1 + Slider_ATT.Value);
-            m_globalRunesInfo.DEF = ((1 / (1 + Slider_ATT.Value)) * (1 + Slider_DEF.Value) - (Slider_LEF.Value * 1.6));
-            m_globalRunesInfo.RES = ((1 / (1 + Slider_ATT.Value)) * (1 - Slider_DEF.Value) - (Slider_LEF.Value * 1.6));
-        }
-
-        private void Slider_DEF_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            m_globalRunesInfo.MHP = (1 / (1 + Slider_ATT.Value) + Slider_LEF.Value);
-            m_globalRunesInfo.ATT = (1 + Slider_ATT.Value);
-            m_globalRunesInfo.DEF = ((1 / (1 + Slider_ATT.Value)) * (1 + Slider_DEF.Value) - (Slider_LEF.Value * 1.6));
-            m_globalRunesInfo.RES = ((1 / (1 + Slider_ATT.Value)) * (1 - Slider_DEF.Value) - (Slider_LEF.Value * 1.6));
-        }
+        
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameTranslaterUI"
         mc:Ignorable="d"
-        Title="WindowTrans" Height="346.661" Width="565.154">
+        Title="WindowTrans" Height="355.661" Width="554.154">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="171*"/>
