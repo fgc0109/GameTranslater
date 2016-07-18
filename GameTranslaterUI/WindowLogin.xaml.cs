@@ -34,15 +34,14 @@ namespace GameTranslaterUI
             InitializingDefult();
 
             //状态绑定
-            bindingState();
+            BindingState();
             //打开文件监视器
-            settingPlugsWatcher();
+            SettingPlugsWatcher();
 
             Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
-            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
-            //throw new NotImplementedException();
+            Dispatcher.Invoke(new Action(() => { listView_Plugs.SelectedIndex = 0; }));
 
-            listView_Plugs.DataContext = getDataTable();
+            listView_Plugs.DataContext = GetDataTable();
         }
 
         private void InitializingDefult()
@@ -58,7 +57,6 @@ namespace GameTranslaterUI
         private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
-            Dispatcher.Invoke(new Action(() => { comboBox_Plugs.SelectedIndex = 0; }));
         }
 
         private void button_LoginIn_Click(object sender, RoutedEventArgs e)
@@ -99,22 +97,13 @@ namespace GameTranslaterUI
             Close();
         }
 
-        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            TextBox_DebugInfo.Text = tabControl.SelectedIndex.ToString();
-        }
-
-        private void comboBox_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", comboBox_Plugs.SelectedItem as string);
-            TextBox_DebugInfo.Text = temp.PlugInfo();
-        }
-
         private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataRowView row = listView_Plugs.SelectedItem as DataRowView;
             ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", row.Row[1] as string);
             TextBox_DebugInfo.Text = temp.PlugInfo();
+
+            tabControl.IsEnabled = temp.DataNeeded();
         }
     }
 }

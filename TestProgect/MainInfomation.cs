@@ -33,7 +33,7 @@ namespace TestProgect
 
         public bool DataNeeded()
         {
-            return true;
+            return false;
         }
 
         public DataSet GetDataSet()

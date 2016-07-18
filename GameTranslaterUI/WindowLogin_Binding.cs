@@ -13,36 +13,25 @@ namespace GameTranslaterUI
     public partial class WindowLogin : Window
     {
         private BasicInfomation m_globalBasicInfo = null;
-        private List<DataTable> m_mainDataTable = null;
-        private DataSet m_mainDataSet = null;
 
         /// <summary>
         /// 绑定全局状态数据
         /// </summary>
-        public void bindingState()
+        public void BindingState()
         {
             //添加数据库连接状态改变的事件
             MySqlHelper.OpenMySql("localhost", "3306", "root", "123456", "par_db_new");
-            MySqlHelper.Connection.StateChange += M_dbConnection_StateChange;
+            MySqlHelper.Connection.StateChange += connectionState_Change;
 
             m_globalBasicInfo = new BasicInfomation();
 
             //stateDataBase_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDB") { Source = m_globalBasicInfo });
             //stateDataSets_TextBox.SetBinding(TextBox.TextProperty, new Binding("InfoDS") { Source = m_globalBasicInfo });
             //comboBox_Plugs.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("InfoPlugList") { Source = m_globalBasicInfo });
-
             //image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/state_active.png"));            
         }
 
-        internal void getDatas()
-        {
-            for (int i = 0; i < m_mainDataSet.Tables.Count; i++)
-            {
-                m_mainDataTable.Add(m_mainDataSet.Tables[i]);
-            }
-        }
-
-        private DataTable getDataTable()
+        private DataTable GetDataTable()
         {
             DataTable dataPlugs = new DataTable();
 
@@ -62,7 +51,7 @@ namespace GameTranslaterUI
             return dataPlugs;
         }
 
-        private void M_dbConnection_StateChange(object sender, StateChangeEventArgs e)
+        private void connectionState_Change(object sender, StateChangeEventArgs e)
         {
             if (MySqlHelper.Connection.State == ConnectionState.Open)
             {

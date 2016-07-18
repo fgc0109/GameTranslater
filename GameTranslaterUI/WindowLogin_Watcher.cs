@@ -13,7 +13,7 @@ namespace GameTranslaterUI
         /// <summary>
         /// 设置文件监视器
         /// </summary>
-        public void settingPlugsWatcher()
+        public void SettingPlugsWatcher()
         {
             FileSystemWatcher plugChangeWatcher = new FileSystemWatcher();
             plugChangeWatcher.Path = m_appStartupPath + @"\Plugs\";
