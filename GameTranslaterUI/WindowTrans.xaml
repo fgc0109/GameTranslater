@@ -18,7 +18,16 @@
                 <MenuItem Command="ApplicationCommands.Copy"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="button_Export" Content="Button" HorizontalAlignment="Left" Margin="19,76,0,0" VerticalAlignment="Top" Width="75" Click="button_Export_Click"/>
+        <Button x:Name="button_Export" Content="输出至文件" HorizontalAlignment="Left" Margin="21,123,0,0" VerticalAlignment="Top" Width="75" Click="button_Export_Click" Height="20"/>
+        <Button x:Name="button_Import" HorizontalAlignment="Left" Margin="21,85,0,0" VerticalAlignment="Top" Width="75" Click="button_Import_Click" Height="20" Content="从文件导入"/>
+        <ListView ItemsSource="{Binding}" x:Name="listView_Plugs" HorizontalAlignment="Left" Width="75" SelectionChanged="listView_Plugs_SelectionChanged" Margin="30,10,0,41" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"  Width="30" />
+                    <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Name}" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
 
     </Grid>

@@ -14,7 +14,7 @@ namespace GameTranslaterUI
     {
         public void BindingState()
         {
-            dataGrid.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("MainDataTable") { Source = m_globalBasicInfo });
+            dataGrid.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("MainDataTable") { Source = mGlobalBasicInfo });
         }
     }
 }

@@ -8,7 +8,7 @@ using IMainPlug;
 
 namespace TestProgect
 {
-    public class MainInfomation:ITranslaterInterface
+    public class MainInfomation : ITranslaterInterface
     {
         private DataSet mainData = new DataSet();
         public DataSet MainData
@@ -27,6 +27,16 @@ namespace TestProgect
         //以下为接口方法实现
 
         public bool StartPoint(string path, string name)
+        {
+            return true;
+        }
+
+        public bool FileImport(string path, ref DataTable importdata)
+        {
+            return true;
+        }
+
+        public bool FileExport(string path, DataTable outputdata)
         {
             return true;
         }

@@ -23,9 +23,20 @@ namespace ThisWarOfMine
             return "测试方法\r\n ";
         }
 
-        //以下为接口方法实现
 
+        //
         public bool StartPoint(string path, string name)
+        {
+
+            return true;
+        }
+
+        public bool FileImport(string path, ref DataTable importdata)
+        {
+            return true;
+        }
+
+        public bool FileExport(string path, DataTable outputdata)
         {
             return true;
         }

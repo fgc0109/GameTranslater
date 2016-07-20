@@ -10,8 +10,8 @@ namespace ThisWarOfMine
 {
     public class FilesDecoding
     {
-        public static MemoryStream m_idxStream = null;
-        public static MemoryStream m_datStream = null;
+        public static MemoryStream mStreamIDX = null;
+        public static MemoryStream mStreamDAT = null;
         public static MemoryStream[] m_zipStream = null;
         public static MemoryStream[] m_uzipStream = null;
 
@@ -39,7 +39,7 @@ namespace ThisWarOfMine
             try
             {
                 byte[] idxData = File.ReadAllBytes(filePath+ fileName + ".idx");
-                m_idxStream = new MemoryStream(idxData);
+                mStreamIDX = new MemoryStream(idxData);
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace ThisWarOfMine
             try
             {
                 byte[] datData = File.ReadAllBytes(filePath + fileName  + ".dat");
-                m_datStream = new MemoryStream(datData);
+                mStreamDAT = new MemoryStream(datData);
             }
             catch (Exception e)
             {
@@ -63,7 +63,7 @@ namespace ThisWarOfMine
         {
             try
             {
-                BinaryReader idxReader = new BinaryReader(m_idxStream);
+                BinaryReader idxReader = new BinaryReader(mStreamIDX);
 
                 m_idxHeader = idxReader.ReadBytes(3);
                 m_idxCounts = idxReader.ReadBytes(4);
@@ -93,7 +93,7 @@ namespace ThisWarOfMine
             //尝试读取DAT文件
             try
             {
-                BinaryReader datReader = new BinaryReader(m_datStream);
+                BinaryReader datReader = new BinaryReader(mStreamDAT);
                 m_zipStream = new MemoryStream[m_fileCount];
 
                 for (int i = 0; i < m_fileCount; i++)
@@ -104,8 +104,8 @@ namespace ThisWarOfMine
                     byte[] datDeviat = m_idxDeviat[i];
                     m_lengthDeviat[i] = (datDeviat[0]) + (datDeviat[1] << 8) + (datDeviat[2] << 16) + (datDeviat[3] << 24);
 
-                    m_datStream.Seek(0, SeekOrigin.Begin);
-                    m_datStream.Position = m_lengthDeviat[i];
+                    mStreamDAT.Seek(0, SeekOrigin.Begin);
+                    mStreamDAT.Position = m_lengthDeviat[i];
 
                     m_zipStream[i] = new MemoryStream(datReader.ReadBytes(m_lengthBefore[i]));
                 }
