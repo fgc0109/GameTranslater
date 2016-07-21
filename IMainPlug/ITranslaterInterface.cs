@@ -13,10 +13,10 @@ namespace IMainPlug
     public interface ITranslaterInterface
     {
         /// <summary>
-        /// 程序主入口点,在主程序中首先调用
+        /// 插件支持的文件类型筛选
         /// </summary>
         /// <returns></returns>
-        bool StartPoint(string path,string name);
+        bool FileFilter(ref string filter);
 
         /// <summary>
         /// 读取文件内容至数据表
@@ -31,7 +31,7 @@ namespace IMainPlug
         bool FileExport(string path,DataTable outputdata);
 
         /// <summary>
-        /// 界面的打开是否需要强制加载数据
+        /// 是否需要强制加载数据
         /// </summary>
         /// <returns></returns>
         bool DataNeeded();

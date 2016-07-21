@@ -36,11 +36,15 @@ namespace GameTranslaterUI
             mGlobalBasicInfo = new BasicInfomation();
 
             BindingState();
+            SettingPlugsWatcher();
+
+            listView_Plugs.DataContext = GetDataTable();
 
             mGlobalBasicInfo.MainDataTable = paraValues[1] as DataTable;
 
             DataRowView row = listView_Plugs.SelectedItem as DataRowView;
-            loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
+            if (row != null)
+                loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
         }
 
         private void button_Export_Click(object sender, RoutedEventArgs e)
@@ -57,8 +61,16 @@ namespace GameTranslaterUI
 
         }
 
+        private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
+        }
+
         private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            DataRowView row = listView_Plugs.SelectedItem as DataRowView;
+            if (row != null)
+                loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
             if (loadedPlug.DataNeeded() == true && mGlobalBasicInfo.MainDataSet == null)
             {
                 //该插件不支持导出空数据

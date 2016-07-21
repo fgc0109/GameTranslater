@@ -17,13 +17,13 @@ namespace GameTranslaterUI
         public void SettingPlugsWatcher()
         {
             FileSystemWatcher plugChangeWatcher = new FileSystemWatcher();
-            plugChangeWatcher.Path = m_appStartupPath + @"\Plugs\";
+            plugChangeWatcher.Path = mAppStartupPath + @"\Plugs\";
             plugChangeWatcher.Filter = "*.dll";
             plugChangeWatcher.EnableRaisingEvents = true;
 
             plugChangeWatcher.Changed += plugChangeWatcher_Changed;
 
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
             Dispatcher.Invoke(new Action(() => { listView_Plugs.SelectedIndex = 0; }));
         }
     }

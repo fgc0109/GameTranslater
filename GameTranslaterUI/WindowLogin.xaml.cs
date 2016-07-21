@@ -24,16 +24,16 @@ namespace GameTranslaterUI
     /// </summary>
     public partial class WindowLogin : Window
     {
-        public readonly string m_appStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+        public readonly string mAppStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-        private BasicInfomation m_globalBasicInfo = null;
-        private WindowTrans transWindow = null;
+        private BasicInfomation mGlobalBasicInfo = null;
+        private WindowTrans mTransWindow = null;
 
         public WindowLogin()
         {
             InitializeComponent();
-            m_globalBasicInfo = new BasicInfomation();
-            
+            mGlobalBasicInfo = new BasicInfomation();
+
             BindingState();
             InitializeDefult();
             SettingPlugsWatcher();
@@ -43,7 +43,7 @@ namespace GameTranslaterUI
 
         private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() => { m_globalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(m_appStartupPath, "ITranslaterInterface"); }));
+            Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
         }
 
         private void button_LoginIn_Click(object sender, RoutedEventArgs e)
@@ -55,11 +55,11 @@ namespace GameTranslaterUI
             {
                 case 0:
                     MySqlHelper.OpenMySql(TextBox_Addr.Text, TextBox_Port.Text, TextBox_Base.Text, TextBox_User.Text, TextBox_Pass.Text);
-                    dataObject = MySqlHelper.ExecuteData(DataType.dataTable, TextBox_Table.Text);
+                    dataObject = MySqlHelper.ExecuteData(TextBox_Table.Text);
                     break;
                 case 1:
                     MySqlHelper.OpenMySql(TextBox_Addr.Text, TextBox_Port.Text, TextBox_Base.Text, TextBox_User.Text, TextBox_Pass.Text);
-                    dataObject = MySqlHelper.ExecuteData(DataType.dataSet, TextBox_Table.Text);
+                    dataObject = MySqlHelper.ExecuteData(TextBox_Table.Text);
                     break;
                 default:
                     dataObject = new object[] { false, null, "Error" };
@@ -75,8 +75,8 @@ namespace GameTranslaterUI
                     //basicWindow.Show();
                     break;
                 default:
-                    transWindow = new WindowTrans(dataObject);
-                    transWindow.Show();
+                    mTransWindow = new WindowTrans(dataObject);
+                    mTransWindow.Show();
 
                     //basicWindow = new WindowRunes(dataObject);
                     //basicWindow.Show();
@@ -88,7 +88,7 @@ namespace GameTranslaterUI
         private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataRowView row = listView_Plugs.SelectedItem as DataRowView;
-            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(m_appStartupPath + @"\Plugs\", row.Row[1] as string);
+            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
             TextBox_DebugInfo.Text = temp.PlugInfo();
 
             tabControl.IsEnabled = temp.DataNeeded();

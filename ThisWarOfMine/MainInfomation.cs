@@ -23,11 +23,9 @@ namespace ThisWarOfMine
             return "测试方法\r\n ";
         }
 
-
-        //
-        public bool StartPoint(string path, string name)
+        public bool FileFilter(ref string filter)
         {
-
+            filter = "IDX - File(*.idx) | *.idx| 所有文件(*.*) | *.*";
             return true;
         }
 

@@ -26,7 +26,7 @@ namespace TestProgect
 
         //以下为接口方法实现
 
-        public bool StartPoint(string path, string name)
+        public bool FileFilter(ref string extend)
         {
             return true;
         }

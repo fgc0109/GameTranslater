@@ -8,21 +8,15 @@ using MySql.Data.MySqlClient;
 
 namespace DataHelper
 {
-    public enum DataType
-    {
-        dataSet,
-        dataTable
-    }
-
     static public class MySqlHelper
     {
-        static private MySqlConnection m_dbConnection = null;
-        static private MySqlDataAdapter m_dbDataAdapter = null;
-        static private MySqlCommand m_dbCommand = null;
+        static private MySqlConnection mDatabaseConnection = null;
+        static private MySqlDataAdapter mDatabaseDataAdapter = null;
+        static private MySqlCommand mDatabaseCommand = null;
 
         static public MySqlConnection Connection
         {
-            get { return m_dbConnection; }
+            get { return mDatabaseConnection; }
         }
 
         /// <summary>
@@ -38,38 +32,38 @@ namespace DataHelper
         {
             string connectionString = string.Format("Server = {0};port={1};Database = {2}; User ID = {3}; Password = {4};",
                 host, port, name, user, pass);
-            m_dbConnection = new MySqlConnection(connectionString);
+            mDatabaseConnection = new MySqlConnection(connectionString);
             try
             {
-                m_dbConnection.Open();
+                mDatabaseConnection.Open();
 
-                if (m_dbConnection.State == ConnectionState.Open)
-                    return new object[3] { true, m_dbConnection.State, string.Empty };
+                if (mDatabaseConnection.State == ConnectionState.Open)
+                    return new object[3] { true, mDatabaseConnection.State, string.Empty };
                 else
-                    return new object[3] { false, m_dbConnection.State, string.Empty };
+                    return new object[3] { false, mDatabaseConnection.State, string.Empty };
             }
             catch (Exception ex)
             {
-                return new object[3] { false, m_dbConnection.State, ex };
+                return new object[3] { false, mDatabaseConnection.State, ex };
             }
         }
 
         /// <summary>
-        /// 返回对应名称的数据集或数据表
+        /// 返回对应名称的数据表
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="name">数据表名称</param>
         /// <param name="paraValues"></param>
-        /// <returns>返回数据状态标识,数据集或数据表,错误信息</returns>
-        static public object[] ExecuteData(DataType type, params object[] paraValues)
+        /// <returns>返回数据状态标识,数据表,错误信息</returns>
+        static public object[] ExecuteData(string name, params object[] paraValues)
         {
-            DataTable local_data = new DataTable();
+            DataTable localData = new DataTable();
             string strCommand = "select * from {0};";
             try
             {
-                m_dbDataAdapter = new MySqlDataAdapter(string.Format(strCommand, paraValues), m_dbConnection);
-                m_dbDataAdapter.Fill(local_data);
+                mDatabaseDataAdapter = new MySqlDataAdapter(string.Format(strCommand, paraValues), mDatabaseConnection);
+                mDatabaseDataAdapter.Fill(localData);
 
-                return new object[3] { true, local_data, string.Empty };
+                return new object[3] { true, localData, string.Empty };
             }
             catch (Exception ex)
             {
@@ -79,14 +73,14 @@ namespace DataHelper
 
         static public int ExecuteNonQuery(string strCommand, params object[] paraValues)
         {
-            m_dbCommand.Connection = m_dbConnection;
-            m_dbCommand.CommandText = string.Format(strCommand, paraValues);
+            mDatabaseCommand.Connection = mDatabaseConnection;
+            mDatabaseCommand.CommandText = string.Format(strCommand, paraValues);
             if (paraValues != null)
             {
                 foreach (MySqlParameter parm in paraValues)
-                    m_dbCommand.Parameters.Add(parm);
+                    mDatabaseCommand.Parameters.Add(parm);
             }
-            return m_dbCommand.ExecuteNonQuery();
+            return mDatabaseCommand.ExecuteNonQuery();
         }
     }
 }

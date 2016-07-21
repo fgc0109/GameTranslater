@@ -40,7 +40,7 @@ namespace GameTranslaterUI
             dataPlugs.PrimaryKey = new DataColumn[1] { ID };
 
             dataPlugs.Columns.Add(new DataColumn("Name", typeof(string)));
-            foreach (var item in m_globalBasicInfo.InfoPlugList)
+            foreach (var item in mGlobalBasicInfo.InfoPlugList)
             {
                 dataPlugs.Rows.Add(null, item);
             }
@@ -52,19 +52,19 @@ namespace GameTranslaterUI
         {
             if (MySqlHelper.Connection.State == ConnectionState.Open)
             {
-                m_globalBasicInfo.StateDataBase = true;
+                mGlobalBasicInfo.StateDataBase = true;
             }
             else if (MySqlHelper.Connection.State == ConnectionState.Closed)
             {
-                m_globalBasicInfo.StateDataBase = false;
+                mGlobalBasicInfo.StateDataBase = false;
             }
             else if (MySqlHelper.Connection.State == ConnectionState.Connecting)
             {
-                m_globalBasicInfo.StateDataBase = false;
+                mGlobalBasicInfo.StateDataBase = false;
             }
             else
             {
-                m_globalBasicInfo.StateDataBase = false;
+                mGlobalBasicInfo.StateDataBase = false;
             }
         }
     }
