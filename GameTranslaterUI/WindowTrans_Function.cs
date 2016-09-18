@@ -28,6 +28,14 @@ namespace GameTranslaterUI
         }
 
         /// <summary>
+        /// 检查插件状态
+        /// </summary>
+        private void CheckPlugsState()
+        {
+            
+        }
+
+        /// <summary>
         /// 设置插件列表控件的结构和数据
         /// </summary>
         /// <returns></returns>

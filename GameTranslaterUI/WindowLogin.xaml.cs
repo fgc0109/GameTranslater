@@ -32,66 +32,39 @@ namespace GameTranslaterUI
         public WindowLogin()
         {
             InitializeComponent();
-            mGlobalBasicInfo = new BasicInfomation();
 
-            BindingState();
-            InitializeDefult();
+            mGlobalBasicInfo = new BasicInfomation();
             SettingPlugsWatcher();
 
-            listView_Plugs.DataContext = GetDataTable();
+            mTransWindow = new WindowTrans(null, mGlobalBasicInfo.InfoPlugList);
+            mTransWindow.Show();
+
+            Close();
         }
+
+        /// <summary>
+        /// 设置文件监视器
+        /// </summary>
+        public void SettingPlugsWatcher()
+        {
+            FileSystemWatcher plugChangeWatcher = new FileSystemWatcher();
+            plugChangeWatcher.Path = mAppStartupPath + @"\Plugs\";
+            plugChangeWatcher.Filter = "*.dll";
+            plugChangeWatcher.EnableRaisingEvents = true;
+
+            plugChangeWatcher.Changed += plugChangeWatcher_Changed;
+
+            Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
+        }
+
+        #region ==========CallBack
 
         private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
         {
             Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
         }
 
-        private void button_LoginIn_Click(object sender, RoutedEventArgs e)
-        {
-            object[] dataObject = null;
+        #endregion
 
-            //根据标签页选择加载数据的方式
-            switch (tabControl.SelectedIndex)
-            {
-                case 0:
-                    MySqlHelper.OpenMySql(TextBox_Addr.Text, TextBox_Port.Text, TextBox_Base.Text, TextBox_User.Text, TextBox_Pass.Text);
-                    dataObject = MySqlHelper.ExecuteData(TextBox_Table.Text);
-                    break;
-                case 1:
-                    MySqlHelper.OpenMySql(TextBox_Addr.Text, TextBox_Port.Text, TextBox_Base.Text, TextBox_User.Text, TextBox_Pass.Text);
-                    dataObject = MySqlHelper.ExecuteData(TextBox_Table.Text);
-                    break;
-                default:
-                    dataObject = new object[] { false, null, "Error" };
-                    break;
-            }
-
-            MySqlHelper.Connection.StateChange += connectionState_Change;
-            //根据插件选择加载的窗口
-            switch (tabControl.SelectedIndex)
-            {
-                case 99:
-                    //basicWindow = new WindowRunes(dataObject);
-                    //basicWindow.Show();
-                    break;
-                default:
-                    mTransWindow = new WindowTrans(dataObject);
-                    mTransWindow.Show();
-
-                    //basicWindow = new WindowRunes(dataObject);
-                    //basicWindow.Show();
-                    break;
-            }
-            Close();
-        }
-
-        private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataRowView row = listView_Plugs.SelectedItem as DataRowView;
-            ITranslaterInterface temp = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
-            TextBox_DebugInfo.Text = temp.PlugInfo();
-
-            tabControl.IsEnabled = temp.DataNeeded();
-        }
     }
 }
