@@ -5,29 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameTranslaterUI"
         mc:Ignorable="d"
-        Title="WindowTrans" Height="500" Width="800">
-    <Grid>
+        Title="WindowTrans" Height="600" Width="800" WindowState="Maximized">
+    <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="171*"/>
-            <RowDefinition Height="172*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox" Margin="10,0,0,10" TextWrapping="Wrap" Text="TextBox" Height="67" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="219" Grid.Row="1"/>
-        <DataGrid x:Name="dataGrid" Margin="234,31,10,10" Grid.RowSpan="2"/>
+        <TextBox x:Name="textBox" Margin="180,10,10,10" TextWrapping="Wrap" Text="TextBox" Grid.Row="2" Height="23"/>
+        <DataGrid x:Name="dataGrid" Margin="315,31,10,10" Grid.RowSpan="2"/>
         <Menu x:Name="menu" Margin="10,10,10,0" Height="16" VerticalAlignment="Top">
-            <MenuItem Header="Test">
+            <MenuItem Header="菜单">
+                <MenuItem Command="ApplicationCommands.Open"/>
+                <MenuItem Command="ApplicationCommands.Copy"/>
+            </MenuItem>
+            <MenuItem Header="帮助">
+                <MenuItem Command="ApplicationCommands.Open"/>
                 <MenuItem Command="ApplicationCommands.Copy"/>
             </MenuItem>
         </Menu>
-        <Button x:Name="button_Export" Content="输出至文件" HorizontalAlignment="Left" Margin="21,41,0,0" VerticalAlignment="Top" Width="75" Click="button_Export_Click" Height="20" Grid.Row="1"/>
-        <Button x:Name="button_Import" HorizontalAlignment="Left" Margin="21,16,0,0" VerticalAlignment="Top" Width="75" Click="button_Import_Click" Height="20" Content="从文件导入" Grid.Row="1"/>
-        <ListView ItemsSource="{Binding}" x:Name="listView_Plugs" SelectionChanged="listView_Plugs_SelectionChanged" Margin="10,31,563,19">
+        <Button x:Name="button_Export" Content="输出至文件" HorizontalAlignment="Left" Margin="90,0,0,10" Width="75" Click="button_Export_Click" Height="20" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <Button x:Name="button_Import" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="button_Import_Click" Content="从文件导入" Height="20" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <ListView ItemsSource="{Binding}" x:Name="listView_Plugs" SelectionChanged="listView_Plugs_SelectionChanged" Margin="10,31,0,10" HorizontalAlignment="Left" Width="300">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"  Width="30" />
-                    <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Name}" Width="200"/>
+                    <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Name}" Width="188"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Margin="10,10,0,35" Width="300" Grid.Row="1">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <ProgressBar Margin="10,0,0,10" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="165" Grid.Row="2"/>
 
 
     </Grid>
