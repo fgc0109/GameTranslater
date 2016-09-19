@@ -27,7 +27,6 @@ namespace GameTranslaterUI
     {
         public readonly string mAppStartupPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
         private BasicInfomation mGlobalBasicInfo = null;
-
         private ITranslaterInterface loadedPlug = null;
 
         public WindowTrans(params object[] paraValues)
@@ -38,13 +37,13 @@ namespace GameTranslaterUI
             BindingState();
             SettingPlugsWatcher();
 
-            listView_Plugs.DataContext = GetDataTable();
+            //listBox_Plugs.DataContext = GetDataTable();
+            //listView_Plugs.DataContext = GetDataTable();
 
             mGlobalBasicInfo.MainDataTable = paraValues[1] as DataTable;
 
-            DataRowView row = listView_Plugs.SelectedItem as DataRowView;
-            if (row != null)
-                loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
+            if (listBox_Plugs.SelectedItem != null)
+                loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", listBox_Plugs.SelectedItem as string);
         }
 
         private void button_Export_Click(object sender, RoutedEventArgs e)
@@ -61,20 +60,26 @@ namespace GameTranslaterUI
 
         }
 
-        private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
+
+
+        private void listBox_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
+            DataRowView row = listBox_Plugs.SelectedItem as DataRowView;
+            if (listBox_Plugs.SelectedItem != null)
+                loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", listBox_Plugs.SelectedItem as string);
+
+           
+
+            //if (loadedPlug.DataNeeded() == true && mGlobalBasicInfo.MainDataSet == null)
+            //{
+            //    //该插件不支持导出空数据
+            //}
         }
 
-        private void listView_Plugs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void button_PlugInfo_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView row = listView_Plugs.SelectedItem as DataRowView;
-            if (row != null)
-                loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", row.Row[1] as string);
-            if (loadedPlug.DataNeeded() == true && mGlobalBasicInfo.MainDataSet == null)
-            {
-                //该插件不支持导出空数据
-            }
+            if (loadedPlug != null)
+                textBox.Text += loadedPlug.PlugInfo();
         }
     }
 }

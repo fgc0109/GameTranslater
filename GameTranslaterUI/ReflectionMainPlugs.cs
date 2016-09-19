@@ -14,20 +14,18 @@ namespace GameTranslaterUI
 {
     static class ReflectionMainPlugs
     {
-        public static ObservableCollection<string> mPlugList = new ObservableCollection<string>();
-
         /// <summary>
         /// 检测插件并读取指定目录下实现指定接口的插件列表
         /// </summary>
         /// <param name="path">程序集绝对路径</param>
         /// <param name="interfaceName">接口名</param>
         /// <returns>可用插件列表</returns>
-        static public ObservableCollection<string> CheckPlugFiles(string path,string interfaceName)
+        static public ObservableCollection<string> CheckPlugFiles(string path, string interfaceName)
         {
-            ObservableCollection<string> plugNameList = new ObservableCollection<string>();
-
             path = path + @"\Plugs\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
+            ObservableCollection<string> plugNameList = new ObservableCollection<string>();
 
             foreach (var item in Directory.GetFiles(path, "*.dll"))
             {
@@ -35,18 +33,18 @@ namespace GameTranslaterUI
                 Assembly plugAssembly = Assembly.LoadFile(path + temp);
 
                 if (plugAssembly == null) continue;
-                //尝试获取插件中的类型信息
-                Type[] types = null;
+
+                Type[] plugTypes = null;
                 try
                 {
-                    types = plugAssembly.GetTypes();
+                    plugTypes = plugAssembly.GetTypes();
                 }
                 catch (Exception ex)
                 {
                     ex.ToString();
                     continue;
                 }
-                foreach (var items in types)
+                foreach (var items in plugTypes)
                     if (items.GetInterface(interfaceName) != null) plugNameList.Add(temp);
             }
             return plugNameList;

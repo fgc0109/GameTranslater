@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameTranslaterUI"
         mc:Ignorable="d"
-        Title="WindowTrans" Height="600" Width="800" WindowState="Maximized">
-    <Grid RenderTransformOrigin="0.5,0.5">
+        Title="WindowTrans" MinWidth="768" Width="768" Height="535" MinHeight="535" WindowStartupLocation="CenterScreen">
+    <Grid RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="31*"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition/>
             <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="textBox" Margin="180,10,10,10" TextWrapping="Wrap" Text="TextBox" Grid.Row="2" Height="23"/>
+        <TextBox x:Name="textBox" Margin="180,10,10,10" TextWrapping="Wrap" Text="TextBox" Grid.Row="2"/>
         <DataGrid x:Name="dataGrid" Margin="315,31,10,10" Grid.RowSpan="2"/>
         <Menu x:Name="menu" Margin="10,10,10,0" Height="16" VerticalAlignment="Top">
             <MenuItem Header="菜单">
@@ -26,23 +26,36 @@
         </Menu>
         <Button x:Name="button_Export" Content="输出至文件" HorizontalAlignment="Left" Margin="90,0,0,10" Width="75" Click="button_Export_Click" Height="20" VerticalAlignment="Bottom" Grid.Row="1"/>
         <Button x:Name="button_Import" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="button_Import_Click" Content="从文件导入" Height="20" VerticalAlignment="Bottom" Grid.Row="1"/>
-        <ListView ItemsSource="{Binding}" x:Name="listView_Plugs" SelectionChanged="listView_Plugs_SelectionChanged" Margin="10,31,0,10" HorizontalAlignment="Left" Width="300">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"  Width="30" />
-                    <GridViewColumn Header="属性" DisplayMemberBinding="{Binding Name}" Width="188"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Margin="10,10,0,35" Width="300" Grid.Row="1">
-            <TabItem Header="TabItem">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Margin="10,10,0,0" Width="300" Grid.Row="1" Height="162" VerticalAlignment="Top">
+            <TabItem Header="MySQL">
+                <Grid Background="#FFE5E5E5">
+                    <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="42,37,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="87,37,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Excel">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="SQLite">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Files">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
         <ProgressBar Margin="10,0,0,10" Height="23" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="165" Grid.Row="2"/>
+        <GroupBox x:Name="groupBox" Header="插件" HorizontalAlignment="Left" Margin="10,31,0,10" Width="300">
+            <DockPanel Margin="0,10,0,0">
+                <DockPanel  Width="180">
+                    <ListBox x:Name="listBox_Plugs" RenderTransformOrigin="0.5,0.5" SelectionChanged="listBox_Plugs_SelectionChanged"/>
+                </DockPanel >
+                <StackPanel Width="96" Margin="5,0,0,0">
+                    <Button x:Name="button_PlugInfo" Content="信息" Margin="0,0,0,5" Click="button_PlugInfo_Click"/>
+                    <Button x:Name="button_Unload" Content="卸载" Margin="0,5" IsEnabled="False"/>
+                </StackPanel>
+
+            </DockPanel>
+        </GroupBox>
 
 
     </Grid>

@@ -24,7 +24,11 @@ namespace GameTranslaterUI
             plugChangeWatcher.Changed += plugChangeWatcher_Changed;
 
             Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
-            Dispatcher.Invoke(new Action(() => { listView_Plugs.SelectedIndex = 0; }));
+            Dispatcher.Invoke(new Action(() => { listBox_Plugs.SelectedIndex = 0; }));
+        }
+        private void plugChangeWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() => { mGlobalBasicInfo.InfoPlugList = ReflectionMainPlugs.CheckPlugFiles(mAppStartupPath, "ITranslaterInterface"); }));
         }
 
         /// <summary>
@@ -43,18 +47,18 @@ namespace GameTranslaterUI
         {
             DataTable dataPlugs = new DataTable();
 
-            DataColumn indexColumn = new DataColumn("ID");
-            indexColumn.DataType = Type.GetType("System.Int32");
-            indexColumn.AutoIncrement = true;
-            indexColumn.AutoIncrementSeed = 1;
+            //DataColumn indexColumn = new DataColumn("ID");
+            //indexColumn.DataType = Type.GetType("System.Int32");
+            //indexColumn.AutoIncrement = true;
+            //indexColumn.AutoIncrementSeed = 1;
 
-            dataPlugs.Columns.Add(indexColumn);
+            //dataPlugs.Columns.Add(indexColumn);
+            //dataPlugs.PrimaryKey = new DataColumn[1] { indexColumn };
+
             dataPlugs.Columns.Add(new DataColumn("Name", typeof(string)));
 
-            dataPlugs.PrimaryKey = new DataColumn[1] { indexColumn };
-
             foreach (var item in mGlobalBasicInfo.InfoPlugList)          
-                dataPlugs.Rows.Add(null, item);
+                dataPlugs.Rows.Add(item);
             return dataPlugs;
         }
     }
