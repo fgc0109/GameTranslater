@@ -8,7 +8,7 @@ using IMainPlug;
 
 namespace ThisWarOfMine
 {
-    public class MainInfomation:ITranslaterInterface
+    public class MainInfomation : ITranslaterInterface
     {
         private DataSet mainData = new DataSet();
         public DataSet MainData
@@ -29,8 +29,14 @@ namespace ThisWarOfMine
             return true;
         }
 
-        public bool FileImport(string path, ref DataTable importdata)
+        public bool FileImport(string path, out DataTable importdata)
         {
+            string error = String.Empty;
+            FilesDecoding.FileLoad(path, out error);
+            FilesDecoding.DataUnpacking(out error);
+            FilesDecoding.DataUncompress();
+
+            importdata = new DataTable();
             return true;
         }
 

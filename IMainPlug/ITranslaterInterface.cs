@@ -22,13 +22,13 @@ namespace IMainPlug
         /// 读取文件内容至数据表
         /// </summary>
         /// <returns></returns>
-        bool FileImport(string path,ref DataTable importdata);
+        bool FileImport(string path, out DataTable importdata);
 
         /// <summary>
         /// 将当前数据表导出至文件
         /// </summary>
         /// <returns></returns>
-        bool FileExport(string path,DataTable outputdata);
+        bool FileExport(string path, DataTable outputdata);
 
         /// <summary>
         /// 是否需要强制加载数据

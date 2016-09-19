@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
-using Microsoft.Win32;
+using System.Windows.Forms;
 using System.IO;
 using DataHelper;
 using IMainPlug;
@@ -46,19 +46,7 @@ namespace GameTranslaterUI
                 loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", listBox_Plugs.SelectedItem as string);
         }
 
-        private void button_Export_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "IDX - File(*.idx) | *.idx| 所有文件(*.*) | *.*";
-            openFile.ShowDialog();
-            //filePath.Text = openFile.FileName.Replace(".idx", "");
-            //loadedPlug.FileImport()
-        }
 
-        private void button_Import_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
 
 
@@ -68,7 +56,7 @@ namespace GameTranslaterUI
             if (listBox_Plugs.SelectedItem != null)
                 loadedPlug = (ITranslaterInterface)ReflectionMainPlugs.LoadAssembly(mAppStartupPath + @"\Plugs\", listBox_Plugs.SelectedItem as string);
 
-           
+
 
             //if (loadedPlug.DataNeeded() == true && mGlobalBasicInfo.MainDataSet == null)
             //{
@@ -79,7 +67,51 @@ namespace GameTranslaterUI
         private void button_PlugInfo_Click(object sender, RoutedEventArgs e)
         {
             if (loadedPlug != null)
-                textBox.Text += loadedPlug.PlugInfo();
+                textBox.Text += loadedPlug.PlugInfo() + "\r\n";
         }
+
+        #region ========== MySQL UserInterface ==========
+        private void button_MySQL_Open_Click(object sender, RoutedEventArgs e)
+        {
+            object[] tryMySQL = MySqlHelper.OpenMySql(textBox_Address.Text, textBox_Port.Text, textBox_Database.Text, textBox_User.Text, textBox_Password.Text);
+            if ((bool)tryMySQL[0])
+            {
+                if ((ConnectionState)tryMySQL[1] == ConnectionState.Open)
+                {
+                    mGlobalBasicInfo.StateDataTable = true;
+                    mGlobalBasicInfo.MainDataTable = MySqlHelper.ExecuteData(textBox_Table.Text)[1] as DataTable;
+                }
+                else textBox.Text += (string)tryMySQL[2];
+            }
+            else
+            {
+                textBox.Text += (string)tryMySQL[2];
+            }
+        }
+        #endregion
+
+        #region  ========== File UserInterface ==========
+        private void button_Export_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog openFolder = new FolderBrowserDialog();
+            openFolder.ShowDialog();
+            textBox_ExportLocation.Text = openFolder.SelectedPath;
+
+            DataTable tempDataTable = mGlobalBasicInfo.MainDataTable;
+            loadedPlug.FileExport(textBox_ImportLocation.Text, tempDataTable);
+        }
+
+        private void button_Import_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "IDX - File(*.idx) | *.idx| 所有文件(*.*) | *.*";
+            openFile.ShowDialog();
+            textBox_ImportLocation.Text = openFile.FileName.Replace(".idx", "");
+
+            DataTable tempDataTable = new DataTable();
+            if (loadedPlug.FileImport(textBox_ImportLocation.Text, out tempDataTable))
+                mGlobalBasicInfo.MainDataTable = tempDataTable;
+        }
+        #endregion
     }
 }

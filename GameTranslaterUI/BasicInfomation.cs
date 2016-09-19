@@ -16,8 +16,8 @@ namespace GameTranslaterUI
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private bool m_stateDatabase = false;
-        private bool m_stateDataSets = false;
+        private bool m_stateDataTable = false;
+        private bool m_stateDataSet = false;
 
         private ObservableCollection<string> m_plugList = new ObservableCollection<string>();
 
@@ -27,26 +27,26 @@ namespace GameTranslaterUI
         /// <summary>
         /// 提供程序数据表加载状态信息
         /// </summary>
-        public bool StateDataBase
+        public bool StateDataTable
         {
-            get { return m_stateDatabase; }
+            get { return m_stateDataTable; }
             set
             {
-                m_stateDatabase = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDataBase"));
+                m_stateDataTable = value;
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDataTable"));
             }
         }
 
         /// <summary>
         /// 提供程序数据集加载状态信息
         /// </summary>
-        public bool StateDataSets
+        public bool StateDataSet
         {
-            get { return m_stateDataSets; }
+            get { return m_stateDataSet; }
             set
             {
-                m_stateDataSets = value;
-                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDataSets"));
+                m_stateDataSet = value;
+                if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StateDataSet"));
             }
         }
 

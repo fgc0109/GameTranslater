@@ -40,7 +40,7 @@ namespace DataHelper
                 if (mDatabaseConnection.State == ConnectionState.Open)
                     return new object[3] { true, mDatabaseConnection.State, string.Empty };
                 else
-                    return new object[3] { false, mDatabaseConnection.State, string.Empty };
+                    return new object[3] { false, mDatabaseConnection.State, connectionString };
             }
             catch (Exception ex)
             {
@@ -52,15 +52,14 @@ namespace DataHelper
         /// 返回对应名称的数据表
         /// </summary>
         /// <param name="name">数据表名称</param>
-        /// <param name="paraValues"></param>
         /// <returns>返回数据状态标识,数据表,错误信息</returns>
-        static public object[] ExecuteData(string name, params object[] paraValues)
+        static public object[] ExecuteData(string name)
         {
             DataTable localData = new DataTable();
             string strCommand = "select * from {0};";
             try
             {
-                mDatabaseDataAdapter = new MySqlDataAdapter(string.Format(strCommand, paraValues), mDatabaseConnection);
+                mDatabaseDataAdapter = new MySqlDataAdapter(string.Format(strCommand, name), mDatabaseConnection);
                 mDatabaseDataAdapter.Fill(localData);
 
                 return new object[3] { true, localData, string.Empty };

@@ -10,112 +10,119 @@ namespace ThisWarOfMine
 {
     public class FilesDecoding
     {
-        public static MemoryStream mStreamIDX = null;
-        public static MemoryStream mStreamDAT = null;
-        public static MemoryStream[] m_zipStream = null;
-        public static MemoryStream[] m_uzipStream = null;
+        private static MemoryStream mStreamIDX = null;
+        private static MemoryStream mStreamDAT = null;
+        private static MemoryStream[] mStreamZip = null;
+        private static MemoryStream[] mStreamUZip = null;
 
-        public static DeflateStream[] m_defStream = null;
-        public static GZipStream[] m_gzipStream = null;
+        private static DeflateStream[] mStreamDeflate = null;
+        private static GZipStream[] mStreamGZip = null;
 
-        public static byte[] m_idxHeader = new byte[3];
-        public static byte[] m_idxCounts = new byte[4];
-        public static byte[] m_idxUnknow = new byte[4];
+        private static byte[] mIdxHeader = new byte[3];
+        private static byte[] mIdxCounts = new byte[4];
+        private static byte[] mIdxUnknow = new byte[4];
 
-        public static int m_fileCount = 0;
-        public static int[] m_lengthHash = null;
-        public static int[] m_lengthBefore = null;
-        public static int[] m_lengthAfters = null;
-        public static int[] m_lengthDeviat = null;
+        private static int mFileCount = 0;
+        private static int[] mLengthHash = null;
+        private static int[] mLengthBefore = null;
+        private static int[] mLengthAfters = null;
+        private static int[] mLengthDeviat = null;
 
-        public static List<byte[]> m_idxHash = new List<byte[]>();
-        public static List<byte[]> m_idxBefore = new List<byte[]>();
-        public static List<byte[]> m_idxAfters = new List<byte[]>();
-        public static List<byte[]> m_idxDeviat = new List<byte[]>();
-        public static List<byte[]> m_idxEnding = new List<byte[]>();
+        private static List<byte[]> mIdxHash = new List<byte[]>();
+        private static List<byte[]> mIdxBefore = new List<byte[]>();
+        private static List<byte[]> mIdxAfters = new List<byte[]>();
+        private static List<byte[]> mIdxDeviat = new List<byte[]>();
+        private static List<byte[]> mIdxEnding = new List<byte[]>();
 
-        public static string FileLoad(string filePath,string fileName)
+        /// <summary>
+        /// 读取打包文件
+        /// </summary>
+        /// <param name="path">文件路径</param>
+        /// <param name="error">错误信息</param>
+        /// <returns>文件读取状态</returns>
+        public static bool FileLoad(string path, out string error)
         {
+            error = String.Empty;
             try
             {
-                byte[] idxData = File.ReadAllBytes(filePath+ fileName + ".idx");
+                byte[] idxData = File.ReadAllBytes(path + ".idx");
                 mStreamIDX = new MemoryStream(idxData);
-            }
-            catch (Exception e)
-            {
-                return e.ToString();
-            }
 
-            try
-            {
-                byte[] datData = File.ReadAllBytes(filePath + fileName  + ".dat");
+                byte[] datData = File.ReadAllBytes(path + ".dat");
                 mStreamDAT = new MemoryStream(datData);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return e.ToString();
+                error = ex.ToString();
+                return false;
             }
-
-            return String.Empty;
+            return true;
         }
 
-        public static string DataUnpacking()
+        /// <summary>
+        /// 文件解包
+        /// </summary>
+        /// <param name="error">错误信息</param>
+        /// <returns></returns>
+        public static bool DataUnpacking(out string error)
         {
+            error = String.Empty;
             try
             {
                 BinaryReader idxReader = new BinaryReader(mStreamIDX);
 
-                m_idxHeader = idxReader.ReadBytes(3);
-                m_idxCounts = idxReader.ReadBytes(4);
-                m_idxUnknow = idxReader.ReadBytes(4);
+                mIdxHeader = idxReader.ReadBytes(3);
+                mIdxCounts = idxReader.ReadBytes(4);
+                mIdxUnknow = idxReader.ReadBytes(4);
 
-                m_fileCount = (m_idxCounts[0]) + (m_idxCounts[1] << 8) + (m_idxCounts[2] << 16) + (m_idxCounts[3] << 24);
+                mFileCount = (mIdxCounts[0]) + (mIdxCounts[1] << 8) + (mIdxCounts[2] << 16) + (mIdxCounts[3] << 24);
 
-                m_lengthHash = new int[m_fileCount];
-                m_lengthBefore = new int[m_fileCount];
-                m_lengthAfters = new int[m_fileCount];
-                m_lengthDeviat = new int[m_fileCount];
+                mLengthHash = new int[mFileCount];
+                mLengthBefore = new int[mFileCount];
+                mLengthAfters = new int[mFileCount];
+                mLengthDeviat = new int[mFileCount];
 
-                for (int i = 0; i < m_fileCount; i++)
+                for (int i = 0; i < mFileCount; i++)
                 {
-                    m_idxHash.Add(idxReader.ReadBytes(4));
-                    m_idxBefore.Add(idxReader.ReadBytes(4));
-                    m_idxAfters.Add(idxReader.ReadBytes(4));
-                    m_idxDeviat.Add(idxReader.ReadBytes(4));
-                    m_idxEnding.Add(idxReader.ReadBytes(1));
+                    mIdxHash.Add(idxReader.ReadBytes(4));
+                    mIdxBefore.Add(idxReader.ReadBytes(4));
+                    mIdxAfters.Add(idxReader.ReadBytes(4));
+                    mIdxDeviat.Add(idxReader.ReadBytes(4));
+                    mIdxEnding.Add(idxReader.ReadBytes(1));
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return e.ToString();
+                error = ex.ToString();
+                return false;
             }
 
-            //尝试读取DAT文件
             try
             {
                 BinaryReader datReader = new BinaryReader(mStreamDAT);
-                m_zipStream = new MemoryStream[m_fileCount];
+                mStreamZip = new MemoryStream[mFileCount];
 
-                for (int i = 0; i < m_fileCount; i++)
+                for (int i = 0; i < mFileCount; i++)
                 {
-                    byte[] datBefore = m_idxBefore[i];
-                    m_lengthBefore[i] = (datBefore[0]) + (datBefore[1] << 8) + (datBefore[2] << 16) + (datBefore[3] << 24);
+                    byte[] datBefore = mIdxBefore[i];
+                    mLengthBefore[i] = (datBefore[0]) + (datBefore[1] << 8) + (datBefore[2] << 16) + (datBefore[3] << 24);
 
-                    byte[] datDeviat = m_idxDeviat[i];
-                    m_lengthDeviat[i] = (datDeviat[0]) + (datDeviat[1] << 8) + (datDeviat[2] << 16) + (datDeviat[3] << 24);
+                    byte[] datDeviat = mIdxDeviat[i];
+                    mLengthDeviat[i] = (datDeviat[0]) + (datDeviat[1] << 8) + (datDeviat[2] << 16) + (datDeviat[3] << 24);
 
                     mStreamDAT.Seek(0, SeekOrigin.Begin);
-                    mStreamDAT.Position = m_lengthDeviat[i];
+                    mStreamDAT.Position = mLengthDeviat[i];
 
-                    m_zipStream[i] = new MemoryStream(datReader.ReadBytes(m_lengthBefore[i]));
+                    mStreamZip[i] = new MemoryStream(datReader.ReadBytes(mLengthBefore[i]));
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return e.ToString();
+                error = ex.ToString();
+                return false;
             }
 
-            return String.Empty;
+            return true;
         }
 
         /// <summary>
@@ -124,31 +131,31 @@ namespace ThisWarOfMine
         /// <param name="mainForm"></param>
         public static void DataUncompress()
         {
-            m_defStream = new DeflateStream[m_fileCount];
-            m_uzipStream = new MemoryStream[m_fileCount];
+            mStreamDeflate = new DeflateStream[mFileCount];
+            mStreamUZip = new MemoryStream[mFileCount];
 
-            BinaryReader[] zipReader = new BinaryReader[m_fileCount];
+            BinaryReader[] zipReader = new BinaryReader[mFileCount];
 
 
-            for (int i = 0; i < m_fileCount; i++)
+            for (int i = 0; i < mFileCount; i++)
             {
-                byte[] datHash = m_idxHash[i];
-                m_lengthHash[i] = (datHash[0]) + (datHash[1] << 8) + (datHash[2] << 16) + (datHash[3] << 24);
+                byte[] datHash = mIdxHash[i];
+                mLengthHash[i] = (datHash[0]) + (datHash[1] << 8) + (datHash[2] << 16) + (datHash[3] << 24);
 
-                byte[] datAfter = m_idxAfters[i];
-                m_lengthAfters[i] = (datAfter[0]) + (datAfter[1] << 8) + (datAfter[2] << 16) + (datAfter[3] << 24);
+                byte[] datAfter = mIdxAfters[i];
+                mLengthAfters[i] = (datAfter[0]) + (datAfter[1] << 8) + (datAfter[2] << 16) + (datAfter[3] << 24);
 
                 //准备处理内存流数据
-                zipReader[i] = new BinaryReader(m_zipStream[i]);
+                zipReader[i] = new BinaryReader(mStreamZip[i]);
                 //移动至压缩文件内容部分
                 zipReader[i].ReadBytes(10);
                 //去除压缩文件结尾
-                m_zipStream[i].SetLength(m_zipStream[i].Length - 4);
+                mStreamZip[i].SetLength(mStreamZip[i].Length - 4);
 
-                m_defStream[i] = new DeflateStream(m_zipStream[i], CompressionMode.Decompress,true);
+                mStreamDeflate[i] = new DeflateStream(mStreamZip[i], CompressionMode.Decompress,true);
 
-                m_uzipStream[i] = new MemoryStream();
-                m_defStream[i].CopyTo(m_uzipStream[i]);
+                mStreamUZip[i] = new MemoryStream();
+                mStreamDeflate[i].CopyTo(mStreamUZip[i]);
             }
         }
 
@@ -168,10 +175,10 @@ namespace ThisWarOfMine
         //    {
         //        ListViewItem infoListItem = new ListViewItem();
 
-        //        infoListItem.Text = m_lengthHash[i].ToString("X8");
-        //        infoListItem.SubItems.Add(m_lengthDeviat[i].ToString());
-        //        infoListItem.SubItems.Add(m_lengthBefore[i].ToString());
-        //        infoListItem.SubItems.Add(m_lengthAfters[i].ToString());
+        //        infoListItem.Text = mLengthHash[i].ToString("X8");
+        //        infoListItem.SubItems.Add(mLengthDeviat[i].ToString());
+        //        infoListItem.SubItems.Add(mLengthBefore[i].ToString());
+        //        infoListItem.SubItems.Add(mLengthAfters[i].ToString());
 
         //        mainForm.infoList.Items.Add(infoListItem);
         //    }
@@ -185,14 +192,14 @@ namespace ThisWarOfMine
                 Directory.CreateDirectory(path);
             }
 
-            for (int i = 0; i < m_fileCount; i++)
+            for (int i = 0; i < mFileCount; i++)
             {
-                FileStream outputFile = new FileStream(path + m_lengthHash[i].ToString("X8"), FileMode.Create);
+                FileStream outputFile = new FileStream(path + mLengthHash[i].ToString("X8"), FileMode.Create);
 
-                m_uzipStream[i].Seek(0, SeekOrigin.Begin);
-                outputFile.Write(m_uzipStream[i].ToArray(), 0, (int)m_uzipStream[i].Length);
+                mStreamUZip[i].Seek(0, SeekOrigin.Begin);
+                outputFile.Write(mStreamUZip[i].ToArray(), 0, (int)mStreamUZip[i].Length);
 
-                m_uzipStream[i].Seek(0, SeekOrigin.Begin);
+                mStreamUZip[i].Seek(0, SeekOrigin.Begin);
                 outputFile.Close();
             }
                 return "文件已经保存";

@@ -31,8 +31,9 @@ namespace TestProgect
             return true;
         }
 
-        public bool FileImport(string path, ref DataTable importdata)
+        public bool FileImport(string path, out DataTable importdata)
         {
+            importdata = new DataTable();
             return true;
         }
 
