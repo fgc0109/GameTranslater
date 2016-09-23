@@ -60,7 +60,11 @@ namespace GameTranslaterUI
         {
             //使用绝对路径读取程序集文件
             Assembly plugAssembly = Assembly.LoadFile(path + plugname);
-            Type[] types = plugAssembly.GetTypes();
+
+            //旧方法
+            //Type[] types = plugAssembly.GetTypes();
+            //Type[] types = plugAssembly.GetExportedTypes();
+            Type[] types = (Type[])plugAssembly.ExportedTypes;
 
             //使用接口获取合适的程序集
             ITranslaterInterface loadedPlug = null;
