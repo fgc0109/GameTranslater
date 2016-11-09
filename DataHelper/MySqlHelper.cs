@@ -8,15 +8,20 @@ using MySql.Data.MySqlClient;
 
 namespace DataHelper
 {
+    /// <summary>
+    /// MySql数据辅助类
+    /// 类变量采用匈牙利命名法
+    /// 其他变量采用驼峰命名法
+    /// </summary>
     static public class MySqlHelper
     {
-        static private MySqlConnection mDatabaseConnection = null;
-        static private MySqlDataAdapter mDatabaseDataAdapter = null;
-        static private MySqlCommand mDatabaseCommand = null;
+        static private MySqlConnection m_Connection = null;
+        static private MySqlDataAdapter m_DataAdapter = null;
+        static private MySqlCommand m_Command = null;
 
         static public MySqlConnection Connection
         {
-            get { return mDatabaseConnection; }
+            get { return m_Connection; }
         }
 
         /// <summary>
@@ -27,24 +32,24 @@ namespace DataHelper
         /// <param name="name">数据库名</param>
         /// <param name="user">数据库用户名</param>
         /// <param name="pass">数据库密码</param>
-        /// <returns>返回连接标识,连接状态枚举,错误信息</returns>
-        static public object[] OpenMySql(string host, string port, string name, string user, string pass)
+        /// <param name="exception">异常信息</param>
+        /// <returns>连接状态</returns>
+        static public bool OpenMySql(string host, string port, string name, string user, string pass, out string exception)
         {
             string connectionString = string.Format("Server = {0};port={1};Database = {2}; User ID = {3}; Password = {4};",
                 host, port, name, user, pass);
-            mDatabaseConnection = new MySqlConnection(connectionString);
+            m_Connection = new MySqlConnection(connectionString);
             try
             {
-                mDatabaseConnection.Open();
+                m_Connection.Open();
 
-                if (mDatabaseConnection.State == ConnectionState.Open)
-                    return new object[3] { true, mDatabaseConnection.State, string.Empty };
-                else
-                    return new object[3] { false, mDatabaseConnection.State, connectionString };
+                exception = string.Empty;
+                return true;
             }
             catch (Exception ex)
             {
-                return new object[3] { false, mDatabaseConnection.State, ex };
+                exception = ex.ToString();
+                return false;
             }
         }
 
@@ -59,8 +64,8 @@ namespace DataHelper
             string strCommand = "select * from {0};";
             try
             {
-                mDatabaseDataAdapter = new MySqlDataAdapter(string.Format(strCommand, name), mDatabaseConnection);
-                mDatabaseDataAdapter.Fill(localData);
+                m_DataAdapter = new MySqlDataAdapter(string.Format(strCommand, name), m_Connection);
+                m_DataAdapter.Fill(localData);
 
                 return new object[3] { true, localData, string.Empty };
             }
@@ -72,14 +77,14 @@ namespace DataHelper
 
         static public int ExecuteNonQuery(string strCommand, params object[] paraValues)
         {
-            mDatabaseCommand.Connection = mDatabaseConnection;
-            mDatabaseCommand.CommandText = string.Format(strCommand, paraValues);
+            m_Command.Connection = m_Connection;
+            m_Command.CommandText = string.Format(strCommand, paraValues);
             if (paraValues != null)
             {
                 foreach (MySqlParameter parm in paraValues)
-                    mDatabaseCommand.Parameters.Add(parm);
+                    m_Command.Parameters.Add(parm);
             }
-            return mDatabaseCommand.ExecuteNonQuery();
+            return m_Command.ExecuteNonQuery();
         }
     }
 }

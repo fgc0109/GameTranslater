@@ -73,19 +73,15 @@ namespace GameTranslaterUI
         #region ========== MySQL UserInterface ==========
         private void button_MySQL_Open_Click(object sender, RoutedEventArgs e)
         {
-            object[] tryMySQL = MySqlHelper.OpenMySql(textBox_Address.Text, textBox_Port.Text, textBox_Database.Text, textBox_User.Text, textBox_Password.Text);
-            if ((bool)tryMySQL[0])
+            string exception = string.Empty;
+            if (MySqlHelper.OpenMySql(textBox_Address.Text, textBox_Port.Text, textBox_Database.Text, textBox_User.Text, textBox_Password.Text, out exception))
             {
-                if ((ConnectionState)tryMySQL[1] == ConnectionState.Open)
-                {
-                    mGlobalBasicInfo.StateDataTable = true;
-                    mGlobalBasicInfo.MainDataTable = MySqlHelper.ExecuteData(textBox_Table.Text)[1] as DataTable;
-                }
-                else textBox.Text += (string)tryMySQL[2];
+                mGlobalBasicInfo.StateDataTable = true;
+                mGlobalBasicInfo.MainDataTable = MySqlHelper.ExecuteData(textBox_Table.Text)[1] as DataTable;
             }
             else
             {
-                textBox.Text += (string)tryMySQL[2];
+                textBox.Text += exception;
             }
         }
         #endregion

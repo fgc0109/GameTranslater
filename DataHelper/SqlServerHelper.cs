@@ -8,33 +8,46 @@ using System.Data.SqlClient;
 
 namespace DataHelper
 {
+    /// <summary>
+    /// SqlServer数据辅助类
+    /// 类变量采用匈牙利命名法
+    /// 其他变量采用驼峰命名法
+    /// </summary>
     public class SqlServerHelper
     {
-        static private SqlConnection m_dbConnection = null;
-        static private SqlDataAdapter m_dbDataAdapter = null;
-        static private SqlCommand m_dbCommand = null;
+        static private SqlConnection m_Connection = null;
+        static private SqlDataAdapter m_DataAdapter = null;
+        static private SqlCommand m_Command = null;
 
         static public SqlConnection Connection
         {
-            get { return m_dbConnection; }
+            get { return m_Connection; }
         }
 
-        static public void OpenSql(string host, string port, string user, string pass, string database)
+        /// <summary>
+        /// 连接MySQL数据库
+        /// </summary>
+        /// <param name="host">IP地址</param>
+        /// <param name="port">端口号</param>
+        /// <param name="name">数据库名</param>
+        /// <param name="user">数据库用户名</param>
+        /// <param name="pass">数据库密码</param>
+        /// <param name="exception">异常信息</param>
+        /// <returns>连接状态</returns>
+        static public bool OpenSql(string host, string port, string user, string pass, string name, out string exception)
         {
             string connectionString = string.Format("Server = {0};port={1};Database = {2}; User ID = {3}; Password = {4};",
-                host, port, database, user, pass);
-            m_dbConnection = new SqlConnection(connectionString);
-
-            if (m_dbConnection.State != ConnectionState.Open)
+                host, port, name, user, pass);
+            m_Connection = new SqlConnection(connectionString);
+            try
             {
-                try
-                {
-                    m_dbConnection.Open();
-                }
-                catch
-                {
-
-                }
+                exception = string.Empty;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                exception = ex.ToString();
+                return false;
             }
         }
 
@@ -43,8 +56,8 @@ namespace DataHelper
             DataSet local_dataset = new DataSet();
             try
             {
-                m_dbDataAdapter = new SqlDataAdapter(strCommand, m_dbConnection);
-                m_dbDataAdapter.Fill(local_dataset);
+                m_DataAdapter = new SqlDataAdapter(strCommand, m_Connection);
+                m_DataAdapter.Fill(local_dataset);
 
                 return local_dataset;
             }
@@ -59,8 +72,8 @@ namespace DataHelper
             DataTable local_datatable = new DataTable();
             try
             {
-                m_dbDataAdapter = new SqlDataAdapter(strCommand, m_dbConnection);
-                m_dbDataAdapter.Fill(local_datatable);
+                m_DataAdapter = new SqlDataAdapter(strCommand, m_Connection);
+                m_DataAdapter.Fill(local_datatable);
 
                 return local_datatable;
             }
@@ -72,15 +85,15 @@ namespace DataHelper
 
         static public int ExecuteNonQuery(string strCommand, params object[] paraValues)
         {
-            m_dbCommand.Connection = m_dbConnection;
-            m_dbCommand.CommandText = strCommand;
+            m_Command.Connection = m_Connection;
+            m_Command.CommandText = strCommand;
             if (paraValues != null)
             {
                 foreach (SqlParameter parm in paraValues)
-                    m_dbCommand.Parameters.Add(parm);
+                    m_Command.Parameters.Add(parm);
             }
 
-            return m_dbCommand.ExecuteNonQuery();
+            return m_Command.ExecuteNonQuery();
         }
     }
 }
